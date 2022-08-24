@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<promotions xmlns="http://www.demandware.com/xml/impex/promotion/2008-01-31">
+    <campaign campaign-id="bolt-order-10amount-off-coupon">
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+        <customer-groups match-mode="any">
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="bolt-order-10amount-off"/>
+        </coupons>
+    </campaign>
+
+    <campaign campaign-id="bolt-all-promotion-types-coupon">
+        <description>With this campaign, trigger all types of promotions(order/shipping/product) with</description>
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+        <customer-groups match-mode="any">
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="boltall"/>
+        </coupons>
+    </campaign>
+
+    <campaign campaign-id="bolt-all-promotion-types-auto">
+        <description>This campaign contains order level/shipping level/product level promotions which is triggered without applying a coupon.
+To trigger order level promotion, make order amount &gt; 200
+To trigger product level promotion, use the product under category 'womens-clothing'
+To trigger shipping level promotion, make order amount &gt; 100</description>
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+        <customer-groups match-mode="any">
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </campaign>
+
+    <campaign campaign-id="bolt-product-40percent-off-coupon">
+        <description>Use product in category 'womens-jewelry'</description>
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+        <customer-groups match-mode="any">
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="bolt-product-40percent-off"/>
+        </coupons>
+    </campaign>
+
+    <campaign campaign-id="bolt-shipping-50percent-off-coupon">
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+        </campaign-scope>
+        <customer-groups match-mode="any">
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+        <coupons>
+            <coupon coupon-id="bolt-shipping-50percent-off"/>
+        </coupons>
+    </campaign>
+
+    <promotion promotion-id="bolt-order-10amount-off-coupon">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-order-10amount-off-coupon</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <order-promotion-rule>
+            <discount-only-qualifying-products>false</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <amount>10.0</amount>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="bolt-order-20amount-off-over200-auto">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-order-20amount-off-over200-auto</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <order-promotion-rule>
+            <discount-only-qualifying-products>false</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>200.0</threshold>
+                    <amount>20.0</amount>
+                </discount>
+            </discounts>
+            <exclude-discounted-products>false</exclude-discounted-products>
+        </order-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="bolt-product-30percent-off-coupon">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-product-30percent-off-coupon</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <price-condition operator="greater than">
+                            <price>0.1</price>
+                        </price-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <percentage>30.0</percentage>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="bolt-product-specified-40percent-off-coupon">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-product-specified-40percent-off-coupon</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>womens-jewelry</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <percentage>40.0</percentage>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="bolt-product-specified-50percent-off-auto">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-product-specified-50percent-off-auto</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-m-en" operator="is equal">
+                            <category-id>womens-clothing</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <percentage>50.0</percentage>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="bolt-shipping-50percent-off-auto">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-shipping-50percent-off-auto</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <shipping-promotion-rule>
+            <shipping-methods>
+                <method-id>GLOBALE_STORE_COLLECTION</method-id>
+                <method-id>GLOBALE_STANDARD</method-id>
+                <method-id>GLOBALE_EXPRESS</method-id>
+                <method-id>PickUpInStore</method-id>
+                <method-id>NextDay</method-id>
+                <method-id>ShipToStore</method-id>
+                <method-id>EUR005</method-id>
+                <method-id>EUR004</method-id>
+                <method-id>EUR003</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>021</method-id>
+                <method-id>012</method-id>
+                <method-id>005</method-id>
+                <method-id>004</method-id>
+                <method-id>003</method-id>
+                <method-id>002</method-id>
+                <method-id>001</method-id>
+                <method-id>Standard</method-id>
+                <method-id>Express</method-id>
+            </shipping-methods>
+            <discounts condition-type="shipment-total">
+                <discount>
+                    <threshold>100.0</threshold>
+                    <percentage>50.0</percentage>
+                </discount>
+            </discounts>
+        </shipping-promotion-rule>
+    </promotion>
+
+    <promotion promotion-id="bolt-shipping-50percent-off-coupon">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <refinable-flag>false</refinable-flag>
+        <prevent-requalifying-flag>false</prevent-requalifying-flag>
+        <prorate-across-eligible-items-flag>false</prorate-across-eligible-items-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">bolt-shipping-50percent-off-coupon</name>
+        <custom-attributes>
+            <custom-attribute attribute-id="geDoNotConvert">false</custom-attribute>
+            <custom-attribute attribute-id="geLoyaltyPromotion">false</custom-attribute>
+        </custom-attributes>
+        <shipping-promotion-rule>
+            <shipping-methods>
+                <method-id>GLOBALE_STORE_COLLECTION</method-id>
+                <method-id>GLOBALE_STANDARD</method-id>
+                <method-id>GLOBALE_EXPRESS</method-id>
+                <method-id>PickUpInStore</method-id>
+                <method-id>NextDay</method-id>
+                <method-id>ShipToStore</method-id>
+                <method-id>EUR005</method-id>
+                <method-id>EUR004</method-id>
+                <method-id>EUR003</method-id>
+                <method-id>EUR002</method-id>
+                <method-id>EUR001</method-id>
+                <method-id>021</method-id>
+                <method-id>012</method-id>
+                <method-id>005</method-id>
+                <method-id>004</method-id>
+                <method-id>003</method-id>
+                <method-id>002</method-id>
+                <method-id>001</method-id>
+                <method-id>Express</method-id>
+                <method-id>Standard</method-id>
+            </shipping-methods>
+            <discounts condition-type="shipment-total">
+                <discount>
+                    <threshold>1.0</threshold>
+                    <percentage>50.0</percentage>
+                </discount>
+            </discounts>
+        </shipping-promotion-rule>
+    </promotion>
+
+    <promotion-campaign-assignment promotion-id="bolt-order-10amount-off-coupon" campaign-id="bolt-order-10amount-off-coupon">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-order-10amount-off-coupon" campaign-id="bolt-all-promotion-types-coupon">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-order-20amount-off-over200-auto" campaign-id="bolt-all-promotion-types-auto">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-product-30percent-off-coupon" campaign-id="bolt-all-promotion-types-coupon">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-product-specified-40percent-off-coupon" campaign-id="bolt-product-40percent-off-coupon">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-product-specified-50percent-off-auto" campaign-id="bolt-all-promotion-types-auto">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-shipping-50percent-off-auto" campaign-id="bolt-all-promotion-types-auto">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-shipping-50percent-off-coupon" campaign-id="bolt-shipping-50percent-off-coupon">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="bolt-shipping-50percent-off-coupon" campaign-id="bolt-all-promotion-types-coupon">
+        <qualifiers match-mode="all">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+</promotions>

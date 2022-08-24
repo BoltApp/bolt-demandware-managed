@@ -1,0 +1,45 @@
+<isdecorate template="application/MenuFrame">
+<iscontent type="text/html" charset="UTF-8"> 
+	<isinclude template="custom/modules" /> 
+	<isinclude template="inc/Modules">
+	<isbreadcrumbs bcurl1="${URLUtils.url('Bolt-Documentation')}" 
+		bctext1="${Resource.msg('bolt.document.label','bolt',null)}" />
+		
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<tbody>
+			<tr>
+				<td colspan="5" class="overview_title">${Resource.msg('bolt.document.title','bolt',null)}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="documentation">
+		<tbody>
+			<tr>
+				<td colspan="5" class="overview_documentation">${Resource.msg('bolt.document.heading','bolt',null)}<br>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="overview_title_description">
+					${Resource.msg('bolt.back.label','bolt',null)}
+					<a href="https://merchant-sandbox.bolt.com" target="_blank" >${Resource.msg('bolt.sandbox.label','bolt',null)}</a>
+					${Resource.msg('bolt.separator.label','bolt',null)}
+					<a href="https://merchant-sandbox.bolt.com" target="_blank" >${Resource.msg('bolt.live.label','bolt',null)}</a><br>&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="overview_title_description">
+					<a href="https://docs.bolt.com/docs/6-production-readiness" target="_blank" >${Resource.msg('bolt.test.card','bolt',null)}</a><br>&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="overview_title_description">
+					<a href="https://www.bolt.com/" target="_blank">${Resource.msg('bolt.website.label','bolt',null)}</a><br>&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="overview_title_description">
+					<p><isprint value="${Resource.msg('bolt.copyright','bolt',null)}"/></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</isdecorate>

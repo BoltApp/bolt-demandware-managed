@@ -1,0 +1,74 @@
+<!--- TEMPLATENAME: homelanding.isml --->
+<isdecorate template="application/MenuFrame"> 
+	<iscontent type="text/html" charset="UTF-8"> 
+	<isinclude template="custom/modules" /> 
+	<isinclude template="inc/Modules">
+	<isbreadcrumbs bcurl1="${URLUtils.url('Bolt-LandingPage')}"
+		bctext1="${Resource.msg('bolt.title','bolt',null)}" />
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td colspan="5" class="overview_title">Bolt</td>
+		</tr>
+		<tr>
+			<td colspan="5" class="overview_title_description">Transactions Management <br>&nbsp;
+			</td>
+		</tr>
+		<tr>
+			
+			
+			
+			
+			
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="filtertableProjects">
+    <thead>
+      <tr>
+    	<th class="table_header left n e s w" nowrap="nowrap" width="20%">${Resource.msg('orderid','bolt',null)}</th>
+    	<th class="table_header left n e s" nowrap="nowrap" width="20%">${Resource.msg('txnid','bolt',null)}</th>
+    	<th class="table_header left n e s" nowrap="nowrap" width="8%">${Resource.msg('orderdate','bolt',null)}</th>
+    	<th class="table_header left n e s" nowrap="nowrap" width="8%">${Resource.msg('email','bolt',null)}</th>
+    	<th class="table_header left n e s" nowrap="nowrap" width="8%">${Resource.msg('total','bolt',null)}</th>
+    	<th class="table_header left n e s" nowrap="nowrap" width="8%">${Resource.msg('transactiontype','bolt',null)}</th>
+    	<th class="table_header left n e s" nowrap="nowrap" width="8%">${Resource.msg('transactionstatus','bolt',null)}</th>
+    </tr>	
+    </thead>
+   
+    <tbody>
+    	<isloop items="${pdict.OrderList}" var="item" status="loopstate">
+	    	<tr>
+	        	<td class="table_detail left e w s" nowrap="nowrap"><label class="item-label" for="">${item.data.order_no}</label></td>
+	        	<td class="table_detail left e s" nowrap="nowrap"><label class="item-label" for="" title=""></label></td>
+	        	<td class="table_detail left e s" nowrap="nowrap"><label class="item-label" for=""></label></td>
+	            <td class="table_detail left e s" nowrap="nowrap">
+	            	<label class="item-label" for="">
+	            		 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="status-badge-holder">
+	                    	<tr>
+								<td><span class="status-badge "></span></td>
+	                    	</tr>
+	                    </table>
+	            	</label>
+	            </td>
+	            <isset name="calendarDate" value="${dw.util.Calendar(item.lastModified)}" scope="page"/>
+	            <isset name="lastModifiedDate" value="${dw.util.StringUtils.formatCalendar(dw.util.Calendar(calendarDate), 'yyyy-MM-dd')}" scope="page"/>
+	            <td class="table_detail left e s" nowrap="nowrap"><label class="item-label" for="">adsfasdf</label></td>
+	            <td class="table_detail left e s" nowrap="nowrap"><label class="item-label" for="">Sale</label></td>
+	            <td class="table_detail left e s" nowrap="nowrap"><label class="item-label" for="">Settled</label></td>
+	        </tr>
+	 </isloop>       
+    </tbody>
+</table>  
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</tr>
+	</table>
+</isdecorate>

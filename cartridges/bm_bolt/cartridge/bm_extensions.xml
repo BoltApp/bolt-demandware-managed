@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<extensions xmlns="http://www.demandware.com/xml/bmmodules/2007-12-11"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.demandware.com/xml/bmmodules/2007-12-11 bmext.xsd">
+	<!-- =============================================================== -->
+	<!-- == == -->
+	<!-- == SITE MENU EXTENSIONS == -->
+	<!-- == == -->
+	<!-- =============================================================== -->
+	<!-- This file shows you an example how to create your own Business Manager 
+		Extensions. It integrates custom menu items and corresponding pages on three 
+		places: 1. "DEMO Site Menu Extension" - Menu item within the site specific 
+		menu 2. "DEMO Site Submenu Extension within an existing Menu" - Menu within 
+		the existing "Site Preferences" 3. "DEMO Admin Extension" - Menu item within 
+		the Administration Menu This file uses the pipeline "custom_extensionsactions" 
+		and includes two templates - /extensions/adminmenupageextension - /extensions/sitemenupageextension 
+		Please make sure that your new menuitems and menuactions get unique ids. 
+		If you use ids from the original Business Manager your menu items are not 
+		shown! You can include your menu extensions into existing menus by referencing 
+		them in the menupath. The Business Manager Menu IDs you find at the end of 
+		this file -->
+	<!-- Menu Action as part of the site main menu (positioned at the bottom 
+		of the site main menu) -->
+	<menuitem id="customadminmenuextension_id101" position="99999"
+		site="true">
+		<name xml:lang="x-default">Bolt</name>
+		<short_description xml:lang="x-default">
+			Bolt Payment Solution.
+		</short_description>
+		<description xml:lang="x-default">
+			Bolt Payment Solution.
+		</description>
+		<icon>icons/star_yellow_add.gif</icon>
+	</menuitem>
+	<!-- a second Demo Business Manager Extension for the menu item above Note: 
+		the site attribute has to have the same value as the parent menu item -->
+	<menuaction id="customsubmenu_id03" menupath="customadminmenuextension_id101"
+		position="100" site="true">
+		<name xml:lang="x-default">Transactions Management</name>
+		<short_description xml:lang="x-default">
+			Bolt Payment Solution.
+		</short_description>
+		<description xml:lang="x-default">
+			Bolt Payment Solution.
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="Bolt" node="OrderList" />
+		<sub-pipelines>
+			<pipeline name="Bolt-OrderList" />
+			<pipeline name="Bolt-OrderDetails" />
+			<pipeline name="Bolt-Documentation" />
+			<pipeline name="Operations-Action" />
+		</sub-pipelines>
+		<icon>icons/star_yellow_new.gif</icon>
+	</menuaction>
+	<menuaction id="customsubmenu_id04" menupath="customadminmenuextension_id101"
+		position="101" site="true">
+		<name xml:lang="x-default">Documentation and Support</name>
+		<short_description xml:lang="x-default">
+			Documentation and Support.
+		</short_description>
+		<description xml:lang="x-default">
+			Documentation and Support.
+		</description>
+		<!-- no icon specified -->
+		<exec pipeline="Bolt" node="Documentation" />
+		<icon>icons/star_yellow_new.gif</icon>
+	</menuaction>
+</extensions>

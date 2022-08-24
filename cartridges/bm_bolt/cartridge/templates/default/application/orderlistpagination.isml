@@ -1,0 +1,52 @@
+<table class="pagecursor" width="100%">
+    <tbody>
+        <tr>
+            <td>
+                <table class="pagecursor" width="100%" border="0" cellspacing="1" cellpadding="1">
+                    <tbody>
+                        <tr>
+                            <td class="pagecursortxt top" align="left" width="40%" nowrap="nowrap">
+                            	${Resource.msg('order.list.showing','bolt',null)}&nbsp;
+                            	<span class="pagecursoritem bold">${pdict.startRow.toFixed()}</span>&nbsp;-
+                            	<span class="pagecursoritem bold">${pdict.endRow.toFixed()}</span>&nbsp;${Resource.msg('order.list.of','bolt',null)}
+                            	<span class="pagecursoritem bold">${pdict.totalOrderCount.toFixed()}</span>&nbsp;${Resource.msg('order.list.items','bolt',null)}
+                            </td>
+                            
+                            <isif condition="${pdict.totalOrderCount > 10}">
+	                            <td class="pagecursortxt top hide-${pdict.pageSize.toFixed()}" nowrap="nowrap">
+	                                ${Resource.msg('order.list.show','bolt',null)}
+	                                <span class="pagecursortxt ten">
+	                                	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',10)}">10</a>
+	                                </span>
+	                                <span class="pagecursortxt fifty">
+	                                	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',50)}">50</a>
+	                                </span>
+	                                <span class="pagecursortxt hundred">
+	                                	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',100)}">100</a>
+	                                </span>
+	                                ${Resource.msg('order.list.items','bolt',null)}
+	                            </td>
+	                            <isif condition="${pdict.pageNumber > 1}">
+		                            <td class="pagecursortxt" width="1">
+		                            	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',pdict.pageSize,'pagenumber',1)}">${Resource.msg('order.list.first','bolt',null)}</a>
+		                            </td>
+		                            <td class="pagecursortxt" width="1">
+		                            	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',pdict.pageSize,'pagenumber',(pdict.pageNumber - 1))}">${Resource.msg('order.list.prev','bolt',null)}</a>
+		                            </td>
+		                        </isif>
+		                        <isif condition="${pdict.pageNumber < pdict.pageCount}">
+		                            <td class="pagecursortxt" width="1">
+		                            	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',pdict.pageSize,'pagenumber',(pdict.pageNumber + 1))}">${Resource.msg('order.list.next','bolt',null)}</a>
+		                            </td>
+		                            <td class="pagecursortxt" width="1">
+		                            	<a class="pagecursorbtn perm_not_disabled" href="${URLUtils.url('Bolt-OrderList','pagesize',pdict.pageSize,'pagenumber',pdict.pageCount)}">${Resource.msg('order.list.last','bolt',null)}</a>
+		                            </td>
+		                        </isif>
+	                        </isif>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
