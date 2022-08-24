@@ -539,18 +539,6 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltPartnerMerchant">
-        <display-name xml:lang="x-default">Bolt Partner Merchant</display-name>
-        <type>enum-of-string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <value-definitions>
-          <value-definition default="true">
-            <display xml:lang="x-default">MERCHANT_NAME</display>
-            <value>MERCHANT_NAME</value>
-          </value-definition>
-        </value-definitions>
-      </attribute-definition>
       <attribute-definition attribute-id="boltEnableInventoryCheck">
         <display-name xml:lang="x-default">Enable default inventory check</display-name>
         <type>boolean</type>
