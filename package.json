@@ -16,7 +16,7 @@
     "eslint:base": "eslint --format unix --ext .jsx,.js --cache --cache-location node_modules/eslintcache/cache --quiet",
     "eslint:fix": "npm run eslint:base -- --fix",
     "eslint:merchant": "npm run eslint -- --fix --config ./src/cartridges/int_bolt_extensions/cartridge/scripts/merchant-custom/f21/.lint.json",
-    "lint": "npm run lint:css && npm run eslint",
+    "lint": "npm run eslint",
     "lint:css": "sgmf-scripts --lint css",
     "transpile": "babel ./src/cartridges  -d ./cartridges --copy-files",
     "transpile:watch": "npm run transpile -- --watch",
