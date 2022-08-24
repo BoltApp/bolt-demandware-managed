@@ -1,0 +1,6 @@
+<iscontent type="text/javascript" charset="UTF-8" compact="true"/>
+
+(function(){
+    window.Resources = ${JSON.stringify(pdict.resourceHelper.getResources())};
+    window.Urls = ${JSON.stringify(pdict.resourceHelper.getUrls())};
+}());

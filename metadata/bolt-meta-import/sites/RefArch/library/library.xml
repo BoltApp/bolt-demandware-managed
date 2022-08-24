@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="RefArchSharedLibrary">
+  <content content-id="gift-additional-details">
+    <display-name xml:lang="x-default">Gift Certificate Additonal Details</display-name>
+    <description xml:lang="x-default">Gift Certificate Additional Details</description>
+    <online-flag>true</online-flag>
+    <searchable-flag>false</searchable-flag>
+    <custom-attributes>
+      <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class=&quot;terms-of-use&quot;&gt;
+        &lt;p&gt;&lt;strong&gt;Terms Of Use&lt;/strong&gt;&lt;/p&gt;
+        &lt;ul&gt;
+        &lt;li&gt;You cannot purchase an online gift certificate with another gift certificate.&lt;/li&gt;
+        &lt;li&gt;If the amount of your online gift certificates does NOT cover the total order amount, you will need to pay the remainder of the purchase with a valid credit card.&lt;/li&gt;
+        &lt;li&gt;If the amount of your online gift certificates is for MORE than the total order amount, the balance will be stored with your Salesforce account for your next purchase using the same gift certificate code.&lt;/li&gt;
+        &lt;li&gt;If you have any additional questions, please contact our Customer Service team.&lt;/li&gt;
+        &lt;li&gt;Online gift certificates are non-transferable, non-refundable and are not redeemable for cash (except where required by state law).&lt;/li&gt;
+        &lt;li&gt;We cannot replace lost or stolen online gift certificates.&lt;/li&gt;
+        &lt;li&gt;We do not charge sales tax when you buy an online gift certificate because it is charged when the gift certificate is used. State tax may be added to all orders shipped to addresses in the states indicated here.&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;</custom-attribute>
+    </custom-attributes>
+    <folder-links>
+      <classification-link folder-id="gift-certificates" />
+    </folder-links>
+  </content>
+
+  <content content-id="gift-check-balance">
+    <display-name xml:lang="x-default">Gift Certificate Check Balance</display-name>
+    <description xml:lang="x-default">Gift Certificate Check Balance Pop-Up</description>
+    <online-flag>true</online-flag>
+    <searchable-flag>false</searchable-flag>
+    <custom-attributes>
+      <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h2&gt;Check Balance of Existing Certificate&lt;/h2&gt;
+        &lt;div style=&quot;padding:20px 0;&quot;&gt;
+        To redeem a gift certificate, provide the card’s 16-digit number code on the billing page of the checkout process. To check the balance of your online gift certificate, enter the number below:&lt;/div&gt;</custom-attribute>
+    </custom-attributes>
+    <folder-links>
+      <classification-link folder-id="gift-certificates" />
+    </folder-links>
+  </content>
+
+  <content content-id="gift-details">
+    <display-name xml:lang="x-default">Gift Certificate Details</display-name>
+    <description xml:lang="x-default">Gift Certificate Details</description>
+    <online-flag>true</online-flag>
+    <searchable-flag>false</searchable-flag>
+    <page-attributes>
+      <page-title xml:lang="x-default">Purchasing Gift Certificates</page-title>
+      <page-description xml:lang="x-default">Purchasing Gift Certificates</page-description>
+    </page-attributes>
+    <custom-attributes>
+      <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h2&gt;Purchase an Online Gift Certificate&lt;/h2&gt;
+        
+        &lt;img height=&quot;162&quot; width=&quot;312&quot; src=&quot;images/gift-certificates.png?$staticlink$&quot; alt=&quot;&quot; /&gt;
+        
+        &lt;ul&gt;
+        &lt;li&gt;Delivered by email within hours&lt;/li&gt;
+        &lt;li&gt;Send as email&lt;/li&gt;
+        &lt;li&gt;Use online only&lt;/li&gt;
+        &lt;li&gt;Only redeemable in the country where purchased&lt;/li&gt;
+        &lt;/ul&gt;
+        
+        &lt;p&gt;&lt;strong&gt;Online Gift Certificate General Information&lt;/strong&gt;&lt;/p&gt;
+        &lt;p&gt;Online Gift Certificates can be ordered in any amount between $5.00 and $5000.00. They are sent via email to any individual with a valid email address. The recipient of an online gift certificate will receive an email with a gift certificate code redeemable only at Salesforce. The code is activated within 24 hours after receiving the email.&lt;/p&gt;</custom-attribute>
+    </custom-attributes>
+    <folder-links>
+      <classification-link folder-id="gift-certificates" />
+    </folder-links>
+  </content>
+
+</library>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+     <job job-id="PeriodicCatalog" priority="0">
+        <description>Export and upload delta catalog feed to S3 bucket</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="ExportCatalog" type="ExecuteScriptModule" enforce-restart="false">
+                <description>Generate catalog feed with updated products</description>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/catalogFeed.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">initExport</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">false</parameter>
+                    <parameter name="chunkSize">100</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="CleanUpFiles" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/cleanUp.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">cleanUp</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">false</parameter>
+                    <parameter name="filePath">/periodic_catalog/full</parameter>
+                    <parameter name="days">4</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="false">
+                <recurrence>
+                    <date-from>2021-10-14Z</date-from>
+                    <start-time>15:03:47.000Z</start-time>
+                    <interval>24h</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+    <job job-id="BoltPriceInventoryExport" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="ExportPriceInventory" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/priceInventoryFeed.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">initExport</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">false</parameter>
+                    <parameter name="chunkSize">2000</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2021-12-24Z</date>
+                <time>05:09:13.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+    <job job-id="BoltOrderTrackingTest" priority="0">
+        <description>Send order tracking data to Bolt for recent orders. Optional parameters: orderId, totalOrders, trackingNumber, carrier.</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArch"/>
+            <step step-id="SendOrderTracking" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/orderTracking.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">orderTracking</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">false</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="true">
+                <date>2022-02-08Z</date>
+                <time>16:14:35.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+</jobs>
+

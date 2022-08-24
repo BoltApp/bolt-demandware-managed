@@ -1,0 +1,3 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<link href="${URLUtils.staticURL('css/bolt.css')}" type="text/css" rel="stylesheet" />
+<script src="${URLUtils.staticURL('lib/jquery/jquery-3.5.0.min.js')}"></script>

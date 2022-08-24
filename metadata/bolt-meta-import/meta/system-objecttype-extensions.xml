@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+  <type-extension type-id="Order">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="boltAuthAmount">
+        <display-name xml:lang="x-default">Auth Amount</display-name>
+        <type>double</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCaptureAmount">
+        <display-name xml:lang="x-default">Capture Amount</display-name>
+        <type>double</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCustomCheckboxGift">
+        <display-name xml:lang="x-default">Is Gift</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCustomCheckboxLoyalty">
+        <display-name xml:lang="x-default">Is Loyalty</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCustomCheckboxNewsLetter">
+        <display-name xml:lang="x-default">Is Newsletter</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCustomCheckboxOther">
+        <display-name xml:lang="x-default">Is Other Checkbox</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCustomFieldList">
+        <display-name xml:lang="x-default">Bolt Custom Field List</display-name>
+        <type>text</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltDWLinkOrderID">
+        <display-name xml:lang="x-default">Bolt Demandware Link Order ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltDWLinkOrderToken">
+        <display-name xml:lang="x-default">Bolt SFCC Link Order Token</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltMultiCheckout">
+        <display-name xml:lang="x-default">Is Multi Checkout</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltOrderplacementFail">
+        <display-name xml:lang="x-default">Order Placement Fail</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltPaidAmount">
+        <display-name xml:lang="x-default">Paid Amount</display-name>
+        <type>double</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltAutoCapture">
+        <display-name xml:lang="x-default">Is Auto Capture</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTransactionHistory">
+        <display-name xml:lang="x-default">Bolt Transaction History</display-name>
+        <type>text</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTransactionID">
+        <display-name xml:lang="x-default">Bolt Transaction ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTransactionReference">
+        <display-name xml:lang="x-default">Bolt Transaction Reference</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTransactionStatus">
+        <display-name xml:lang="x-default">Bolt Transaction Status</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTransactionType">
+        <display-name xml:lang="x-default">Bolt Transaction Type</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTransactionProcessor">
+        <display-name xml:lang="x-default">Bolt Transaction Processor</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="isBoltOrder">
+        <display-name xml:lang="x-default">is Bolt Order</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserConnection">
+        <display-name xml:lang="x-default">Fraud Browser Connection</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserAcceptCharset">
+        <display-name xml:lang="x-default">Fraud Browser Accept Charset</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserAccept">
+        <display-name xml:lang="x-default">Fraud Browser Accept</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserAcceptEncoding">
+        <display-name xml:lang="x-default">Fraud Browser Accept Encoding</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserIdLanguageCode">
+        <display-name xml:lang="x-default">Fraud Browser ID Language Code</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserReferer">
+        <display-name xml:lang="x-default">Fraud Browser Referer</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserID">
+        <display-name xml:lang="x-default">Fraud Browser ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudHostname">
+        <display-name xml:lang="x-default">Fraud Host Name</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudRemoteHost">
+        <display-name xml:lang="x-default">Fraud Browser Hostname</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudTimeSpentOnSiteStr">
+        <display-name xml:lang="x-default">Fraud Time spent on site str</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudBrowserSessionId">
+        <display-name xml:lang="x-default">Fraud Browser Session ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="fraudDeviceFingerprint">
+        <display-name xml:lang="x-default">Fraud Device fingerprint</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+
+      <attribute-definition attribute-id="authorizationResponseCode">
+        <display-name xml:lang="x-default">Authorization Response Code</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="avsResponseCode">
+        <display-name xml:lang="x-default">Avs Response Code</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="bankAuthorizationCode">
+        <display-name xml:lang="x-default">Bank Authorization Code</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="cvvAuthorizationCode">
+        <display-name xml:lang="x-default">Cvv Authorization Code</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="tenderType">
+        <display-name xml:lang="x-default">Tender Type</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="panToken">
+        <display-name xml:lang="x-default">Pan Token</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="authorizationRequestId">
+        <display-name xml:lang="x-default">Authorization Request Id</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="recurringDetailReference">
+        <display-name xml:lang="x-default">Recurring Detail reference</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="shopperReference">
+        <display-name xml:lang="x-default">Shopper Reference</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="alias">
+        <display-name xml:lang="x-default">Alias</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="amazonOrderReferenceId">
+        <display-name xml:lang="x-default">Amazon order reference Id</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="amazonAuthorizationId">
+        <display-name xml:lang="x-default">Amazon Authorization Id</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="alternateOrderId">
+        <display-name xml:lang="x-default">Alternate order Id</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="isBackOfficeOrder">
+        <display-name xml:lang="x-default">Is Back Office Order</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+    </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="APIHookAttributes">
+        <display-name xml:lang="x-default">Bolt Attributes</display-name>
+        <attribute attribute-id="boltTransactionID"/>
+        <attribute attribute-id="boltTransactionHistory"/>
+        <attribute attribute-id="boltTransactionType"/>
+        <attribute attribute-id="boltTransactionProcessor"/>
+        <attribute attribute-id="boltTransactionStatus"/>
+        <attribute attribute-id="boltTransactionReference"/>
+        <attribute attribute-id="boltDWLinkOrderID"/>
+        <attribute attribute-id="boltAuthAmount"/>
+        <attribute attribute-id="boltCaptureAmount"/>
+        <attribute attribute-id="boltPaidAmount"/>
+        <attribute attribute-id="boltAutoCapture"/>
+        <attribute attribute-id="isBoltOrder"/>
+        <attribute attribute-id="boltCustomFieldList"/>
+      </attribute-group>
+      <attribute-group group-id="Bolt Custom Checkboxes">
+        <display-name xml:lang="x-default">Bolt Custom Checkboxes</display-name>
+        <attribute attribute-id="boltCustomCheckboxGift"/>
+        <attribute attribute-id="boltCustomCheckboxLoyalty"/>
+        <attribute attribute-id="boltCustomCheckboxNewsLetter"/>
+        <attribute attribute-id="boltCustomCheckboxOther"/>
+      </attribute-group>
+    </group-definitions>
+  </type-extension>
+
+  <type-extension type-id="OrderPaymentInstrument">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="boltCardExpirationMonth">
+        <display-name xml:lang="x-default">Credit Card Expiration Month</display-name>
+        <type>int</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCardExpirationYear">
+        <display-name xml:lang="x-default">Credit Card Expiration Year</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCreditCardLastDigits">
+        <display-name xml:lang="x-default">Credit Card Last 4 Digits</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCreditCardType">
+        <display-name xml:lang="x-default">Credit Card Type</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltTokenType">
+        <display-name xml:lang="x-default">Token Type</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="giftCardID">
+        <display-name xml:lang="x-default">Gift Card ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="giftCardPin">
+        <display-name xml:lang="x-default">Gift Card PIN</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="giftCardStatus">
+        <display-name xml:lang="x-default">Gift Card Status</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="giftCardTimeAdded">
+        <display-name xml:lang="x-default">Gift Card Time Added (Unix Timestamp)</display-name>
+        <type>double</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="giftCardRedemptionId">
+        <display-name xml:lang="x-default">Gift Card Redemption Id</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+    </custom-attribute-definitions>
+  </type-extension>
+
+  <type-extension type-id="ProductLineItem">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="fromStoreId">
+        <display-name xml:lang="x-default">From Store Id</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="isPOBox">
+        <display-name xml:lang="x-default">Is PO Box</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+    </custom-attribute-definitions>
+  </type-extension>
+
+  <type-extension type-id="OrganizationPreferences">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="appleDeveloperMerchantidDomainAssociation">
+        <display-name xml:lang="x-default">Apple Developer Merchant ID Domain Association</display-name>
+        <description xml:lang="x-default">Validation String which is sent if Apple requests /.well-known/apple-developer-merchantid-domain-association and a static URL mapping exists for a site which runs in root context (GLOBAL). Mapping rule must be /.well-known/apple-developer-merchantid-domain-association s,,,,,/apple-developer-merchantid-domain-association</description>
+        <type>text</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+    </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="applePay">
+        <display-name xml:lang="x-default">Apple Pay</display-name>
+        <attribute attribute-id="appleDeveloperMerchantidDomainAssociation"/>
+      </attribute-group>
+    </group-definitions>
+  </type-extension>
+
+  <type-extension type-id="SitePreferences">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="boltAPI">
+        <display-name xml:lang="x-default">Bolt API URL</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltAPIKey">
+        <display-name xml:lang="x-default">API Key</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltBackOfficePublishableKey">
+        <display-name xml:lang="x-default">Publishable Key - Back Office</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltCartAjaxUpdateEnable">
+        <display-name xml:lang="x-default">Enable Cart Ajax Update</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnable">
+        <display-name xml:lang="x-default">Enable Bolt Pay</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnableBackOffice">
+        <display-name xml:lang="x-default">Display Bolt Checkout for Back Office payments</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnableCartPage">
+        <display-name xml:lang="x-default">Display Bolt Checkout on the Cart Page</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnableCheckoutPage">
+        <display-name xml:lang="x-default">Display Bolt Checkout on the Native Checkout Page</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltGiftCertificateEnable">
+        <display-name xml:lang="x-default">Gift Cetificate Enable</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltMultiPublishableKey">
+        <display-name xml:lang="x-default">Publishable Key - Multistep</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltPreauthEnable">
+        <display-name xml:lang="x-default">Preauth Enable</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>true</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltSigningSecret">
+        <display-name xml:lang="x-default">Signing Secret</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnvironment">
+        <display-name xml:lang="x-default">Bolt Environment</display-name>
+        <type>enum-of-string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <value-definitions>
+          <value-definition>
+            <display xml:lang="x-default">Sandbox</display>
+            <value>sandbox</value>
+          </value-definition>
+          <value-definition default="true">
+            <display xml:lang="x-default">Production</display>
+            <value>production</value>
+          </value-definition>
+          <value-definition>
+            <display xml:lang="x-default">Internal Bolt Testing (For Bolt Engineering Only)</display>
+            <value>staging</value>
+          </value-definition>
+        </value-definitions>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltMerchantDivisionID">
+        <display-name xml:lang="x-default">Bolt Merchant Division ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltPartnerMerchant">
+        <display-name xml:lang="x-default">Bolt Partner Merchant</display-name>
+        <type>enum-of-string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <value-definitions>
+          <value-definition default="true">
+            <display xml:lang="x-default">MERCHANT_NAME</display>
+            <value>MERCHANT_NAME</value>
+          </value-definition>
+        </value-definitions>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnableInventoryCheck">
+        <display-name xml:lang="x-default">Enable default inventory check</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>true</default-value>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltProcessorMapping">
+          <display-name xml:lang="x-default">Bolt Processor Mapping</display-name>
+          <description xml:lang="x-default">Bolt Processor Mapping to generalize processor value sent to downstream. JSON format.</description>
+          <type>text</type>
+          <mandatory-flag>false</mandatory-flag>
+          <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+
+      <!--  V2 cartridges attributes -->
+      <attribute-definition attribute-id="boltEnvironmentOCAPI">
+        <display-name xml:lang="x-default">Bolt Environment</display-name>
+        <type>enum-of-string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <value-definitions>
+          <value-definition>
+            <display xml:lang="x-default">Sandbox</display>
+            <value>sandbox</value>
+          </value-definition>
+          <value-definition default="true">
+            <display xml:lang="x-default">Production</display>
+            <value>production</value>
+          </value-definition>
+          <value-definition>
+            <display xml:lang="x-default">Internal Bolt Testing (For Bolt Engineering Only)</display>
+            <value>staging</value>
+          </value-definition>
+        </value-definitions>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltMultiPublishableKeyOCAPI">
+        <display-name xml:lang="x-default">Publishable Key - Multistep - used for V2 version</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltBackOfficePublishableKeyOCAPI">
+        <display-name xml:lang="x-default">Publishable Key - Back Office - used for V2 version</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnableSessionRecording">
+        <display-name xml:lang="x-default">Enable Shopper Session Recording</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
+    </custom-attribute-definitions>
+
+    <group-definitions>
+      <attribute-group group-id="Bolt Payment Setting - General">
+        <display-name xml:lang="x-default">Bolt Payment Setting</display-name>
+        <attribute attribute-id="boltEnable"/>
+        <attribute attribute-id="boltAPIKey"/>
+        <attribute attribute-id="boltSigningSecret"/>
+        <attribute attribute-id="boltEnableCartPage"/>
+        <attribute attribute-id="boltEnableBackOffice"/>
+        <attribute attribute-id="boltEnableCheckoutPage"/>
+        <attribute attribute-id="boltPreauthEnable"/>
+        <attribute attribute-id="boltGiftCertificateEnable"/>
+        <attribute attribute-id="boltCartAjaxUpdateEnable"/>
+        <attribute attribute-id="boltPartnerMerchant"/>
+        <attribute attribute-id="boltEnableInventoryCheck"/>
+        <attribute attribute-id="boltMerchantDivisionID"/>
+        <attribute attribute-id="boltProcessorMapping"/>
+        <attribute attribute-id="boltEnableSessionRecording"/>
+      </attribute-group>
+      <attribute-group group-id="Bolt Credentials Setting - V1">
+        <display-name xml:lang="x-default">Bolt Credentials Setting - V1</display-name>
+        <attribute attribute-id="boltMultiPublishableKey"/>
+        <attribute attribute-id="boltBackOfficePublishableKey"/>
+        <attribute attribute-id="boltEnvironment"/>
+      </attribute-group>
+      <attribute-group group-id="Bolt Credentials Setting - V2">
+        <display-name xml:lang="x-default">Bolt Credentials Setting - V2</display-name>
+        <attribute attribute-id="boltMultiPublishableKeyOCAPI"/>
+        <attribute attribute-id="boltBackOfficePublishableKeyOCAPI"/>
+        <attribute attribute-id="boltEnvironmentOCAPI"/>
+      </attribute-group>
+    </group-definitions>
+  </type-extension>
+
+  <type-extension type-id="Store">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="shipToStoreEnabled">
+        <display-name xml:lang="x-default">Ship To Store Enabled</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+    </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="Features">
+        <display-name xml:lang="x-default">Features</display-name>
+        <attribute attribute-id="shipToStoreEnabled"/>
+      </attribute-group>
+    </group-definitions>
+  </type-extension>
+
+  <type-extension type-id="Product">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="itemTag">
+        <display-name xml:lang="x-default">Store ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+    </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="Custom">
+        <display-name xml:lang="x-default">Custom</display-name>
+        <attribute attribute-id="itemTag"/>
+      </attribute-group>
+    </group-definitions>
+  </type-extension>
+
+  <type-extension type-id="Basket">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="boltDynamicAddOns">
+        <display-name xml:lang="x-default">Bolt Dynamic Add-Ons</display-name>
+        <type>text</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+    </custom-attribute-definitions>
+  </type-extension>
+
+  <type-extension type-id="Promotion">
+    <custom-attribute-definitions>
+			<attribute-definition attribute-id="cartMessage">
+        <display-name xml:lang="x-default">Cart Message</display-name>
+        <type>string</type>
+        <localizable-flag>false</localizable-flag>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="plpMessage">
+          <display-name xml:lang="x-default">PLP Message</display-name>
+          <type>string</type>
+          <localizable-flag>false</localizable-flag>
+          <mandatory-flag>false</mandatory-flag>
+          <externally-managed-flag>false</externally-managed-flag>
+          <min-length>0</min-length>
+      </attribute-definition>
+    </custom-attribute-definitions>
+      <group-definitions>
+        <attribute-group group-id="custom">
+          <display-name xml:lang="x-default">Custom Attributes</display-name>
+          <attribute attribute-id="plpMessage"/>
+          <attribute attribute-id="cartMessage"/>
+        </attribute-group>
+      </group-definitions>
+  </type-extension>
+
+  <type-extension type-id="ProductInventoryRecord">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="isStoreInventoryAllocated">
+        <display-name xml:lang="x-default">Is Store Inventory Allocated</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+    </custom-attribute-definitions>
+  </type-extension>
+
+  <type-extension type-id="Shipment">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="isPOBox">
+        <display-name xml:lang="x-default">Is PO Box</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+    </custom-attribute-definitions>
+  </type-extension>
+
+  <type-extension type-id="Profile">
+    <custom-attribute-definitions>
+      <attribute-definition attribute-id="allowMarketingEmails">
+        <display-name xml:lang="x-default">Allow Marketing Emails</display-name>
+        <description xml:lang="x-default">If true, customer has consented to receiving marketing emails from the merchant</description>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+      <attribute-definition attribute-id="allowMarketingSMS">
+        <display-name xml:lang="x-default">Allow Marketing SMS</display-name>
+        <description xml:lang="x-default">If true, customer has consented to receiving marketing SMS from the merchant</description>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
+    </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="Custom Fields">
+        <display-name xml:lang="x-default">Custom Fields</display-name>
+        <attribute attribute-id="allowMarketingEmails"/>
+        <attribute attribute-id="allowMarketingSMS"/>
+      </attribute-group>
+    </group-definitions>
+  </type-extension>
+</metadata>

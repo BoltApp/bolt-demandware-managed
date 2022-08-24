@@ -1,0 +1,68 @@
+<!--- TEMPLATENAME: homelanding.isml --->
+<isdecorate template="application/MenuFrame"> <iscontent
+	type="text/html" charset="UTF-8"> <isinclude
+	template="custom/modules" /> <isinclude template="inc/Modules">
+<isset name="TOP_URL"
+	value="${URLUtils.url('SiteNavigationBar-ShowMenuitemOverview', 'CurrentMenuItemId', 'customadminmenuextension_id101')}"
+	scope="PAGE"> <isbreadcrumbs
+	bcurl1="${URLUtils.url('Bolt-LandingPage')}"
+	bctext1="${Resource.msg('bolt.config','bolt',null)}" />
+<div class="bolt-configs">
+	<h1>${Resource.msg('config.pagetitle','bolt',null)}</h1>
+</div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<form action="${URLUtils.url('custom_extensionsactions-SiteAction')}"
+		method="post" name="formMask">
+		<tr>
+			<td class="table_header w e s" width="25%">Name</td>
+			<td class="table_header e s" width="30%">Value</td>
+			<td class="table_header e s" width="20%">Type</td>
+			<td class="table_header e s" width="25%">Default Value</td>
+		</tr>
+		<!-- content -->
+		<tr>
+			<!-- Name -->
+			<td class="table_detail w e s" nowrap="nowrap">
+				${Resource.msg('bolt.enable','bolt',null)}</td>
+			<!--- Value --->
+			<td class="table_detail e s" nowrap="nowrap"><input
+				type="checkbox" name="${pdict.SampleSiteParameter}" value=
+			<ISPRINT value="${pdict.SampleSiteParameter}">
+				class="inputfield_en w100"/> </td>
+			<!--- Type --->
+			<td class="table_detail e s" nowrap="nowrap">True/False</td>
+			<td class="table_detail e s" nowrap="nowrap">
+				${Resource.msg('bolt.disabled','bolt',null)}</td>
+		</tr>
+
+		<tr>
+			<td colspan="4" class="e s" align="right">
+				<table border="0" cellspacing="4" cellpadding="0">
+					<tr>
+						<td class="button"><input type="submit" name="update"
+							value="Apply" class="button" /></td>
+						<td class="button"><input type="submit" name="cancel"
+							value="Cancel" class="button" /></td>
+						<td class="button"><input type="reset" name="reset"
+							value="Reset" class="button" /></td>
+						<input type="hidden" name="CurrentMenuItemId"
+							value="<isprint value="${pdict.CurrentMenuItemId}">"/>
+						<input type="hidden" name="mainmenuname" value="<isprint value="${pdict.mainmenuname}">"/>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+	</form>
+</table>
+<!-- EO Main Content -->
+
+<table class="bottombuttons">
+	<form name="Back" action="${TOP_URL}" method="post">
+		<tr>
+			<td><input class="button" type="submit" name="backToPrefs"
+				value="&lt;&lt; Back" /></td>
+		</tr>
+	</form>
+</table>
+<!-- EO Working Area --></isdecorate>

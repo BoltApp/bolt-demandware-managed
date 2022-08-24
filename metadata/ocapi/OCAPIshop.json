@@ -1,0 +1,41 @@
+{
+  "_v": "20.8",
+  "clients": [
+    {
+      "client_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "allowed_origins": [],
+      "resources": [
+        {
+          "resource_id": "/customers/auth",
+          "methods": ["post"],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
+        },
+        {
+          "resource_id": "/sessions",
+          "methods": ["post"],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
+        },
+        {
+          "resource_id": "/baskets",
+          "methods": ["post"],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
+        },
+        {
+          "resource_id": "/baskets/*",
+          "methods": ["post", "delete"],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
+        },
+        {
+          "resource_id": "/baskets/*/items",
+          "methods": ["post"],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
+        }
+      ]
+    }
+  ]
+}

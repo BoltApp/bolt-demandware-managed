@@ -1,0 +1,64 @@
+<isdecorate template="application/MenuFrame">
+<iscontent type="text/html" charset="UTF-8">
+<isinclude template="custom/modules" />
+<isinclude template="inc/Modules" />
+<isbreadcrumbs bcurl1="${URLUtils.url('Bolt-OrderList')}" bctext1="${Resource.msg('order.list.label','bolt',null)}" />
+	
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+		<tr>
+			<td colspan="5" class="overview_title">${Resource.msg('order.list.title','bolt',null)}</td>
+		</tr>
+		<tr>
+			<td colspan="5" class="overview_title_description"></td>
+		</tr>
+	</tbody>
+</table>
+
+<isinclude template="application/orderlistsearch" />
+
+<isif condition="${pdict.totalOrderCount == 0}">
+	<table class="order-list-empty n w e s" border="0" cellpadding="0" cellspacing="0" width="100%">
+	   <tbody>
+	      <tr>
+	         <td width="100%" class="table_detail">
+	            <p>
+	               ${Resource.msg('order.list.noorders','bolt',null)}
+	            </p>
+	         </td>
+	      </tr>
+	   </tbody>
+	</table>
+<iselse>
+	<table class="order-list-content" width="100%" border="0" cellspacing="0" cellpadding="0">
+	    <tbody>
+	        <tr>
+	            <td class="table_header w e s">${Resource.msg('orderid','bolt',null)}</td>
+	            <td class="table_header e s" nowrap="nowrap">${Resource.msg('orderdate','bolt',null)}</td>
+	            <td class="table_header e s" nowrap="nowrap">${Resource.msg('order.customer','bolt',null)}</td>
+	            <td class="table_header e s" nowrap="nowrap">${Resource.msg('order.customer.email','bolt',null)}</td>
+	            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('order.total','bolt',null)}</td>
+	            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('transactiontype','bolt',null)}</td>
+	            <td class="table_header e s left" nowrap="nowrap">${Resource.msg('transactionstatus','bolt',null)}</td>
+	        </tr>
+	        <isloop items="${pdict.orders}" var="order" status="orderstate">
+		        <tr style="background-color: #FFFFFF">
+		            <td class="table_detail w e s" nowrap="nowrap">
+		                <a href="${URLUtils.url('Bolt-OrderDetails','OrderNo',order.orderNo)}" target="_blank" class="table_detail_link">${order.orderNo}</a>&nbsp;
+		            </td>
+		            <td class="table_detail e s" nowrap="nowrap">${dw.util.StringUtils.formatCalendar(dw.util.Calendar(dw.util.Calendar(order.getCreationDate())), 'yyyy-MM-dd HH:mm')}</td>
+		            <td class="table_detail e s" nowrap="nowrap">${order.getCustomerName()}</td>
+		            <td class="table_detail e s" nowrap="nowrap">${order.getCustomerEmail()}</td>
+		            <td class="table_detail e s right" nowrap="nowrap">${order.getCurrencyCode() +' '+ order.getTotalGrossPrice().value}</td>
+		            <td class="table_detail e s" nowrap="nowrap">${order.custom.boltTransactionType}</td>
+		            <td class="table_detail e s" nowrap="nowrap">${order.custom.boltTransactionStatus}</td>
+		        </tr>
+		    </isloop>
+	    </tbody>
+	</table>
+	
+	<isinclude template="application/orderlistpagination" />
+	
+</isif>
+
+</isdecorate>

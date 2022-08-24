@@ -1,0 +1,15 @@
+!.project
+metadata/bolt-meta-import.zip
+node_modules/
+.idea/
+.DS_Store
+.vscode/
+dw.json
+.nyc_output/
+cartridges/bm_bolt/
+cartridges/int_bolt_controllers/
+cartridges/int_bolt_core/
+cartridges/int_bolt_csc/
+cartridges/int_bolt_extensions/
+cartridges/int_bolt_loadtest/
+cartridges/int_bolt_sfra/

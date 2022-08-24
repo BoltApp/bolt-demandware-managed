@@ -1,0 +1,125 @@
+/******** Bolt custom CSS *******/
+.bolt-module * {
+  box-sizing: border-box;
+}
+
+bolt-configs {
+  font-size: 13px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.bolt-module h1 {
+  border-bottom: 1px solid #dadada;
+  color: #84bd00;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2em;
+  padding: 10px 0;
+}
+
+.bolt-module h2 {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 5px;
+  text-transform: none;
+}
+.bolt-module .infobox {
+  margin-bottom: 10px;
+}
+.bolt-module .popup-holder {
+  width: 100%;
+  text-align: center;
+}
+.bolt-module .operations-holder {
+  background-color: #fff;
+  display: none;
+  padding: 10px 8px 10px 15px;
+  border: 1px solid #a9a9a9;
+  float: left;
+  margin-top: 50px;
+  margin-left: 500px;
+}
+.bolt-module .operations-holder input[type='text'] {
+  width: 80px;
+  padding: 0 5px;
+  text-align: right;
+}
+.bolt-module .operations-holder input[type='radio'] {
+  position: relative;
+  top: 2px;
+}
+.bolt-module .operations-holder button {
+  border-radius: 0;
+  padding: 5px 30px;
+  color: #fff;
+  background-color: #808080;
+  border-color: #808080;
+}
+.bolt-module .operations-holder button:hover {
+  background-color: #000000;
+}
+.bolt-module .operations-holder button[disabled]:hover {
+  color: #fff;
+}
+.bolt-module .operations-holder table {
+  width: 230px;
+}
+.bolt-module .operations-holder table td {
+  padding: 5px 0;
+}
+.bolt-module .operations-holder table td label {
+  margin: 0;
+}
+.bolt-module .operations-container .title {
+}
+#filtertableProjects tfoot {
+  display: table-header-group;
+}
+#filtertableProjects tfoot tr th {
+  border-bottom: 1px solid #dadada;
+}
+.overview_documentation {
+  font-size: 20px;
+  padding-top: 22px;
+}
+table#documentation {
+  border-top: 1px solid #dadada;
+}
+.overview_title_description p {
+  font-size: 10px;
+  font-style: italic;
+}
+.dt-table.dataTable {
+  border-collapse: collapse;
+}
+.dt-table td {
+  border: 1px solid #dadada;
+}
+.bolt-module .infobox {
+  border-top: 1px solid #dadada;
+}
+.infobox_title_search {
+  padding: 5px;
+}
+.order-list-content {
+  border-top: 1px solid #dadada;
+}
+.order-list-empty td {
+  padding-top: 12px;
+}
+.pagecursortxt.hide-10 .ten {
+  display: none;
+}
+.pagecursortxt.hide-50 .fifty {
+  display: none;
+}
+.pagecursortxt.hide-100 .hundred {
+  display: none;
+}
+.pagecursorbtn {
+  text-decoration: none;
+}
+a.button.show-all {
+  margin-left: 80px;
+}
