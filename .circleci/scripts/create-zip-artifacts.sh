@@ -11,7 +11,7 @@ create_release() {
   
   # Zip the artifact into artifacts directory as v<TAG>.zip
   zip -r ../artifacts/"$GIT_TAG".zip . -x ".git/*" "node_modules/*" ".circleci/*"
-  cd ../bolt-demandware-embedded || exit
+  cd ../bolt-demandware-managed || exit
 }
 
 # Create Artifacts directory
