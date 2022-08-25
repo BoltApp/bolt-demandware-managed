@@ -1,10 +1,10 @@
 # bolt-demandware-managed
 
-# Bolt SFRA Cartridges for Embedded Checkout
+# Bolt SFRA Cartridges for Managed Checkout
 
 ## Getting Started
 
-1. Clone this repository. (The name of the top-level folder is bolt\-demandware-embedded.)
+1. Clone this repository. (The name of the top-level folder is bolt\-demandware-managed.)
 2. In the top-level `/bolt-demandware-managed` folder, enter the following command: `npm install`. (This command installs all of the package dependencies required for this cartridge.)
 3. In the top-level `/bolt-demandware-managed` folder, edit the `paths.base` property in the package.json file. This property should contain a relative path to the local directory containing the Storefront Reference Architecture repository. For example:
 
