@@ -135,17 +135,13 @@ jobs:
 
   publish-github-release:
     docker:
-      - image: circleci/golang:1.10
+      - image: cimg/go:1.19.0
     steps:
       - attach_workspace:
           at: ../artifacts
       - run:
           name: "Publish Release on GitHub"
-          command: |
-            GIT_TAG=<< pipeline.parameters.tag >>
-            go get github.com/tcnksm/ghr
-            ghr -t "${GITHUBTOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -n "Version $GIT_TAG" -body "This release is version $GIT_TAG" -debug "$GIT_TAG" "../artifacts/$GIT_TAG.zip"
-            bash ../artifacts/release-artifacts.sh << pipeline.parameters.tag >>
+          command: bash ../artifacts/release-artifacts.sh << pipeline.parameters.tag >>
 
   create-release:
     working_directory: /home/circleci/bolt-demandware-managed
