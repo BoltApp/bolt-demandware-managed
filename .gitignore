@@ -1,5 +1,5 @@
 !.project
-metadata/bolt-meta-import-.zip
+metadata/bolt-meta-import.zip
 node_modules/
 .idea/
 .DS_Store
