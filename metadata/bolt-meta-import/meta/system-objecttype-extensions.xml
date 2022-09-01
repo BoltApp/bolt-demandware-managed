@@ -352,7 +352,7 @@
         <min-length>0</min-length>
       </attribute-definition>
       <attribute-definition attribute-id="boltCreditCardBIN">
-        <display-name xml:lang="x-default">Credit Card BINe</display-name>
+        <display-name xml:lang="x-default">Credit Card BIN</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
@@ -374,20 +374,6 @@
       </attribute-definition>
       <attribute-definition attribute-id="boltTokenType">
         <display-name xml:lang="x-default">Token Type</display-name>
-        <type>string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltCustomerPaymentProfileID">
-        <display-name xml:lang="x-default">Customer Payment Profile Id</display-name>
-        <type>string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltCustomerProfileID">
-        <display-name xml:lang="x-default">Customer Profile Id</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
