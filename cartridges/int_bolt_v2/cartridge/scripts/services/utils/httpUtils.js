@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Utility functions for API service
@@ -20,7 +20,6 @@ var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
 var HttpResult = require('dw/svc/Result');
 /* Script Includes */
 
-
 var boltPreferences = require('~/cartridge/scripts/services/utils/preferences');
 
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
@@ -35,57 +34,56 @@ exports.HTTP_METHOD_POST = 'POST';
  */
 
 exports.getBoltRequestBody = function () {
-  var req;
+    var req;
 
-  try {
-    var httpParameterMap = request.getHttpParameterMap();
-    var requestBody = httpParameterMap.get('requestBodyAsString') ? httpParameterMap.requestBodyAsString : null;
-    var blockedCharactersList = Site.getCurrent().getCustomPreferenceValue('blockedCharactersList') || null;
-    var denyList = null;
+    try {
+        var httpParameterMap = request.getHttpParameterMap();
+        var requestBody = httpParameterMap.get('requestBodyAsString') ? httpParameterMap.requestBodyAsString : null;
+        var blockedCharactersList = Site.getCurrent().getCustomPreferenceValue('blockedCharactersList') || null;
+        var denyList = null;
 
-    if (blockedCharactersList) {
-      denyList = new RegExp(blockedCharactersList, 'g');
+        if (blockedCharactersList) {
+            denyList = new RegExp(blockedCharactersList, 'g');
+        }
+
+        req = JSON.parse(requestBody); // filter out emojis (usually present in values)
+
+        Object.keys(req).map(function (key) {
+            req[key] = commonUtils.sanitizeInput(req[key], denyList);
+            return null;
+        });
+    } catch (e) {
+        req = null;
+        log.error('Invalid JSON bolt request. Error:' + e.message);
     }
 
-    req = JSON.parse(requestBody); // filter out emojis (usually present in values)
-
-    Object.keys(req).map(function (key) {
-      req[key] = commonUtils.sanitizeInput(req[key], denyList);
-      return null;
-    });
-  } catch (e) {
-    req = null;
-    log.error('Invalid JSON bolt request. Error:' + e.message);
-  }
-
-  return req;
+    return req;
 };
 /**
  * Check authentication code
  * @returns {boolean} authentication status
  */
 
-
 exports.getAuthenticationStatus = function () {
-  var strAuth = request.getHttpHeaders().get('x-bolt-hmac-sha256');
-  var httpParameterMap = request.getHttpParameterMap();
-  var requestBody = httpParameterMap.get('requestBodyAsString') ? httpParameterMap.requestBodyAsString : null;
-  var boltSigningSecret = Site.getCurrent().getCustomPreferenceValue('boltSigningSecret') || '';
+    var strAuth = request.getHttpHeaders().get('x-bolt-hmac-sha256');
+    var httpParameterMap = request.getHttpParameterMap();
+    var requestBody = httpParameterMap.get('requestBodyAsString') ? httpParameterMap.requestBodyAsString : null;
+    var boltSigningSecret = '47a5f8ccac54692f3bfc110d826033586d3c7bf2eb88ad2e369624c7d6fa0d96';// Site.getCurrent().getCustomPreferenceValue('boltSigningSecret') || '';
 
-  if (!strAuth) {
-    log.error('Missing authorization key on request header');
-    return false;
-  }
+    if (!strAuth) {
+        log.error('Missing authorization key on request header');
+        return false;
+    }
 
-  if (!boltSigningSecret) {
-    log.error("Missing custom preference value for 'Access Token Secret'");
-    return false;
-  }
+    if (!boltSigningSecret) {
+        log.error("Missing custom preference value for 'Access Token Secret'");
+        return false;
+    }
 
-  var mac = new Mac(Mac.HMAC_SHA_256);
-  var sha = mac.digest(requestBody, boltSigningSecret);
-  var hmac = Encoding.toBase64(sha);
-  return hmac === strAuth;
+    var mac = new Mac(Mac.HMAC_SHA_256);
+    var sha = mac.digest(requestBody, boltSigningSecret);
+    var hmac = Encoding.toBase64(sha);
+    return hmac === strAuth;
 };
 /**
  * @typedef {Object} ServiceResponse
@@ -102,76 +100,75 @@ exports.getAuthenticationStatus = function () {
  * @returns {ServiceResponse} service response
  */
 
-
 exports.restAPIClient = function (method, endPoint, request) {
-  var contentType = 'application/json';
-  var service = LocalServiceRegistry.createService('bolt.http', {
-    createRequest: function createRequest(service, args) {
-      service.URL = args.endPointUrl;
-      service.setRequestMethod(args.method);
-      service.addHeader('Content-Type', contentType);
-      service.addHeader('X-Api-Key', args.boltAPIKey);
-      service.addHeader('Content-Length', args.request.length);
-      service.addHeader('X-Nonce', new Date().getTime());
-      service.addHeader('X-Bolt-Source-Name', boltPreferences.BOLT_SOURCE_NAME);
-      service.addHeader('X-Bolt-Source-Version', boltPreferences.BOLT_CARTRIDGE_VERSION);
-      return args.request;
-    },
-    parseResponse: serviceParseResponse,
-    getRequestLogMessage: function getRequestLogMessage(request, requestContentType) {
-      if (requestContentType !== 'application/json') {
-        return request;
-      }
+    var contentType = 'application/json';
+    var service = LocalServiceRegistry.createService('bolt.http', {
+        createRequest: function createRequest(service, args) {
+            service.URL = args.endPointUrl;
+            service.setRequestMethod(args.method);
+            service.addHeader('Content-Type', contentType);
+            service.addHeader('X-Api-Key', args.boltAPIKey);
+            service.addHeader('Content-Length', args.request.length);
+            service.addHeader('X-Nonce', new Date().getTime());
+            service.addHeader('X-Bolt-Source-Name', boltPreferences.BOLT_SOURCE_NAME);
+            service.addHeader('X-Bolt-Source-Version', boltPreferences.BOLT_CARTRIDGE_VERSION);
+            return args.request;
+        },
+        parseResponse: serviceParseResponse,
+        getRequestLogMessage: function getRequestLogMessage(request, requestContentType) {
+            if (requestContentType !== 'application/json') {
+                return request;
+            }
 
-      return request ? LogUtils.maskCustomerData(JSON.parse(request)) : JSON.stringify({});
-    },
-    getResponseLogMessage: function getResponseLogMessage(response) {
-      return LogUtils.maskCustomerData(JSON.parse(response.text));
-    }
-  });
-  var config = getConfiguration();
-  var endPointUrl = config.boltAPIBaseURLV1 + endPoint;
-  request = request || '';
-  var serviceArgs = {
-    method: method,
-    endPointUrl: endPointUrl,
-    request: request,
-    boltAPIKey: config.boltAPIKey
-  };
-  var result = service.call(serviceArgs);
-
-  if (result && result.status === HttpResult.OK) {
-    return {
-      status: HttpResult.OK,
-      errors: [],
-      result: result.object
+            return request ? LogUtils.maskCustomerData(JSON.parse(request)) : JSON.stringify({});
+        },
+        getResponseLogMessage: function getResponseLogMessage(response) {
+            return LogUtils.maskCustomerData(JSON.parse(response.text));
+        }
+    });
+    var config = getConfiguration();
+    var endPointUrl = config.boltAPIBaseURLV1 + endPoint;
+    request = request || '';
+    var serviceArgs = {
+        method: method,
+        endPointUrl: endPointUrl,
+        request: request,
+        boltAPIKey: config.boltAPIKey
     };
-  }
+    var result = service.call(serviceArgs);
 
-  log.error('Error on Service execution: ' + result);
-
-  if (result.errorMessage) {
-    try {
-      var responseError = JSON.parse(result.errorMessage);
-      return {
-        status: HttpResult.ERROR,
-        errors: responseError.errors || [new Error('Service execution failed with no error message')],
-        result: null
-      };
-    } catch (e) {
-      return {
-        status: HttpResult.ERROR,
-        errors: [new Error('Failed to parse error messages from service response')],
-        result: null
-      };
+    if (result && result.status === HttpResult.OK) {
+        return {
+            status: HttpResult.OK,
+            errors: [],
+            result: result.object
+        };
     }
-  } else {
-    return {
-      status: HttpResult.ERROR,
-      errors: [new Error('Service execution failed with no error message')],
-      result: null
-    };
-  }
+
+    log.error('Error on Service execution: ' + result);
+
+    if (result.errorMessage) {
+        try {
+            var responseError = JSON.parse(result.errorMessage);
+            return {
+                status: HttpResult.ERROR,
+                errors: responseError.errors || [new Error('Service execution failed with no error message')],
+                result: null
+            };
+        } catch (e) {
+            return {
+                status: HttpResult.ERROR,
+                errors: [new Error('Failed to parse error messages from service response')],
+                result: null
+            };
+        }
+    } else {
+        return {
+            status: HttpResult.ERROR,
+            errors: [new Error('Service execution failed with no error message')],
+            result: null
+        };
+    }
 };
 /**
  * HTTPService configuration parseResponse
@@ -180,40 +177,38 @@ exports.restAPIClient = function (method, endPoint, request) {
  * @returns {string | null} success or null
  */
 
-
 function serviceParseResponse(_service, httpClient) {
-  var resp;
+    var resp;
 
-  if (httpClient.statusCode === 200 || httpClient.statusCode === 201) {
-    resp = JSON.parse(httpClient.getText());
-  } else {
-    log.error('Error on http request:' + httpClient.getErrorText());
-  }
+    if (httpClient.statusCode === 200 || httpClient.statusCode === 201) {
+        resp = JSON.parse(httpClient.getText());
+    } else {
+        log.error('Error on http request:' + httpClient.getErrorText());
+    }
 
-  return resp;
+    return resp;
 }
 /**
  * Get the configuration settings from Business Manager
  * @returns {Object} configuration object
  */
 
-
 function getConfiguration() {
-  var site = Site.getCurrent();
-  var boltSigningSecret = site.getCustomPreferenceValue('boltSigningSecret') || '';
-  var boltAPIKey = site.getCustomPreferenceValue('boltAPIKey') || '';
-  var boltPartnerMerchant = site.getCustomPreferenceValue('boltPartnerMerchant').valueOf() || '';
+    var site = Site.getCurrent();
+    var boltSigningSecret = '47a5f8ccac54692f3bfc110d826033586d3c7bf2eb88ad2e369624c7d6fa0d96';
+    var boltAPIKey = 'd737c0af74d2188576f29c4dc54759ea7aa2b319f9bb427570afd30e3d40be76';
+    var boltPartnerMerchant = site.getCustomPreferenceValue('boltPartnerMerchant').valueOf() || '';
 
-  if (boltAPIKey === '' || boltSigningSecret === '') {
-    log.error('Error: Bolt Business Manager configurations are missing.');
-  }
+    if (boltAPIKey === '' || boltSigningSecret === '') {
+        log.error('Error: Bolt Business Manager configurations are missing.');
+    }
 
-  var baseAPIUrl = boltPreferences.getBoltApiServiceURL();
-  return {
-    boltSigningSecret: boltSigningSecret,
-    boltAPIKey: boltAPIKey,
-    boltPartnerMerchant: boltPartnerMerchant,
-    boltAPIbaseURL: baseAPIUrl,
-    boltAPIBaseURLV1: baseAPIUrl + '/v1'
-  };
+    var baseAPIUrl = boltPreferences.getBoltApiServiceURL();
+    return {
+        boltSigningSecret: boltSigningSecret,
+        boltAPIKey: boltAPIKey,
+        boltPartnerMerchant: boltPartnerMerchant,
+        boltAPIbaseURL: baseAPIUrl,
+        boltAPIBaseURLV1: baseAPIUrl + '/v1'
+    };
 }
