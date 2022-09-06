@@ -1,18 +1,16 @@
-"use strict";
+'use strict';
 
 /* API Includes */
 var BasketMgr = require('dw/order/BasketMgr');
+
 /* Script Modules */
-
-
 var StateCodeMap = require('~/cartridge/scripts/utils/stateCodeMap');
+
 /**
  * Return corresponding US state full name if input address is a valid US state code
  * @param {dw.customer.CustomerAddress} address - dw customer address
  * @returns {string} US State full nmae or stateCode
  */
-
-
 function convertUSStateCodeToFullName(address) {
   if (address.countryCode && address.countryCode.value === 'US' && StateCodeMap.USStateCodeMap[address.stateCode]) {
     return StateCodeMap.USStateCodeMap[address.stateCode];
@@ -20,12 +18,11 @@ function convertUSStateCodeToFullName(address) {
 
   return address.stateCode;
 }
+
 /**
  * Generate user signature used for prefilling Bolt checkout modal
  * @returns {Object} user signature
  */
-
-
 exports.getPrefillUserSignature = function () {
   var basket = BasketMgr.getCurrentBasket();
   var customer = basket.customer,

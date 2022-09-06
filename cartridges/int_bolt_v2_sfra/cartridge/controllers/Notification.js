@@ -1,27 +1,37 @@
-"use strict";
+'use strict';
 
 /* eslint-disable eqeqeq */
 var server = require('server');
+
 /* API Includes */
-
-
 var Resource = require('dw/web/Resource');
+
 /* Script Modules */
-
-
 var COHelpers = require('*/cartridge/scripts/checkout/checkoutHelpers');
-
 var BoltHttpUtils = require('int_bolt_v2/cartridge/scripts/services/utils/httpUtils');
-
 var LogUtils = require('int_bolt_v2/cartridge/scripts/utils/boltLogUtils');
-
 var PaymentHelper = require('int_bolt_v2/cartridge/scripts/checkout/paymentProcessor');
 
 var log = LogUtils.getLogger('Notification');
+
+/**
+ * Set response to fail, log and return error message
+ * @param {Object} res - response object
+ * @param {string} errorMessage - error message
+ * @param {string} statusCode - status code
+ */
+function respondError(res, errorMessage, statusCode) {
+  log.error(errorMessage);
+  response.setStatus(statusCode);
+  res.json({
+    status: 'error',
+    message: errorMessage
+  });
+}
+
 /**
  * Send Order confirmation email
  */
-
 server.post('OrderConfirmEmail', server.middleware.https, function (req, res, next) {
   var ORDER_STATUS_NEW = dw.order.Order.ORDER_STATUS_NEW; // eslint-disable-line no-undef
 
@@ -46,7 +56,6 @@ server.post('OrderConfirmEmail', server.middleware.https, function (req, res, ne
       return next();
     } // Only pass orders in status 'new' and 'open'. Orders in other status should be ignored.
 
-
     if (order.status != ORDER_STATUS_NEW && order.status != ORDER_STATUS_OPEN) {
       errorMessage = Resource.msgf('order.status.incorrect', 'error', null, order.status);
       respondError(res, errorMessage, 406);
@@ -67,10 +76,10 @@ server.post('OrderConfirmEmail', server.middleware.https, function (req, res, ne
     return next();
   }
 });
+
 /**
  * Set payment processor for alternative payment methods.
  */
-
 server.post('APMProcessor', server.middleware.https, function (req, res, next) {
   try {
     if (!BoltHttpUtils.getAuthenticationStatus()) {
@@ -96,20 +105,5 @@ server.post('APMProcessor', server.middleware.https, function (req, res, next) {
     return next();
   }
 });
-/**
- * Set response to fail, log and return error message
- * @param {Object} res - response object
- * @param {string} errorMessage - error message
- * @param {string} statusCode - status code
- */
-
-function respondError(res, errorMessage, statusCode) {
-  log.error(errorMessage);
-  response.setStatus(statusCode);
-  res.json({
-    status: 'error',
-    message: errorMessage
-  });
-}
 
 module.exports = server.exports();

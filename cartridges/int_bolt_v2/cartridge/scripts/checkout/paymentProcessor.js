@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* API Includes */
 var Transaction = require('dw/system/Transaction');
@@ -8,9 +8,8 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 var OrderMgr = require('dw/order/OrderMgr');
 
 var Status = require('dw/system/Status');
+
 /* Script Includes */
-
-
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
 
 var log = LogUtils.getLogger('Payment');

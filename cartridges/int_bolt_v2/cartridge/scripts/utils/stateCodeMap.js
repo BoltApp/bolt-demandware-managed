@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * US state code and full name map

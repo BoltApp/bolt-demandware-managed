@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Utility functions for API service
@@ -10,30 +10,24 @@
 
 /* API Includes */
 var Site = require('dw/system/Site');
-
 var Mac = require('dw/crypto/Mac');
-
 var Encoding = require('dw/crypto/Encoding');
-
 var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
-
 var HttpResult = require('dw/svc/Result');
+
 /* Script Includes */
-
-
 var boltPreferences = require('~/cartridge/scripts/services/utils/preferences');
-
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
-
 var commonUtils = require('~/cartridge/scripts/utils/commonUtils');
 
 var log = LogUtils.getLogger('HttpUtils');
+
 exports.HTTP_METHOD_POST = 'POST';
+
 /**
  * Get bolt request body
  * @returns {Object} bolt request object
  */
-
 exports.getBoltRequestBody = function () {
   var req;
 
@@ -60,12 +54,11 @@ exports.getBoltRequestBody = function () {
 
   return req;
 };
+
 /**
  * Check authentication code
  * @returns {boolean} authentication status
  */
-
-
 exports.getAuthenticationStatus = function () {
   var strAuth = request.getHttpHeaders().get('x-bolt-hmac-sha256');
   var httpParameterMap = request.getHttpParameterMap();
@@ -87,13 +80,55 @@ exports.getAuthenticationStatus = function () {
   var hmac = Encoding.toBase64(sha);
   return hmac === strAuth;
 };
+
+/**
+ * HTTPService configuration parseResponse
+ * @param {Object} _service - HTTP service
+ * @param {Object} httpClient - HTTP client
+ * @returns {string | null} success or null
+ */
+function serviceParseResponse(_service, httpClient) {
+  var resp;
+
+  if (httpClient.statusCode === 200 || httpClient.statusCode === 201) {
+    resp = JSON.parse(httpClient.getText());
+  } else {
+    log.error('Error on http request:' + httpClient.getErrorText());
+  }
+
+  return resp;
+}
+
+/**
+ * Get the configuration settings from Business Manager
+ * @returns {Object} configuration object
+ */
+function getConfiguration() {
+  var site = Site.getCurrent();
+  var boltSigningSecret = site.getCustomPreferenceValue('boltSigningSecret') || '';
+  var boltAPIKey = site.getCustomPreferenceValue('boltAPIKey') || '';
+  var boltPartnerMerchant = site.getCustomPreferenceValue('boltPartnerMerchant').valueOf() || '';
+
+  if (boltAPIKey === '' || boltSigningSecret === '') {
+    log.error('Error: Bolt Business Manager configurations are missing.');
+  }
+
+  var baseAPIUrl = boltPreferences.getBoltApiServiceURL();
+  return {
+    boltSigningSecret: boltSigningSecret,
+    boltAPIKey: boltAPIKey,
+    boltPartnerMerchant: boltPartnerMerchant,
+    boltAPIbaseURL: baseAPIUrl,
+    boltAPIBaseURLV1: baseAPIUrl + '/v1'
+  };
+}
+
 /**
  * @typedef {Object} ServiceResponse
  * @property {string} status - 'OK' | 'ERROR'.
  * @property {Error[]} errors - list of errors.
  * @property {Object} result - result from service call if available.
  */
-
 /**
  * Communicates with Bolt APIs
  * @param {string} method - web service method
@@ -101,8 +136,6 @@ exports.getAuthenticationStatus = function () {
  * @param {Object} request - request object
  * @returns {ServiceResponse} service response
  */
-
-
 exports.restAPIClient = function (method, endPoint, request) {
   var contentType = 'application/json';
   var service = LocalServiceRegistry.createService('bolt.http', {
@@ -173,47 +206,3 @@ exports.restAPIClient = function (method, endPoint, request) {
     };
   }
 };
-/**
- * HTTPService configuration parseResponse
- * @param {Object} _service - HTTP service
- * @param {Object} httpClient - HTTP client
- * @returns {string | null} success or null
- */
-
-
-function serviceParseResponse(_service, httpClient) {
-  var resp;
-
-  if (httpClient.statusCode === 200 || httpClient.statusCode === 201) {
-    resp = JSON.parse(httpClient.getText());
-  } else {
-    log.error('Error on http request:' + httpClient.getErrorText());
-  }
-
-  return resp;
-}
-/**
- * Get the configuration settings from Business Manager
- * @returns {Object} configuration object
- */
-
-
-function getConfiguration() {
-  var site = Site.getCurrent();
-  var boltSigningSecret = site.getCustomPreferenceValue('boltSigningSecret') || '';
-  var boltAPIKey = site.getCustomPreferenceValue('boltAPIKey') || '';
-  var boltPartnerMerchant = site.getCustomPreferenceValue('boltPartnerMerchant').valueOf() || '';
-
-  if (boltAPIKey === '' || boltSigningSecret === '') {
-    log.error('Error: Bolt Business Manager configurations are missing.');
-  }
-
-  var baseAPIUrl = boltPreferences.getBoltApiServiceURL();
-  return {
-    boltSigningSecret: boltSigningSecret,
-    boltAPIKey: boltAPIKey,
-    boltPartnerMerchant: boltPartnerMerchant,
-    boltAPIbaseURL: baseAPIUrl,
-    boltAPIBaseURLV1: baseAPIUrl + '/v1'
-  };
-}
