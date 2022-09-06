@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Product Type Constants
