@@ -358,8 +358,8 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltCreditCardName">
-        <display-name xml:lang="x-default">Credit Card Name</display-name>
+      <attribute-definition attribute-id="boltCreditCardHolderName">
+        <display-name xml:lang="x-default">Credit Card Holder Name</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
