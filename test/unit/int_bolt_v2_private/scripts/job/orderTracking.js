@@ -9,7 +9,7 @@ var ArrayList = require('../../../../mocks/dw.util.Collection.js');
 var Status = require('../../../../mocks/dw/system/Status.js')
 
 describe('orderTracking', function () {
-    var path = '../../../../../cartridges/int_bolt_v2_private/cartridge/scripts/job/orderTracking.js';
+    var path = '../../../../../cartridges/int_bolt_custom/cartridge/scripts/job/orderTracking.js';
     var emptyFunction = function () {};
     var returnFirstArg = function (arg) {
       return arg;
@@ -52,7 +52,7 @@ describe('orderTracking', function () {
                 }
             },
         },
-        'int_bolt_v2/cartridge/scripts/utils/boltLogUtils': {
+        'int_bolt_core/cartridge/scripts/utils/boltLogUtils': {
             getLogger() {
                 return {
                   debug() {},

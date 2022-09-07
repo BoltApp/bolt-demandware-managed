@@ -8,7 +8,7 @@
             <step step-id="ExportCatalog" type="ExecuteScriptModule" enforce-restart="false">
                 <description>Generate catalog feed with updated products</description>
                 <parameters>
-                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/catalogFeed.js</parameter>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_custom/cartridge/scripts/job/catalogFeed.js</parameter>
                     <parameter name="ExecuteScriptModule.FunctionName">initExport</parameter>
                     <parameter name="ExecuteScriptModule.Transactional">false</parameter>
                     <parameter name="chunkSize">100</parameter>
@@ -20,7 +20,7 @@
             <step step-id="CleanUpFiles" type="ExecuteScriptModule" enforce-restart="false">
                 <description/>
                 <parameters>
-                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/cleanUp.js</parameter>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_custom/cartridge/scripts/job/cleanUp.js</parameter>
                     <parameter name="ExecuteScriptModule.FunctionName">cleanUp</parameter>
                     <parameter name="ExecuteScriptModule.Transactional">false</parameter>
                     <parameter name="filePath">/periodic_catalog/full</parameter>
@@ -48,7 +48,7 @@
             <step step-id="ExportPriceInventory" type="ExecuteScriptModule" enforce-restart="false">
                 <description/>
                 <parameters>
-                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/priceInventoryFeed.js</parameter>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_custom/cartridge/scripts/job/priceInventoryFeed.js</parameter>
                     <parameter name="ExecuteScriptModule.FunctionName">initExport</parameter>
                     <parameter name="ExecuteScriptModule.Transactional">false</parameter>
                     <parameter name="chunkSize">2000</parameter>
@@ -71,7 +71,7 @@
             <step step-id="SendOrderTracking" type="ExecuteScriptModule" enforce-restart="false">
                 <description/>
                 <parameters>
-                    <parameter name="ExecuteScriptModule.Module">int_bolt_v2_private/cartridge/scripts/job/orderTracking.js</parameter>
+                    <parameter name="ExecuteScriptModule.Module">int_bolt_custom/cartridge/scripts/job/orderTracking.js</parameter>
                     <parameter name="ExecuteScriptModule.FunctionName">orderTracking</parameter>
                     <parameter name="ExecuteScriptModule.Transactional">false</parameter>
                 </parameters>

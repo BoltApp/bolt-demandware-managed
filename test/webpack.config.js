@@ -11,7 +11,7 @@ module.exports = [
     name: 'js',
     entry: jsFiles,
     output: {
-      path: path.resolve('./cartridges/int_bolt_v2_sfra/cartridge/static'),
+      path: path.resolve('./cartridges/int_bolt_sfra/cartridge/static'),
       filename: '[name].js',
     },
     module: {
@@ -35,7 +35,7 @@ module.exports = [
     name: 'scss',
     entry: scssFiles,
     output: {
-      path: path.resolve('./cartridges/int_bolt_v2_sfra/cartridge/static'),
+      path: path.resolve('./cartridges/int_bolt_sfra/cartridge/static'),
       filename: '[name].css',
     },
     module: {
