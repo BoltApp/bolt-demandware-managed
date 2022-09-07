@@ -4,7 +4,8 @@
   "globals": {
     "empty": "readonly",
     "session": "readonly",
-    "request": "readonly"
+    "request": "readonly",
+    "response": "readonly"
   },
   "rules": {
       "import/no-unresolved": "off",
@@ -16,6 +17,7 @@
       "global-require": "off",
       "no-shadow": ["error", { "allow": ["err", "callback"]}],
       "max-len": "off",
+      "no-plusplus": "off",
       "no-use-before-define": "off",
       "no-param-reassign": "off"
   }
