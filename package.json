@@ -1,6 +1,6 @@
 {
   "name": "bolt-demandware",
-  "version": "21.4.19",
+  "version": "2.1.0",
   "description": "Bolt Cartridge",
   "engines": {
     "node": "^10.22.0",

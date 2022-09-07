@@ -8,7 +8,7 @@ var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
 var log = LogUtils.getLogger('BoltPreferences');
 
 exports.BOLT_SOURCE_NAME = 'commerce_cloud';
-exports.BOLT_CARTRIDGE_VERSION = '21.4.21';
+exports.BOLT_CARTRIDGE_VERSION = '2.1.0';
 
 /**
  * Get the custom preferences value from Business Manager
