@@ -7,7 +7,6 @@
 
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
-
 var ISML = require('dw/template/ISML');
 
 /**
@@ -63,7 +62,6 @@ function documentation() {
 /**
  * Exposed web methods
  */
-
 orderList.public = true;
 orderDetails.public = true;
 documentation.public = true;

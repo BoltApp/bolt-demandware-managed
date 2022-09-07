@@ -4,36 +4,27 @@
  * Utility functions for API service
  */
 
-/* eslint-disable no-param-reassign */
-
 /* eslint-disable no-shadow */
 
 /* API Includes */
 var Site = require('dw/system/Site');
-
 var Mac = require('dw/crypto/Mac');
-
 var Encoding = require('dw/crypto/Encoding');
-
 var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
-
 var HttpResult = require('dw/svc/Result');
 
 /* Script Includes */
 var boltPreferences = require('~/cartridge/scripts/services/utils/preferences');
-
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
-
 var commonUtils = require('~/cartridge/scripts/utils/commonUtils');
-
 var log = LogUtils.getLogger('HttpUtils');
 
 exports.HTTP_METHOD_POST = 'POST';
+
 /**
  * Get bolt request body
  * @returns {Object} bolt request object
  */
-
 exports.getBoltRequestBody = function () {
     var req;
 
@@ -47,8 +38,9 @@ exports.getBoltRequestBody = function () {
             denyList = new RegExp(blockedCharactersList, 'g');
         }
 
-        req = JSON.parse(requestBody); // filter out emojis (usually present in values)
+        req = JSON.parse(requestBody);
 
+        // filter out emojis (usually present in values)
         Object.keys(req).map(function (key) {
             req[key] = commonUtils.sanitizeInput(req[key], denyList);
             return null;
@@ -60,11 +52,11 @@ exports.getBoltRequestBody = function () {
 
     return req;
 };
+
 /**
  * Check authentication code
  * @returns {boolean} authentication status
  */
-
 exports.getAuthenticationStatus = function () {
     var strAuth = request.getHttpHeaders().get('x-bolt-hmac-sha256');
     var httpParameterMap = request.getHttpParameterMap();
@@ -86,12 +78,6 @@ exports.getAuthenticationStatus = function () {
     var hmac = Encoding.toBase64(sha);
     return hmac === strAuth;
 };
-/**
- * @typedef {Object} ServiceResponse
- * @property {string} status - 'OK' | 'ERROR'.
- * @property {Error[]} errors - list of errors.
- * @property {Object} result - result from service call if available.
- */
 
 /**
  * Communicates with Bolt APIs
@@ -100,7 +86,6 @@ exports.getAuthenticationStatus = function () {
  * @param {Object} request - request object
  * @returns {ServiceResponse} service response
  */
-
 exports.restAPIClient = function (method, endPoint, request) {
     var contentType = 'application/json';
     var service = LocalServiceRegistry.createService('bolt.http', {

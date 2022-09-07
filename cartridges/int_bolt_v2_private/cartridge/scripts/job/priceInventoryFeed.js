@@ -5,26 +5,24 @@
 /*
  * Generate price and inventory feed with products
  */
-// API Includes
+
+/* API Includes */
 var File = require('dw/io/File');
+var Site = require('dw/system/Site'); 
 
-var Site = require('dw/system/Site'); // Script Includes
-
-
+/* Script Modules */
 var Constants = require('~/cartridge/scripts/utils/constants');
-
 var JobUtils = require('~/cartridge/scripts/utils/jobUtils');
+
 /* Constants */
-
-
 var FEED_PATH = File.IMPEX + '/bolt_price_inventory_feed/';
 var FEED_NAME = 'price-inventory-export';
+
 /**
  * Export qualified products, generate catalog feed with timestamp.
  * @param {dw.util.Map} context job context
  * @returns {dw.system.Status} job status
  */
-
 function initExport(context) {
   var ProcessHandler = require('~/cartridge/scripts/utils/jobHandler');
 
@@ -35,14 +33,13 @@ function initExport(context) {
   context.chunkSize = chunkSize;
   return ProcessHandler.process(context, shouldExport, getProductLine);
 }
+
 /**
  *  Check if data is qualified to export.
  *  @param {dw.catalog.Product} product product to check
  *  @param {dw.util.Map} context job context
  *  @returns {boolean} flag to export product
  */
-
-
 function shouldExport(product, context) {
   var STANDARD_PRODUCT = Constants.PRODUCT_TYPE_STANDARD_PRODUCT;
   var VARIANT_PRODUCT = Constants.PRODUCT_TYPE_VARIANT_PRODUCT;
@@ -54,13 +51,12 @@ function shouldExport(product, context) {
 
   return false;
 }
+
 /**
  * Get an array of product attributes.
  * @param {dw.catalog.Product} product product to process
  * @returns {Array} product line
  */
-
-
 function getProductLine(product) {
   var productId = product.ID;
   var siteId = Site.current.ID;

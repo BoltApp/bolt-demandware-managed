@@ -2,18 +2,20 @@
 
 /* API Includes */
 var Transaction = require('dw/system/Transaction');
-
 var PaymentMgr = require('dw/order/PaymentMgr');
-
 var OrderMgr = require('dw/order/OrderMgr');
-
 var Status = require('dw/system/Status');
 
 /* Script Includes */
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
-
 var log = LogUtils.getLogger('Payment');
 
+/**
+ * Set payment processor in order
+ * @param {string} orderNo - order number
+ * @param {string} paymentProcessorID - payment processor id
+ * @returns {dw.system.Status} return status to indicate if success or not
+ */
 exports.setPaymentProcessor = function (orderNo, paymentProcessorID) {
     try {
         var order = OrderMgr.getOrder(orderNo);

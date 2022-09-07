@@ -26,8 +26,9 @@ function filterRegex(input, regex) {
     switch (typeof (input)) {
         case 'string':
             // strip deny regex
-            var result = input.replace(regex, '') || ''; // strip leading and trailing spaces
+            var result = input.replace(regex, '') || '';
 
+            // strip leading and trailing spaces
             return result.replace(/^\s+|\s+$/g, '');
 
         case 'object':
@@ -54,12 +55,13 @@ function sanitizeInput(input) {
 
     if (input == null) {
         return null;
-    } // filter emojis first
+    }
 
+    // filter emojis first
     var sanitizedInput = filterRegex(input, emojiRegex, 0);
 
     if (denyListRegex) {
-    // filter input based on given deny list
+        // filter input based on given deny list
         sanitizedInput = filterRegex(sanitizedInput, denyListRegex, 0);
     }
 

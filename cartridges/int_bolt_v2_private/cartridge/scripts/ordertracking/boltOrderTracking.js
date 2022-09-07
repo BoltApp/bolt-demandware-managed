@@ -2,18 +2,13 @@
 
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
-
 var Resource = require('dw/web/Resource');
-
 var HttpResult = require('dw/svc/Result');
+
 /* Script Includes */
-
 var BoltHttpUtils = require('int_bolt_v2/cartridge/scripts/services/utils/httpUtils');
-
 var LogUtils = require('int_bolt_v2/cartridge/scripts/utils/boltLogUtils');
-
 var Constants = require('~/cartridge/scripts/utils/constants');
-
 var log = LogUtils.getLogger('OrderTracking');
 
 /**

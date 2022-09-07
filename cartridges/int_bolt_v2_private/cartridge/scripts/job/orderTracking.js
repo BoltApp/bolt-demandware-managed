@@ -2,26 +2,19 @@
 
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
-
 var Order = require('dw/order/Order');
-
 var Status = require('dw/system/Status');
-
 var Resource = require('dw/web/Resource');
-
 var Transaction = require('dw/system/Transaction');
-
 var HttpResult = require('dw/svc/Result');
+
 /* Script Modules */
-
 var orderTrackingHelper = require('~/cartridge/scripts/ordertracking/boltOrderTracking');
-
 var LogUtils = require('int_bolt_v2/cartridge/scripts/utils/boltLogUtils');
-
 var logger = LogUtils.getLogger('OrderTracking');
+
 /* Constants */
 // test tracking numbers provided by easypost
-
 var TEST_TRACKING_NUMBERS = ['EZ1000000001', // pre_transit
     'EZ2000000002', // in_transit
     'EZ3000000003', // out_for_delivery
@@ -42,9 +35,9 @@ var DEFAULT_TOTAL_ORDERS = 4;
  */
 function orderTracking(context) {
     try {
-    var orders, totalOrders; // eslint-disable-line
-        // send tracking data for specific order if orderId is configured in job parameter
+        var orders, totalOrders; // eslint-disable-line
 
+        // send tracking data for specific order if orderId is configured in job parameter
         if (context.orderId) {
             orders = [OrderMgr.getOrder(context.orderId)];
             totalOrders = 1;

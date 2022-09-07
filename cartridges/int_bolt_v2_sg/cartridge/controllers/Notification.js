@@ -10,20 +10,14 @@
 
 /* API Includes */
 var Resource = require('dw/web/Resource');
+
 /* Script Modules */
-
 var guard = require('*/cartridge/scripts/guard');
-
 var r = require('*/cartridge/scripts/util/Response');
-
 var Email = require('*/cartridge/scripts/models/EmailModel');
-
 var LogUtils = require('int_bolt_v2/cartridge/scripts/utils/boltLogUtils');
-
 var BoltHttpUtils = require('int_bolt_v2/cartridge/scripts/services/utils/httpUtils');
-
 var PaymentHelper = require('int_bolt_v2/cartridge/scripts/checkout/paymentProcessor');
-
 var log = LogUtils.getLogger('Notification');
 
 /**
@@ -58,8 +52,9 @@ function orderConfirmEmail() {
             errorMessage = Resource.msg('order.or.email.notfound', 'error', null);
             respondError(resJSONBody, errorMessage, 404);
             return;
-        } // Only pass orders in status 'new' and 'open'. Orders in other status should be ignored.
+        }
 
+        // Only pass orders in status 'new' and 'open'. Orders in other status should be ignored.
         if (order.status != ORDER_STATUS_NEW && order.status != ORDER_STATUS_OPEN) {
             errorMessage = Resource.msgf('order.status.incorrect', 'error', null, order.status);
             respondError(resJSONBody, errorMessage, 406);
@@ -117,7 +112,6 @@ function APMProcessor() {
         respondError(resJSONBody, e.message || '', 500);
     }
 }
-/* eslint-disable no-param-reassign */
 
 /**
  * Set response to fail, log and return error message
@@ -132,13 +126,11 @@ function respondError(resJSONBody, errorMessage, statusCode) {
     resJSONBody.message = errorMessage;
     r.renderJSON(resJSONBody);
 }
+
 /*
  * Web exposed methods
  */
-
 /** @see {@link module:controllers/Notification~OrderConfirmEmail} */
-
 exports.OrderConfirmEmail = guard.ensure(['post'], orderConfirmEmail);
 /** @see {@link module:controllers/Notification~SetPaymentProcessor} */
-
 exports.APMProcessor = guard.ensure(['post'], APMProcessor);

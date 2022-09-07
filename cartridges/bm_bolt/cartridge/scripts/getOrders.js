@@ -1,8 +1,7 @@
 'use strict';
 
-// API Includes
+/* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
-
 var ArrayList = require('dw/util/ArrayList');
 
 /**
@@ -24,7 +23,7 @@ function getOrders(input) {
     var orders;
 
     if (orderNumber) {
-    // searching for an order ID
+        // searching for an order ID
         order = OrderMgr.searchOrder('custom.boltDWLinkOrderID = {0}', orderNumber);
 
         if (order) {
@@ -34,7 +33,7 @@ function getOrders(input) {
             endRow = 1;
         }
     } else {
-    // all orders on pagination
+        // all orders on pagination
         orders = OrderMgr.searchOrders('custom.isBoltOrder = {0}', 'creationDate desc', true);
         orders.forward((pageNumber - 1) * pageSize, pageSize);
 

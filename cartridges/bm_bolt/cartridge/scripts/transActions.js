@@ -6,17 +6,14 @@
 
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
-
 var Transaction = require('dw/system/Transaction');
-
 var Resource = require('dw/web/Resource');
+
 /* Script Modules */
-
 var Utils = require('*/cartridge/scripts/util/boltUtils');
-
 var LogUtils = require('*/cartridge/scripts/util/boltLogUtils');
-
 var log = LogUtils.getLogger('TransActions');
+
 var authorizedStatus = 'authorized';
 var completedStatus = 'completed';
 
@@ -74,7 +71,7 @@ function setOrderAttributesHistory(action, order, response, paidAmount) {
         }
 
         captureAmount += amount;
-        paidAmount = order.custom.boltPaidAmount + paidAmount; // eslint-disable-line no-param-reassign
+        paidAmount = order.custom.boltPaidAmount + paidAmount;
     } else {
         amount = response.amount && response.amount.amount ? response.amount.amount / 100 : 0.0;
     }
@@ -90,19 +87,18 @@ function setOrderAttributesHistory(action, order, response, paidAmount) {
         date: new Date().getTime()
     });
     Transaction.begin();
-    order.custom.boltTransactionID = response.id || ''; // eslint-disable-line no-param-reassign
+    order.custom.boltTransactionID = response.id || '';
+    order.custom.boltTransactionReference = response.reference || '';
 
-    order.custom.boltTransactionReference = response.reference || ''; // eslint-disable-line no-param-reassign
+    order.custom.boltTransactionType = response.type || '';
 
-    order.custom.boltTransactionType = response.type || ''; // eslint-disable-line no-param-reassign
+    order.custom.boltTransactionStatus = response.status || '';
 
-    order.custom.boltTransactionStatus = response.status || ''; // eslint-disable-line no-param-reassign
+    order.custom.boltCaptureAmount = captureAmount;
 
-    order.custom.boltCaptureAmount = captureAmount; // eslint-disable-line no-param-reassign
+    order.custom.boltPaidAmount = paidAmount;
 
-    order.custom.boltPaidAmount = paidAmount; // eslint-disable-line no-param-reassign
-
-    order.custom.boltTransactionHistory = JSON.stringify(transactionHistory); // eslint-disable-line no-param-reassign
+    order.custom.boltTransactionHistory = JSON.stringify(transactionHistory);
 
     Transaction.commit();
 }
@@ -171,7 +167,7 @@ function cancel(orderNo) {
  */
 function makeCaptureRequest(order, amount, transactionReference) {
     var currency = order.getCurrencyCode();
-    amount = Math.round(amount * 100); // eslint-disable-line no-param-reassign
+    amount = Math.round(amount * 100);
 
     return {
         transaction_reference: transactionReference,
@@ -255,7 +251,7 @@ function capture(orderNo, inputAmount) {
  */
 function makeCreditRequest(order, amount, transactionReference) {
     var currency = order.getCurrencyCode();
-    amount = Math.round(amount * 100); // eslint-disable-line no-param-reassign
+    amount = Math.round(amount * 100);
 
     return {
         transaction_reference: transactionReference,

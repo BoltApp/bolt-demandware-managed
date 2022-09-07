@@ -5,11 +5,11 @@
  *
  */
 function ResourceHelper() {}
+
 /**
  * Get the client-side resources of a given page
  * @returns {Object} An objects key key-value pairs holding the resources
  */
-
 ResourceHelper.getResources = function () {
     var Resource = require('dw/web/Resource'); // application resources
 
@@ -28,11 +28,11 @@ ResourceHelper.getResources = function () {
     };
     return resources;
 };
+
 /**
  * Get the client-side URLs of a given page
  * @returns {Object} An objects key key-value pairs holding the URLs
  */
-
 ResourceHelper.getUrls = function () {
     var URLUtils = require('dw/web/URLUtils'); // application urls
 

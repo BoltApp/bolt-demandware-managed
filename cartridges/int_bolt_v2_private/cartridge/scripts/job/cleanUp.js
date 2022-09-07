@@ -2,10 +2,9 @@
 
 /* API Includes */
 var File = require('dw/io/File');
+
 /* Script Includes */
-
 var logUtils = require('int_bolt_v2/cartridge/scripts/utils/boltLogUtils');
-
 var log = logUtils.getLogger('BoltCatalogExportJob');
 
 /**

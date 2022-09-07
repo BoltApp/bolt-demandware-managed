@@ -4,10 +4,10 @@
  * Creates custom log file for the cartridge
  */
 
-// API Includes
+/* API Includes */
 var Logger = require('dw/system/Logger');
-/* Constants */
 
+/* Constants */
 var LogPrefix = 'bolt';
 
 exports.getLogger = function (category) {
@@ -36,7 +36,7 @@ exports.maskCustomerData = function (data) {
  */
 function actionMaskData(obj) {
     // eslint-disable-next-line
-  for (var key in obj) {
+    for (var key in obj) {
         switch (key) {
             case 'first_name':
             case 'last_name':
@@ -45,7 +45,7 @@ function actionMaskData(obj) {
             case 'shipping_address':
             case 'phones':
             case 'emails':
-                obj[key] = '***'; // eslint-disable-line no-param-reassign
+                obj[key] = '***';
 
                 if (typeof (obj[key]) === 'object') {
                     actionMaskData(obj[key]);

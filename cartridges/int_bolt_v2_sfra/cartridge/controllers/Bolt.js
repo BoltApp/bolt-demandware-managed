@@ -1,19 +1,18 @@
 'use strict';
 
 var server = require('server');
+
 /* API Includes */
-
 var BasketMgr = require('dw/order/BasketMgr');
+
 /* Script Modules */
-
 var BoltPreferences = require('int_bolt_v2/cartridge/scripts/services/utils/preferences');
-
 var UserSignature = require('int_bolt_v2/cartridge/scripts/cart/userSignature');
+
 /**
  *  Get basket ID since SFCC frontend doesn't expose it by default.
  *  Also adding user signatures in case user logged in
  */
-
 server.get('GetOrderReference', server.middleware.https, function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
   var basketID, hints, dwsid; // eslint-disable-line

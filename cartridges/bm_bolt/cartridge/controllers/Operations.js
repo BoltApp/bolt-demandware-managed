@@ -38,9 +38,9 @@ function performAction() {
 
     r.renderJSON(result);
 }
+
 /*
  * Exposed web methods
  */
-
 performAction.public = true;
 exports.Action = performAction;
