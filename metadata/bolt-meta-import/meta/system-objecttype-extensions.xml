@@ -365,6 +365,13 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
+      <attribute-definition attribute-id="boltPSPReference">
+        <display-name xml:lang="x-default">PSP Reference</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
       <attribute-definition attribute-id="boltCreditCardAuthCode">
         <display-name xml:lang="x-default">Credit Card Auth Code</display-name>
         <type>string</type>
