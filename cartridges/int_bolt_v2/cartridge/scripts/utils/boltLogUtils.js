@@ -1,14 +1,9 @@
 'use strict';
 
-function _typeof(obj) {
-    '@babel/helpers - typeof';
-
-    if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === 'function' && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj; }; } return _typeof(obj);
-}
-
 /*
  * Creates custom log file for the cartridge
  */
+
 // API Includes
 var Logger = require('dw/system/Logger');
 /* Constants */
@@ -22,6 +17,7 @@ exports.getLogger = function (category) {
 
     return Logger.getLogger(LogPrefix);
 };
+
 /**
  * Mask customer's sensitive data, interaction function
  * @param {Object} data - request object
@@ -51,7 +47,7 @@ function actionMaskData(obj) {
             case 'emails':
                 obj[key] = '***'; // eslint-disable-line no-param-reassign
 
-                if (_typeof(obj[key]) === 'object') {
+                if (typeof (obj[key]) === 'object') {
                     actionMaskData(obj[key]);
                 }
 

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * This module provides often-needed helper methods for sending responses.
@@ -11,7 +11,7 @@
  * @param {Object} object - response object
  */
 exports.renderJSON = function (object) {
-  response.setContentType('application/json');
-  var json = JSON.stringify(object);
-  response.writer.print(json);
+    response.setContentType('application/json');
+    var json = JSON.stringify(object);
+    response.writer.print(json);
 };

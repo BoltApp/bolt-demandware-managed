@@ -18,8 +18,8 @@ var Encoding = require('dw/crypto/Encoding');
 var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
 
 var HttpResult = require('dw/svc/Result');
-/* Script Includes */
 
+/* Script Includes */
 var boltPreferences = require('~/cartridge/scripts/services/utils/preferences');
 
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
@@ -27,6 +27,7 @@ var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
 var commonUtils = require('~/cartridge/scripts/utils/commonUtils');
 
 var log = LogUtils.getLogger('HttpUtils');
+
 exports.HTTP_METHOD_POST = 'POST';
 /**
  * Get bolt request body

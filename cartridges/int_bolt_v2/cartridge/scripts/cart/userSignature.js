@@ -2,14 +2,14 @@
 
 /* API Includes */
 var BasketMgr = require('dw/order/BasketMgr');
-/* Script Modules */
 
+/* Script Modules */
 var StateCodeMap = require('~/cartridge/scripts/utils/stateCodeMap');
 
 /**
  * Return corresponding US state full name if input address is a valid US state code
  * @param {dw.customer.CustomerAddress} address - dw customer address
- * @returns {string} US State full nmae or stateCode
+ * @returns {string} US State full name or stateCode
  */
 function convertUSStateCodeToFullName(address) {
     if (address.countryCode && address.countryCode.value === 'US' && StateCodeMap.USStateCodeMap[address.stateCode]) {

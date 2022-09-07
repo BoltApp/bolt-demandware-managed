@@ -8,8 +8,8 @@ var PaymentMgr = require('dw/order/PaymentMgr');
 var OrderMgr = require('dw/order/OrderMgr');
 
 var Status = require('dw/system/Status');
-/* Script Includes */
 
+/* Script Includes */
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
 
 var log = LogUtils.getLogger('Payment');

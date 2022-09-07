@@ -10,7 +10,7 @@ var log = logUtils.getLogger('BoltCatalogExportJob');
 
 /**
  * Deletes all files that have not been
- * modified within the days paramater.
+ * modified within the days parameter.
  * @param {dw.util.Map} context job context
  * @returns {boolean} true if all the files that should be deleted are deleted
  * false if any of the files are not deleted
@@ -18,7 +18,7 @@ var log = logUtils.getLogger('BoltCatalogExportJob');
 function cleanUp(context) {
     var clearUpDays = new Number(context.days); // eslint-disable-line no-new-wrappers
 
-    if (isNaN(clearUpDays)) {
+    if (isNaN(clearUpDays)) { // eslint-disable-line no-restricted-globals
         return false;
     }
 
