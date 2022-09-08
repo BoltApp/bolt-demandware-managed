@@ -6,4 +6,4 @@ node_modules/
 .vscode/
 dw.json
 .nyc_output/
-cartridges/int_bolt_v2_sfra/cartridge/static/
+cartridges/int_bolt_sfra/cartridge/static/
