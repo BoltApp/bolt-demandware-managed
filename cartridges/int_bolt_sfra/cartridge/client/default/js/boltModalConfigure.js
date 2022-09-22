@@ -17,7 +17,7 @@ $(document).ready(function () {
             var createBoltOrderUrl = $('.create-bolt-order-url').val();
 
             // add an event handler to Bolt button's click
-            checkoutBoltButton.click(function () {
+            checkoutBoltButton.click(function (e) {
                 // call backend to create cart in Bolt
                 $.ajax({
                     url: createBoltOrderUrl,
@@ -30,7 +30,10 @@ $(document).ready(function () {
                             };
 
                             var boltButtonApp = BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
-                            boltButtonApp.open();
+                            // don't open bolt modal for apple pay
+                            if ($(e.target).attr('data-tid') !== 'apple-pay-button') {
+                                boltButtonApp.open();
+                            }
                         }
                     }
                 });
