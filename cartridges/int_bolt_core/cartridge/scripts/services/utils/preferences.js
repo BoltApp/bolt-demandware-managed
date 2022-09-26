@@ -17,7 +17,7 @@ exports.BOLT_CARTRIDGE_VERSION = '2.1.0';
 exports.getSitePreferences = function () {
     var site = Site.getCurrent();
 
-    var boltMultiPublishableKey = site.getCustomPreferenceValue('boltMultiPublishableKeyOCAPI') || '';
+    var boltMultiPublishableKey = '<YOUR PUBLISHABLE KEY>';
     var blockedCharactersList = site.getCustomPreferenceValue('blockedCharactersList') || null;
 
     if (boltMultiPublishableKey === '') {
@@ -42,6 +42,7 @@ exports.getSitePreferences = function () {
  * @returns {string} API URL to load connect from
  */
 exports.getBoltApiServiceURL = function boltApiURL() {
+    return 'https://api.<CNAME>.dev.bolt.me';
     var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
 
     switch (boltEnv) {
@@ -62,6 +63,7 @@ exports.getBoltApiServiceURL = function boltApiURL() {
  * @returns {string} CDN URL to load connect from
  */
 function boltConnectURL() {
+    return 'https://connect.<CNAME>.dev.bolt.me';
     var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
 
     switch (boltEnv) {
