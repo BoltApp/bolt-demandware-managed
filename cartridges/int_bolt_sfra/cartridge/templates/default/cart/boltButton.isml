@@ -1,4 +1,5 @@
-<isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion == 'V2' && (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0)}">
+<isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion ==
+                'V2' && (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0)}">
     <input type="hidden" class="create-bolt-order-url" value="${URLUtils.https('Bolt-GetOrderReference')}" />
 
     <isset name="boltCdnUrl" value="${pdict.config.boltCdnUrl}" scope="page" />
@@ -10,9 +11,9 @@
     <iscomment>Bolt checkout button</iscomment>
     <div class="col-12 checkout-continue">
         <div class="mb-sm-3 clearfix">
-            <div data-tid="instant-bolt-checkout-button">
-                <object data="${boltCdnUrl}/v1/checkout_button?publishable_key=${boltPublishableKey}"></object>
+            <div data-tid="instant-bolt-checkout-button" class="bolt-checkout-button">
+                <script id="bolt-connect" type="text/javascript" src="${boltCdnUrl}"
+                    data-publishable-key="${boltPublishableKey}"></script>
             </div>
         </div>
-    </div>
 </isif>
