@@ -124,13 +124,6 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltPSPReference">
-        <display-name xml:lang="x-default">PSP Reference</display-name>
-        <type>string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
-      </attribute-definition>
       <attribute-definition attribute-id="isBoltOrder">
         <display-name xml:lang="x-default">is Bolt Order</display-name>
         <type>boolean</type>
@@ -360,6 +353,13 @@
       </attribute-definition>
       <attribute-definition attribute-id="boltCreditCardHolderName">
         <display-name xml:lang="x-default">Credit Card Holder Name</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltPSPReference">
+        <display-name xml:lang="x-default">PSP Reference</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
