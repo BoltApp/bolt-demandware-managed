@@ -1,0 +1,2 @@
+<!--- TEMPLATENAME: plaincontent.isml --->
+<isprint value="${pdict.Content}" />

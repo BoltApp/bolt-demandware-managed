@@ -6,6 +6,7 @@ var Site = require('dw/system/Site');
 /* Script Includes */
 var LogUtils = require('~/cartridge/scripts/utils/boltLogUtils');
 var log = LogUtils.getLogger('BoltPreferences');
+var System = require('dw/system/System');
 
 exports.BOLT_SOURCE_NAME = 'commerce_cloud';
 exports.BOLT_CARTRIDGE_VERSION = '2.1.0';
@@ -76,3 +77,16 @@ function boltConnectURL() {
             return 'https://connect.bolt.com';
     }
 }
+
+/**
+ * Checks whether a system preference is defined or not.
+ * return the preference value if defined, otherwise null
+ * @param {string} preferenceID - global custom preference id
+ * @returns {Object} global custom preference
+ */
+exports.getSystemPreference = function (preferenceID) {
+    if (!(preferenceID in System.getPreferences().getCustom())) {
+        return null;
+    }
+    return System.getPreferences().getCustom()[preferenceID];
+};
