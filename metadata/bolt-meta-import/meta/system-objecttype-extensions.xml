@@ -304,6 +304,7 @@
         <attribute attribute-id="boltAutoCapture"/>
         <attribute attribute-id="isBoltOrder"/>
         <attribute attribute-id="boltCustomFieldList"/>
+        <attribute attribute-id="bankAuthorizationCode"/>
       </attribute-group>
       <attribute-group group-id="Bolt Custom Checkboxes">
         <display-name xml:lang="x-default">Bolt Custom Checkboxes</display-name>
