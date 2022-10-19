@@ -630,6 +630,13 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
+      <attribute-definition attribute-id="isBaseV6orAbove">
+        <display-name xml:lang="x-default">Is Base Version V6 or Above</display-name>
+        <description xml:lang="x-default">Indicate if SFCC base version is V6.0.0 or above.</description>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
     </custom-attribute-definitions>
 
     <group-definitions>
@@ -649,6 +656,7 @@
         <attribute attribute-id="boltMerchantDivisionID"/>
         <attribute attribute-id="boltProcessorMapping"/>
         <attribute attribute-id="boltEnableSessionRecording"/>
+        <attribute attribute-id="isBaseV6orAbove"/>
       </attribute-group>
       <attribute-group group-id="Bolt Credentials Setting - V1">
         <display-name xml:lang="x-default">Bolt Credentials Setting - V1</display-name>
