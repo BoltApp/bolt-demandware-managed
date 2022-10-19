@@ -14,8 +14,8 @@ $(document).ready(function () {
             // Bolt order token since configure (line 32) is not guaranteed to run before modal opens
 
             $('[data-tid="instant-bolt-checkout-button"]').children().replaceWith($('[data-tid="instant-bolt-checkout-button"]').children().clone());
-            var createBoltOrderUrl = $('.create-bolt-order-url').val(),
-                isBaseV6orAbove = $('#isBaseV6orAbove').val();
+            var createBoltOrderUrl = $('.create-bolt-order-url').val();
+            var isBaseV6orAbove = $('#isBaseV6orAbove').val();
 
             // add an event handler to Bolt button's click
             checkoutBoltButton.click(function (e) {
@@ -47,17 +47,18 @@ $(document).ready(function () {
             });
         }
     }, 100);
-    var successRedirect = $('#successRedirect').val(), sfccData;
+    var successRedirect = $('#successRedirect').val();
+    var sfccData;
     var callbacks = {
-        close: function() {
+        close: function () {
             // This function is called when the Bolt checkout modal is closed.
             if (sfccData) {
                 var redirect = $('<form>')
-                .appendTo(document.body)
-                .attr({
-                    method: 'POST',
-                    action: successRedirect
-                });
+                    .appendTo(document.body)
+                    .attr({
+                        method: 'POST',
+                        action: successRedirect
+                    });
 
                 $('<input>')
                     .appendTo(redirect)
@@ -72,35 +73,36 @@ $(document).ready(function () {
                         name: 'orderToken',
                         value: sfccData.sfcc.sfcc_order_token
                     });
-                
+
                 redirect.submit();
             }
         },
-        onCheckoutStart: function() {
-          // This function is called after the checkout form is presented to the user.
+        onCheckoutStart: function () {
+            // This function is called after the checkout form is presented to the user.
         },
-  
-        onEmailEnter: function(email) {
-          // This function is called after the user enters their email address.
+
+        // eslint-disable-next-line no-unused-vars
+        onEmailEnter: function (email) {
+            // This function is called after the user enters their email address.
         },
-  
-        onShippingDetailsComplete: function() {
-          // This function is called when the user proceeds to the shipping options page.
-          // This is applicable only to multi-step checkout.
+
+        onShippingDetailsComplete: function () {
+            // This function is called when the user proceeds to the shipping options page.
+            // This is applicable only to multi-step checkout.
         },
-  
-        onShippingOptionsComplete: function() {
-          // This function is called when the user proceeds to the payment details page.
-          // This is applicable only to multi-step checkout.
+
+        onShippingOptionsComplete: function () {
+            // This function is called when the user proceeds to the payment details page.
+            // This is applicable only to multi-step checkout.
         },
-  
-        onPaymentSubmit: function() {
-          // This function is called after the user clicks the pay button.
+
+        onPaymentSubmit: function () {
+            // This function is called after the user clicks the pay button.
         },
-        success: function(transaction, callback) {
+        success: function (transaction, callback) {
             // This function is called when the Bolt checkout transaction is successful.
             sfccData = transaction;
             callback();
         }
-      };
+    };
 });
