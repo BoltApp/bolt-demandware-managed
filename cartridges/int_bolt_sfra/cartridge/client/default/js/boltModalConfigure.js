@@ -14,7 +14,8 @@ $(document).ready(function () {
             // Bolt order token since configure (line 32) is not guaranteed to run before modal opens
 
             $('[data-tid="instant-bolt-checkout-button"]').children().replaceWith($('[data-tid="instant-bolt-checkout-button"]').children().clone());
-            var createBoltOrderUrl = $('.create-bolt-order-url').val();
+            var createBoltOrderUrl = $('.create-bolt-order-url').val(),
+                isBaseV6orAbove = $('#isBaseV6orAbove').val();
 
             // add an event handler to Bolt button's click
             checkoutBoltButton.click(function (e) {
@@ -29,7 +30,13 @@ $(document).ready(function () {
                                 id: data.basketID
                             };
 
-                            var boltButtonApp = BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
+                            var boltButtonApp;
+                            if (isBaseV6orAbove) {
+                                boltButtonApp = BoltCheckout.configure(cart, data.hints, callbacks); // eslint-disable-line no-undef
+                            } else {
+                                boltButtonApp = BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
+                            }
+
                             // don't open bolt modal for apple pay
                             if ($(e.target).attr('data-tid') !== 'apple-pay-button') {
                                 boltButtonApp.open();
@@ -40,4 +47,60 @@ $(document).ready(function () {
             });
         }
     }, 100);
+    var successRedirect = $('#successRedirect').val(), sfccData;
+    var callbacks = {
+        close: function() {
+            // This function is called when the Bolt checkout modal is closed.
+            if (sfccData) {
+                var redirect = $('<form>')
+                .appendTo(document.body)
+                .attr({
+                    method: 'POST',
+                    action: successRedirect
+                });
+
+                $('<input>')
+                    .appendTo(redirect)
+                    .attr({
+                        name: 'orderID',
+                        value: sfccData.merchant_order_number
+                    });
+
+                $('<input>')
+                    .appendTo(redirect)
+                    .attr({
+                        name: 'orderToken',
+                        value: sfccData.sfcc.sfcc_order_token
+                    });
+                
+                redirect.submit();
+            }
+        },
+        onCheckoutStart: function() {
+          // This function is called after the checkout form is presented to the user.
+        },
+  
+        onEmailEnter: function(email) {
+          // This function is called after the user enters their email address.
+        },
+  
+        onShippingDetailsComplete: function() {
+          // This function is called when the user proceeds to the shipping options page.
+          // This is applicable only to multi-step checkout.
+        },
+  
+        onShippingOptionsComplete: function() {
+          // This function is called when the user proceeds to the payment details page.
+          // This is applicable only to multi-step checkout.
+        },
+  
+        onPaymentSubmit: function() {
+          // This function is called after the user clicks the pay button.
+        },
+        success: function(transaction, callback) {
+            // This function is called when the Bolt checkout transaction is successful.
+            sfccData = transaction;
+            callback();
+        }
+      };
 });
