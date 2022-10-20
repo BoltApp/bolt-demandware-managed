@@ -96,7 +96,7 @@ exports.getSystemPreference = function (preferenceID) {
  * Returns the first digit configured in SFCC base version. "6.1.2" returns 6
  * @returns {number} the first number
  */
-function getSFCCBaseVersion () {
+function getSFCCBaseVersion() {
     var version = 5;
     var sfccBaseVersion = Site.getCurrent().getCustomPreferenceValue('sfccBaseVersion');
     if (empty(sfccBaseVersion)) {
