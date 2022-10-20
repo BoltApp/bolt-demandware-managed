@@ -1,6 +1,6 @@
 <isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion == 'V2' && (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0)}">
     <input type="hidden" class="create-bolt-order-url" value="${URLUtils.https('Bolt-GetOrderReference')}" />
-    <input type="hidden" id="isBaseV6orAbove" name="isBaseV6orAbove" value="${pdict.config.isBaseV6orAbove}" />
+    <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
     <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />
 
     <isset name="boltCdnUrl" value="${pdict.config.boltCdnUrl}" scope="page" />

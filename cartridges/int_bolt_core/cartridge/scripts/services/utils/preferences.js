@@ -35,7 +35,7 @@ exports.getSitePreferences = function () {
         boltMultiPublishableKey: boltMultiPublishableKey,
         blockedCharactersList: blockedCharactersList,
         boltEnableSessionRecording: Site.getCurrent().getCustomPreferenceValue('boltEnableSessionRecording') || false,
-        isBaseV6orAbove: site.getCustomPreferenceValue('isBaseV6orAbove')
+        sfccBaseVersion: getSFCCBaseVersion()
     };
 };
 
@@ -91,3 +91,22 @@ exports.getSystemPreference = function (preferenceID) {
     }
     return System.getPreferences().getCustom()[preferenceID];
 };
+
+/**
+ * Returns the first digit configured in SFCC base version. "6.1.2" returns 6
+ * @returns {number} the first number
+ */
+function getSFCCBaseVersion () {
+    var version = 5;
+    var sfccBaseVersion = Site.getCurrent().getCustomPreferenceValue('sfccBaseVersion');
+    if (empty(sfccBaseVersion)) {
+        return baseVersion;
+    }
+
+    var baseVersion = sfccBaseVersion.split('.');
+    if (!empty(baseVersion)) {
+        version = parseInt(baseVersion[0], 10);
+    }
+
+    return version;
+}

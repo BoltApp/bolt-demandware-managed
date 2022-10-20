@@ -15,7 +15,7 @@ $(document).ready(function () {
 
             $('[data-tid="instant-bolt-checkout-button"]').children().replaceWith($('[data-tid="instant-bolt-checkout-button"]').children().clone());
             var createBoltOrderUrl = $('.create-bolt-order-url').val();
-            var isBaseV6orAbove = $('#isBaseV6orAbove').val();
+            var sfccBaseVersion = $('#sfccBaseVersion').val();
 
             // add an event handler to Bolt button's click
             checkoutBoltButton.click(function (e) {
@@ -31,7 +31,7 @@ $(document).ready(function () {
                             };
 
                             var boltButtonApp;
-                            if (isBaseV6orAbove) {
+                            if (sfccBaseVersion >= 6) {
                                 boltButtonApp = BoltCheckout.configure(cart, data.hints, callbacks); // eslint-disable-line no-undef
                             } else {
                                 boltButtonApp = BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
