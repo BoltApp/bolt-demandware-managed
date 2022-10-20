@@ -630,6 +630,16 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
+      <attribute-definition attribute-id="sfccBaseVersion"> 
+        <display-name xml:lang="x-default">SFCC Base Version</display-name>
+        <description xml:lang="x-default">SFCC base version used in success callback.</description>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+        <regex>^([0-9]+\.)+[0-9]+$</regex>
+        <default-value>5.0.0</default-value>
+      </attribute-definition>
     </custom-attribute-definitions>
 
     <group-definitions>
@@ -649,6 +659,7 @@
         <attribute attribute-id="boltMerchantDivisionID"/>
         <attribute attribute-id="boltProcessorMapping"/>
         <attribute attribute-id="boltEnableSessionRecording"/>
+        <attribute attribute-id="sfccBaseVersion"/>
       </attribute-group>
       <attribute-group group-id="Bolt Credentials Setting - V1">
         <display-name xml:lang="x-default">Bolt Credentials Setting - V1</display-name>
