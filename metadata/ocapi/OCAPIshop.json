@@ -4,7 +4,16 @@
     {
       "client_id": "<<client_id>>",
       "resources": [
-        {
+       {
+          "resource_id": "/stores/**",
+          "read_attributes": "(**)",
+          "write_attributes": "(**)",
+          "cache_time": 0,
+          "methods": [
+             "get"
+          ]
+       },
+       {
           "resource_id":"/baskets",
           "read_attributes":"(**)",
           "write_attributes":"(**)",
