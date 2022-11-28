@@ -526,7 +526,6 @@
         <min-length>0</min-length>
       </attribute-definition>
 
-      <!--  V2 cartridges attributes -->
       <attribute-definition attribute-id="boltEnvironmentOCAPI">
         <display-name xml:lang="x-default">Bolt Environment</display-name>
         <type>enum-of-string</type>
@@ -548,14 +547,14 @@
         </value-definitions>
       </attribute-definition>
       <attribute-definition attribute-id="boltMultiPublishableKeyOCAPI">
-        <display-name xml:lang="x-default">Publishable Key - Multistep - used for V2 version</display-name>
+        <display-name xml:lang="x-default">Publishable Key - Multistep</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
       <attribute-definition attribute-id="boltBackOfficePublishableKeyOCAPI">
-        <display-name xml:lang="x-default">Publishable Key - Back Office - used for V2 version</display-name>
+        <display-name xml:lang="x-default">Publishable Key - Back Office</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
@@ -600,7 +599,7 @@
         <attribute attribute-id="sfccBaseVersion"/>
       </attribute-group>
       <attribute-group group-id="Bolt Credentials Setting - V2">
-        <display-name xml:lang="x-default">Bolt Credentials Setting - V2</display-name>
+        <display-name xml:lang="x-default">Bolt Credentials Setting</display-name>
         <attribute attribute-id="boltMultiPublishableKeyOCAPI"/>
         <attribute attribute-id="boltBackOfficePublishableKeyOCAPI"/>
         <attribute attribute-id="boltEnvironmentOCAPI"/>
