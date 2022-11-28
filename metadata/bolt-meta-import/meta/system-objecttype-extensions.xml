@@ -476,13 +476,6 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltBackOfficePublishableKey">
-        <display-name xml:lang="x-default">Publishable Key - Back Office</display-name>
-        <type>string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
-      </attribute-definition>
       <attribute-definition attribute-id="boltCartAjaxUpdateEnable">
         <display-name xml:lang="x-default">Enable Cart Ajax Update</display-name>
         <type>boolean</type>
@@ -518,53 +511,12 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
-      <attribute-definition attribute-id="boltGiftCertificateEnable">
-        <display-name xml:lang="x-default">Gift Cetificate Enable</display-name>
-        <type>boolean</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <default-value>false</default-value>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltMultiPublishableKey">
-        <display-name xml:lang="x-default">Publishable Key - Multistep</display-name>
-        <type>string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltPreauthEnable">
-        <display-name xml:lang="x-default">Preauth Enable</display-name>
-        <type>boolean</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <default-value>true</default-value>
-      </attribute-definition>
       <attribute-definition attribute-id="boltSigningSecret">
         <display-name xml:lang="x-default">Signing Secret</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltEnvironment">
-        <display-name xml:lang="x-default">Bolt Environment</display-name>
-        <type>enum-of-string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <value-definitions>
-          <value-definition>
-            <display xml:lang="x-default">Sandbox</display>
-            <value>sandbox</value>
-          </value-definition>
-          <value-definition default="true">
-            <display xml:lang="x-default">Production</display>
-            <value>production</value>
-          </value-definition>
-          <value-definition>
-            <display xml:lang="x-default">Internal Bolt Testing (For Bolt Engineering Only)</display>
-            <value>staging</value>
-          </value-definition>
-        </value-definitions>
       </attribute-definition>
       <attribute-definition attribute-id="boltMerchantDivisionID">
         <display-name xml:lang="x-default">Bolt Merchant Division ID</display-name>
@@ -573,22 +525,7 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltEnableInventoryCheck">
-        <display-name xml:lang="x-default">Enable default inventory check</display-name>
-        <type>boolean</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <default-value>true</default-value>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltProcessorMapping">
-          <display-name xml:lang="x-default">Bolt Processor Mapping</display-name>
-          <description xml:lang="x-default">Bolt Processor Mapping to generalize processor value sent to downstream. JSON format.</description>
-          <type>text</type>
-          <mandatory-flag>false</mandatory-flag>
-          <externally-managed-flag>false</externally-managed-flag>
-      </attribute-definition>
 
-      <!--  V2 cartridges attributes -->
       <attribute-definition attribute-id="boltEnvironmentOCAPI">
         <display-name xml:lang="x-default">Bolt Environment</display-name>
         <type>enum-of-string</type>
@@ -610,14 +547,14 @@
         </value-definitions>
       </attribute-definition>
       <attribute-definition attribute-id="boltMultiPublishableKeyOCAPI">
-        <display-name xml:lang="x-default">Publishable Key - Multistep - used for V2 version</display-name>
+        <display-name xml:lang="x-default">Publishable Key - Multistep</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
       <attribute-definition attribute-id="boltBackOfficePublishableKeyOCAPI">
-        <display-name xml:lang="x-default">Publishable Key - Back Office - used for V2 version</display-name>
+        <display-name xml:lang="x-default">Publishable Key - Back Office</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
@@ -661,14 +598,8 @@
         <attribute attribute-id="boltEnableSessionRecording"/>
         <attribute attribute-id="sfccBaseVersion"/>
       </attribute-group>
-      <attribute-group group-id="Bolt Credentials Setting - V1">
-        <display-name xml:lang="x-default">Bolt Credentials Setting - V1</display-name>
-        <attribute attribute-id="boltMultiPublishableKey"/>
-        <attribute attribute-id="boltBackOfficePublishableKey"/>
-        <attribute attribute-id="boltEnvironment"/>
-      </attribute-group>
       <attribute-group group-id="Bolt Credentials Setting - V2">
-        <display-name xml:lang="x-default">Bolt Credentials Setting - V2</display-name>
+        <display-name xml:lang="x-default">Bolt Credentials Setting</display-name>
         <attribute attribute-id="boltMultiPublishableKeyOCAPI"/>
         <attribute attribute-id="boltBackOfficePublishableKeyOCAPI"/>
         <attribute attribute-id="boltEnvironmentOCAPI"/>
