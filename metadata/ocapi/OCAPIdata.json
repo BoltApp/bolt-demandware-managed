@@ -51,7 +51,15 @@
           ],
           "read_attributes": "(**)",
           "write_attributes": "(**)"
-        }
+        },
+        {
+					"resource_id": "/sites/{site_id}/site_preferences/preference_groups/{group_id}/{instance_type}",
+					"methods": [
+						"get"
+					],
+					"read_attributes": "(**)",
+					"write_attributes": "(**)"
+				}
       ]
     }
   ]

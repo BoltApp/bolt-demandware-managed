@@ -525,7 +525,21 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-
+      <attribute-definition attribute-id="boltPluginVersion">
+          <display-name xml:lang="x-default">Bolt Plugin Version</display-name>
+          <description xml:lang="x-default">Bolt Plugin Version</description>
+          <type>string</type>
+          <mandatory-flag>false</mandatory-flag>
+          <externally-managed-flag>false</externally-managed-flag>
+          <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="otherPluginVersions">
+          <display-name xml:lang="x-default">Other Plugin Versions</display-name>
+          <description xml:lang="x-default">All other plugins installed and their versions</description>
+          <type>text</type>
+          <mandatory-flag>false</mandatory-flag>
+          <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
       <attribute-definition attribute-id="boltEnvironmentOCAPI">
         <display-name xml:lang="x-default">Bolt Environment</display-name>
         <type>enum-of-string</type>
@@ -592,11 +606,15 @@
         <attribute attribute-id="boltGiftCertificateEnable"/>
         <attribute attribute-id="boltCartAjaxUpdateEnable"/>
         <attribute attribute-id="boltPartnerMerchant"/>
-        <attribute attribute-id="boltEnableInventoryCheck"/>
         <attribute attribute-id="boltMerchantDivisionID"/>
-        <attribute attribute-id="boltProcessorMapping"/>
         <attribute attribute-id="boltEnableSessionRecording"/>
         <attribute attribute-id="sfccBaseVersion"/>
+      </attribute-group>
+      <attribute-group group-id="BoltPluginSetting">
+        <display-name xml:lang="x-default">Bolt Plugins Setting</display-name>
+        <attribute attribute-id="sfccBaseVersion"/>
+        <attribute attribute-id="otherPluginVersions"/>
+        <attribute attribute-id="boltPluginVersion"/>
       </attribute-group>
       <attribute-group group-id="Bolt Credentials Setting - V2">
         <display-name xml:lang="x-default">Bolt Credentials Setting</display-name>
