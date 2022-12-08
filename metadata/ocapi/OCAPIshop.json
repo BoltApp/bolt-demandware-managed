@@ -169,6 +169,14 @@
          ]
        },
        {
+         "resource_id":"/baskets/{basket_id}/coupons",
+         "read_attributes":"(**)",
+         "write_attributes":"(**)",
+         "methods":[
+            "post"
+         ]
+       },
+       {
           "resource_id":"/promotions/{id}",
           "read_attributes":"(**)",
           "write_attributes":"(**)",
