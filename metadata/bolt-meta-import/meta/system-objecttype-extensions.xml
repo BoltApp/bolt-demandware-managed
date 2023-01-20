@@ -719,7 +719,7 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="fromStoreId">
+      <attribute-definition attribute-id="fromStoreI">
         <display-name xml:lang="x-default">From Store Id</display-name>
         <type>string</type>
         <mandatory-flag>false</mandatory-flag>
