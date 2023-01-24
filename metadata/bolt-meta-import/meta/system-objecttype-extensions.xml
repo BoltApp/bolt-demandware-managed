@@ -490,6 +490,13 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
+      <attribute-definition attribute-id="boltEnableSSO">
+        <display-name xml:lang="x-default">Enable Bolt Pay</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
       <attribute-definition attribute-id="boltEnableBackOffice">
         <display-name xml:lang="x-default">Display Bolt Checkout for Back Office payments</display-name>
         <type>boolean</type>
@@ -601,6 +608,7 @@
         <attribute attribute-id="boltSigningSecret"/>
         <attribute attribute-id="boltEnableCartPage"/>
         <attribute attribute-id="boltEnableBackOffice"/>
+        <attribute attribute-id="boltEnableSSO"/>
         <attribute attribute-id="boltEnableCheckoutPage"/>
         <attribute attribute-id="boltPreauthEnable"/>
         <attribute attribute-id="boltGiftCertificateEnable"/>
