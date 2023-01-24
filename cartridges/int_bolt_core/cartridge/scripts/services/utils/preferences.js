@@ -30,8 +30,10 @@ exports.getSitePreferences = function () {
     return {
         boltEnable: Site.getCurrent().getCustomPreferenceValue('boltEnable'),
         boltEnableCartPage: Site.getCurrent().getCustomPreferenceValue('boltEnableCartPage') || false,
+        boltEnableSSO: Site.getCurrent().getCustomPreferenceValue('boltEnableSSO') || false,
         boltMerchantDivisionID: Site.getCurrent().getCustomPreferenceValue('boltMerchantDivisionID') || '',
         boltCdnUrl: boltCdnUrl,
+        boltAccountURL: boltAccountURL(),
         boltMultiPublishableKey: boltMultiPublishableKey,
         blockedCharactersList: blockedCharactersList,
         boltEnableSessionRecording: Site.getCurrent().getCustomPreferenceValue('boltEnableSessionRecording') || false,
@@ -79,6 +81,22 @@ function boltConnectURL() {
     }
 }
 
+/**
+ * Return Account URL
+ * @returns {string} Account URL to access Bolt account related feature (SSO)
+ */
+function boltAccountURL() {
+    var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironment').valueOf();
+    switch (boltEnv) {
+        case 'sandbox':
+            return 'https://account-sandbox.bolt.com';
+        case 'staging':
+            return 'https://account-staging.bolt.com';
+        case 'production':
+        default:
+            return 'https://account.bolt.com';
+    }
+}
 /**
  * Checks whether a system preference is defined or not.
  * return the preference value if defined, otherwise null
