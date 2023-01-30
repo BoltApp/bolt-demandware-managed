@@ -439,7 +439,36 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
+      <attribute-definition attribute-id="SFCCShipmentId">
+        <display-name xml:lang="x-default">SFCCShipmentId</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="itemGroup">
+        <display-name xml:lang="x-default">Item Group</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="pickUpInStore">
+        <display-name xml:lang="x-default">Is PickUp In Store?</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+      </attribute-definition>
     </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="In store Pick Up">
+        <display-name xml:lang="x-default">In store Pick Up</display-name>
+        <attribute attribute-id="fromStoreId"/>
+        <attribute attribute-id="SFCCShipmentId"/>
+        <attribute attribute-id="itemGroup"/>
+        <attribute attribute-id="pickUpInStore"/>
+      </attribute-group>
+    </group-definitions>
   </type-extension>
 
   <type-extension type-id="OrganizationPreferences">
@@ -533,19 +562,19 @@
         <min-length>0</min-length>
       </attribute-definition>
       <attribute-definition attribute-id="boltPluginVersion">
-          <display-name xml:lang="x-default">Bolt Plugin Version</display-name>
-          <description xml:lang="x-default">Bolt Plugin Version</description>
-          <type>string</type>
-          <mandatory-flag>false</mandatory-flag>
-          <externally-managed-flag>false</externally-managed-flag>
-          <min-length>0</min-length>
+        <display-name xml:lang="x-default">Bolt Plugin Version</display-name>
+        <description xml:lang="x-default">Bolt Plugin Version</description>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
       </attribute-definition>
       <attribute-definition attribute-id="otherPluginVersions">
-          <display-name xml:lang="x-default">Other Plugin Versions</display-name>
-          <description xml:lang="x-default">All other plugins installed and their versions</description>
-          <type>text</type>
-          <mandatory-flag>false</mandatory-flag>
-          <externally-managed-flag>false</externally-managed-flag>
+        <display-name xml:lang="x-default">Other Plugin Versions</display-name>
+        <description xml:lang="x-default">All other plugins installed and their versions</description>
+        <type>text</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
       </attribute-definition>
       <attribute-definition attribute-id="boltEnvironmentOCAPI">
         <display-name xml:lang="x-default">Bolt Environment</display-name>
@@ -588,7 +617,7 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
-      <attribute-definition attribute-id="sfccBaseVersion"> 
+      <attribute-definition attribute-id="sfccBaseVersion">
         <display-name xml:lang="x-default">SFCC Base Version</display-name>
         <description xml:lang="x-default">SFCC base version used in success callback.</description>
         <type>string</type>
@@ -681,7 +710,7 @@
 
   <type-extension type-id="Promotion">
     <custom-attribute-definitions>
-			<attribute-definition attribute-id="cartMessage">
+      <attribute-definition attribute-id="cartMessage">
         <display-name xml:lang="x-default">Cart Message</display-name>
         <type>string</type>
         <localizable-flag>false</localizable-flag>
@@ -690,21 +719,21 @@
         <min-length>0</min-length>
       </attribute-definition>
       <attribute-definition attribute-id="plpMessage">
-          <display-name xml:lang="x-default">PLP Message</display-name>
-          <type>string</type>
-          <localizable-flag>false</localizable-flag>
-          <mandatory-flag>false</mandatory-flag>
-          <externally-managed-flag>false</externally-managed-flag>
-          <min-length>0</min-length>
+        <display-name xml:lang="x-default">PLP Message</display-name>
+        <type>string</type>
+        <localizable-flag>false</localizable-flag>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
       </attribute-definition>
     </custom-attribute-definitions>
-      <group-definitions>
-        <attribute-group group-id="custom">
-          <display-name xml:lang="x-default">Custom Attributes</display-name>
-          <attribute attribute-id="plpMessage"/>
-          <attribute attribute-id="cartMessage"/>
-        </attribute-group>
-      </group-definitions>
+    <group-definitions>
+      <attribute-group group-id="custom">
+        <display-name xml:lang="x-default">Custom Attributes</display-name>
+        <attribute attribute-id="plpMessage"/>
+        <attribute attribute-id="cartMessage"/>
+      </attribute-group>
+    </group-definitions>
   </type-extension>
 
   <type-extension type-id="ProductInventoryRecord">
@@ -734,7 +763,21 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
+      <attribute-definition attribute-id="shipmentType">
+        <display-name xml:lang="x-default">Shipment Type</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
     </custom-attribute-definitions>
+    <group-definitions>
+      <attribute-group group-id="storepickup">
+        <display-name xml:lang="x-default">Store Pickup Information</display-name>
+        <attribute attribute-id="fromStoreId"/>
+        <attribute attribute-id="shipmentType"/>
+      </attribute-group>
+    </group-definitions>
   </type-extension>
 
   <type-extension type-id="Profile">
