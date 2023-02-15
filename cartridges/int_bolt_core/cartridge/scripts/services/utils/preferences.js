@@ -86,7 +86,7 @@ function boltConnectURL() {
  * @returns {string} Account URL to access Bolt account related feature (SSO)
  */
 function boltAccountURL() {
-    var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironment').valueOf();
+    var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
     switch (boltEnv) {
         case 'sandbox':
             return 'https://account-sandbox.bolt.com';
