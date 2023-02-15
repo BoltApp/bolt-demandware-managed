@@ -59,6 +59,25 @@
 					],
 					"read_attributes": "(**)",
 					"write_attributes": "(**)"
+				},
+        {
+          "resource_id": "/customer_lists/**",
+          "methods": [
+            "get",
+            "post",
+            "put",
+            "patch"
+          ],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
+        },
+        {
+					"resource_id": "/customer_lists/{site_id}/customers/*",
+					"methods": [
+						"get"
+					],
+					"read_attributes": "(**)",
+					"write_attributes": "(**)"
 				}
       ]
     }
