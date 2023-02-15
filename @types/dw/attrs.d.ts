@@ -400,7 +400,7 @@ declare class SitePreferencesCustomAttributes {
   /**
    * Bolt Environment
    */
-  boltEnvironment: string;
+  boltEnvironmentOCAPI: string;
 
   /**
    * Bolt Merchant Division ID
