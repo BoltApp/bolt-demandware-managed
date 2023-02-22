@@ -5,7 +5,7 @@ $(document).ready(function () {
     var boltButtonExist = setInterval(function () {
         var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
 
-        if (checkoutBoltButton) {
+        if (checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'svg') {
             // have to check if child of this dom is svg, otherwise bolt button is not fully rendered (it's the object)
             clearInterval(boltButtonExist);
             // This is a temp hack to make sure default event handler that opens modal doesn't work since we open it here
