@@ -26,7 +26,7 @@ server.post('OrderConfirmEmail', server.middleware.https, function (req, res, ne
 
         if (!BoltHttpUtils.getAuthenticationStatus()) {
             errorMessage = Resource.msg('request.not.authenticated', 'error', null);
-            respondError(res, errorMessage, 401);
+            BoltHttpUtils.respondError(res, errorMessage, 401);
             return next();
         }
 
@@ -36,14 +36,14 @@ server.post('OrderConfirmEmail', server.middleware.https, function (req, res, ne
 
         if (order === null || order.getCustomerEmail() === null) {
             errorMessage = Resource.msg('order.or.email.notfound', 'error', null);
-            respondError(res, errorMessage, 404);
+            BoltHttpUtils.respondError(res, errorMessage, 404);
             return next();
         }
 
         // Only pass orders in status 'new' and 'open'. Orders in other status should be ignored.
         if (order.status != ORDER_STATUS_NEW && order.status != ORDER_STATUS_OPEN) {
             errorMessage = Resource.msgf('order.status.incorrect', 'error', null, order.status);
-            respondError(res, errorMessage, 406);
+            BoltHttpUtils.respondError(res, errorMessage, 406);
             return next();
         }
 
@@ -56,7 +56,7 @@ server.post('OrderConfirmEmail', server.middleware.https, function (req, res, ne
         });
         return next();
     } catch (e) {
-        respondError(res, e.message || '', 500);
+        BoltHttpUtils.respondError(res, e.message || '', 500);
         return next();
     }
 });
@@ -68,7 +68,7 @@ server.post('APMProcessor', server.middleware.https, function (req, res, next) {
     try {
         if (!BoltHttpUtils.getAuthenticationStatus()) {
             var errorMessage = Resource.msg('request.not.authenticated', 'error', null);
-            respondError(res, errorMessage, 401);
+            BoltHttpUtils.respondError(res, errorMessage, 401);
             return next();
         }
 
@@ -76,7 +76,7 @@ server.post('APMProcessor', server.middleware.https, function (req, res, next) {
         var status = PaymentHelper.setPaymentProcessor(request.order_id || '', request.processor);
 
         if (status.error) {
-            respondError(res, status.message, 406);
+            BoltHttpUtils.respondError(res, status.message, 406);
             return next();
         }
 
@@ -85,24 +85,9 @@ server.post('APMProcessor', server.middleware.https, function (req, res, next) {
         });
         return next();
     } catch (e) {
-        respondError(res, e.message || '', 500);
+        BoltHttpUtils.respondError(res, e.message || '', 500);
         return next();
     }
 });
-
-/**
- * Set response to fail, log and return error message
- * @param {Object} res - response object
- * @param {string} errorMessage - error message
- * @param {string} statusCode - status code
- */
-function respondError(res, errorMessage, statusCode) {
-    log.error(errorMessage);
-    response.setStatus(statusCode);
-    res.json({
-        status: 'error',
-        message: errorMessage
-    });
-}
 
 module.exports = server.exports();
