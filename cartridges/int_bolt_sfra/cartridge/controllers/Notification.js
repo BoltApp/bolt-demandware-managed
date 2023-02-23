@@ -9,9 +9,7 @@ var Resource = require('dw/web/Resource');
 /* Script Modules */
 var COHelpers = require('*/cartridge/scripts/checkout/checkoutHelpers');
 var BoltHttpUtils = require('int_bolt_core/cartridge/scripts/services/utils/httpUtils');
-var LogUtils = require('int_bolt_core/cartridge/scripts/utils/boltLogUtils');
 var PaymentHelper = require('int_bolt_core/cartridge/scripts/checkout/paymentProcessor');
-var log = LogUtils.getLogger('Notification');
 
 /**
  * Send Order confirmation email

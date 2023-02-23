@@ -212,4 +212,4 @@ exports.respondError = function (res, errorMessage, statusCode) {
         status: 'error',
         message: errorMessage
     });
-}
+};
