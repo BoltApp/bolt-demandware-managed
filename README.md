@@ -4,9 +4,9 @@
 
 ## Getting Started
 
-1. Clone this repository. (The name of the top-level folder is bolt\-demandware-managed.)
-2. In the top-level `/bolt-demandware-managed` folder, enter the following command: `npm install`. (This command installs all of the package dependencies required for this cartridge.)
-3. In the top-level `/bolt-demandware-managed` folder, edit the `paths.base` property in the package.json file. This property should contain a relative path to the local directory containing the Storefront Reference Architecture repository. For example:
+1. Clone this repository.
+2. From the top-level `/bolt-demandware-managed`, run `npm install` to install all package dependencies.
+3. From the top-level `/bolt-demandware-managed`, edit the `paths.base` in package.json. This property should be the relative path to the local directory of the Storefront Reference Architecture repository. For example:
 
 ```
 "paths": {
@@ -28,7 +28,7 @@
 5. From the top-level `/bolt-demandware-managed` folder, run `npm run compile:js && npm run compile:scss`
 6. From the top-level `/bolt-demandware-managed` folder, run `npm run uploadCartridge`
 
-Note: if you upload the bolt cartridge with a new `code-version`, you will need to re-run step 5 and 6.
+Note: if you upload the bolt cartridge with a new `code-version`, you need to re-run step 5 and 6.
 
 # NPM scripts
 
@@ -40,15 +40,15 @@ Use the provided NPM scripts to compile and upload changes to your Sandbox.
 
 ## Linting your code
 
-`npm run lint` - Execute linting for all JavaScript and SCSS files in the project. You should run this command before committing your code.
+`npm run lint` - Execute linting for all JavaScript and SCSS files in the project. This should be run before committing code.
 
 #Testing
 
 ## Running unit tests
-`npm run test:unit` - Execute the unit tests
+`npm run test:unit` - Execute all the unit tests
 
 ## Locale support
 
 supported locales: `en-US`, `en-CA`, `fr-CA`
 
-For more information please check https://docs.google.com/document/d/1AH2_JTUmACbNJDrX6iIUH5LAuGauVa79DFotcJV_LKc/edit#
+For more information please check https://help.bolt.com/products/managed-checkout/sfcc-sfra-v2/

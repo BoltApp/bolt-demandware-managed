@@ -198,3 +198,18 @@ function getConfiguration() {
         boltAPIBaseURLV1: baseAPIUrl + '/v1'
     };
 }
+
+/**
+ * Set response to fail, log and return error message
+ * @param {Object} res - response object
+ * @param {string} errorMessage - error message
+ * @param {string} statusCode - status code
+ */
+exports.respondError = function (res, errorMessage, statusCode) {
+    log.error(errorMessage);
+    response.setStatus(statusCode);
+    res.json({
+        status: 'error',
+        message: errorMessage
+    });
+};
