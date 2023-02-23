@@ -25,7 +25,7 @@
 }
 ```
 
-5. From the top-level `/bolt-demandware-managed` folder, run `npm run compile:js && npm run compile:scss`
+5. From the top-level `/bolt-demandware-managed` folder, run `npm run build`
 6. From the top-level `/bolt-demandware-managed` folder, run `npm run uploadCartridge`
 
 Note: if you upload the bolt cartridge with a new `code-version`, you need to re-run step 5 and 6.
