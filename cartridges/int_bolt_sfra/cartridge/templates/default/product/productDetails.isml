@@ -134,16 +134,9 @@
 
                         </div>
 
-                        <iscomment>Bolt checkout button</iscomment>
-                        <div
-                            data-tid="instant-bolt-checkout-button"
-                            id="product-page-checkout-wrapper"
-                            class="bolt-button-wrapper">
-
-                            <object
-                            data="https://connect.bolt.com/v1/checkout_button?publishable_key=${boltPublishableKey}&amp;variant=${product.variant}"
-                            class="bolt-product-checkout-button">
-                            </object>
+                        <!-- Bolt Checkout Button -->
+                        <div class="row">
+                            <isinclude template="cart/boltButton" />
                         </div>
 
                         <!-- Social Sharing Icons -->
