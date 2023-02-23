@@ -1,6 +1,6 @@
 # bolt-demandware-managed
 
-# Bolt SFRA Cartridges for Managed Checkout
+# Bolt OCAPI Driven Managed Checkout Cartridges for SFRA
 
 ## Getting Started
 
@@ -25,8 +25,8 @@
 }
 ```
 
-5. In the top-level `/storefront-reference-architecture` folder, enter the following command: `npm run compile:js && npm run compile:scss`
-6. In the top-level `/storefront-reference-architecture` folder, enter the following command: `npm run uploadCartridge`
+5. From the top-level `/bolt-demandware-managed` folder, run `npm run compile:js && npm run compile:scss`
+6. From the top-level `/bolt-demandware-managed` folder, run `npm run uploadCartridge`
 
 Note: if you upload the bolt cartridge with a new `code-version`, you will need to re-run step 5 and 6.
 
