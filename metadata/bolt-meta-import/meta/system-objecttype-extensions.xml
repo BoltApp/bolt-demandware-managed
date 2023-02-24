@@ -547,6 +547,13 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
+       <attribute-definition attribute-id="boltEnablePPC">
+        <display-name xml:lang="x-default">Enable Product Page Checkout</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
       <attribute-definition attribute-id="boltSigningSecret">
         <display-name xml:lang="x-default">Signing Secret</display-name>
         <type>string</type>
@@ -639,6 +646,7 @@
         <attribute attribute-id="boltEnableBackOffice"/>
         <attribute attribute-id="boltEnableSSO"/>
         <attribute attribute-id="boltEnableCheckoutPage"/>
+        <attribute attribute-id="boltEnablePPC"/>
         <attribute attribute-id="boltPreauthEnable"/>
         <attribute attribute-id="boltGiftCertificateEnable"/>
         <attribute attribute-id="boltCartAjaxUpdateEnable"/>
