@@ -13,7 +13,18 @@ server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     res.setViewData({
         config: configuration,
-        boltVersion: BoltCartridgeVersion
+        boltVersion: BoltCartridgeVersion,
+        location: 'cart'
+    });
+    next();
+});
+
+server.append('MiniCartShow', function (req, res, next) {
+    var configuration = BoltPreferences.getSitePreferences();
+    res.setViewData({
+        config: configuration,
+        boltVersion: BoltCartridgeVersion,
+        location: 'minicart'
     });
     next();
 });

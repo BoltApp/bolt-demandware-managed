@@ -12,7 +12,7 @@
     <iscomment>Bolt checkout button</iscomment>
     <div class="col-12 checkout-continue">
         <div class="mb-sm-3 clearfix">
-            <div data-tid="instant-bolt-checkout-button">
+            <div class="bolt-${pdict.location}" data-tid="instant-bolt-checkout-button">
                 <object data="${boltCdnUrl}/v1/checkout_button?publishable_key=${boltPublishableKey}"></object>
             </div>
         </div>
