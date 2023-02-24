@@ -37,7 +37,8 @@ exports.getSitePreferences = function () {
         boltMultiPublishableKey: boltMultiPublishableKey,
         blockedCharactersList: blockedCharactersList,
         boltEnableSessionRecording: Site.getCurrent().getCustomPreferenceValue('boltEnableSessionRecording') || false,
-        sfccBaseVersion: getSFCCBaseVersion()
+        sfccBaseVersion: getSFCCBaseVersion(),
+        boltEnablePPC: Site.getCurrent().getCustomPreferenceValue('boltEnablePPC') || false
     };
 };
 
