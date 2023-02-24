@@ -6,7 +6,7 @@ server.extend(page);
 
 /* Script Modules */
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
-var Constants = require('~/cartridge/scripts/utils/constants');
+var Constants = require('int_bolt_custom/cartridge/scripts/utils/constants');
 
 server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
