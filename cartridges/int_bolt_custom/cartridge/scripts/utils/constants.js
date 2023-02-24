@@ -19,3 +19,5 @@ exports.ORDER_TRACKING_URL = '/merchant/track_shipment';
  * Global Constants
  */
 exports.DEFAULT_EMAIL_SENDER = 'no-reply@salesforce.com';
+
+exports.BOLT_CARTRIDGE_V2_VERSION = 'V2';

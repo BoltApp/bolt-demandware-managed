@@ -6,13 +6,13 @@ server.extend(page);
 
 /* Script Modules */
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
-var BoltCartridgeVersion = 'V2';
+var Constants = require('int_bolt_custom/cartridge/scripts/utils/constants');
 
 server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     res.setViewData({
         config: configuration,
-        boltVersion: BoltCartridgeVersion
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
     });
     next();
 });
