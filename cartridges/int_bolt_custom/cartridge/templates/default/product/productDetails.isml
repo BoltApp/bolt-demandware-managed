@@ -133,6 +133,7 @@
                                 <isinclude template="cart/boltButton" />
                             </div>
                         </isif>
+                        
                         <!-- Social Sharing Icons -->
                         <div class="row">
                             <isinclude template="product/components/socialIcons" />
