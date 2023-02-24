@@ -1,33 +1,47 @@
 'use strict';
 
+var shell = require('shelljs');
 var path = require('path');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var cwd = process.cwd();
 var { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-//find cartridge data
-var entryFilePath = '';
-var outputFile = '';
+var packageName = '';
+var jsFiles = {};
+var scssFiles = {};
 process.argv.forEach((val, index) => {
-    if (val === 'entryFilePath' ) {
-        entryFilePath = process.argv[index + 1];
-        var pathLength = entryFilePath.split('/').length;
-        outputFile = (entryFilePath.split('/')[pathLength-1]).split('.')[0];
+    if (val === 'entryPackageName') {
+        packageName = process.argv[index + 1];
+        var cssFilesTmp = shell.ls(path.join(cwd, `./cartridges/${packageName}/cartridge/client/**/scss/**/*.scss`));
+        cssFilesTmp.forEach(filePath => {
+            var name = path.basename(filePath, '.scss');
+            if (name.indexOf('_') !== 0) {
+                let location = path.relative(path.join(cwd, `./cartridges/${packageName}/cartridge/client`), filePath);
+                location = location.substr(0, location.length - 5).replace('scss', 'css');
+                scssFiles[location] = filePath;
+            }
+        });
 
-        console.log('entryFilePath: ', entryFilePath);
-        console.log('pathLength=', pathLength);
-        console.log('outputFile:', outputFile);
+        var jsFilesTmp = shell.ls(path.join(cwd, `./cartridges/${packageName}/cartridge/client/**/js/*.js`));
+        jsFilesTmp.forEach(filePath => {
+            let location = path.relative(path.join(cwd, `./cartridges/${packageName}/cartridge/client`), filePath);
+            location = location.substr(0, location.length - 3);
+            jsFiles[location] = filePath;
+        });
     }
 });
-var outputPath = 'cartridges/' + entryFilePath.split('/')[1] + '/cartridge/static/default/';
-console.log("outputPath: ", outputPath);
+
+var outputPath = './cartridges/' + packageName + '/cartridge/static';
+console.log("scssFiles: ", scssFiles);
+console.log("jsFiles: ", jsFiles);
 
 module.exports = [{
     mode: 'production',
     name: 'js',
-    entry: path.resolve(__dirname, `./${entryFilePath}`),
+    entry: jsFiles,
     output: {
-        path: path.resolve(__dirname, `./${outputPath}js`),
-        filename: `${outputFile}.js`
+        path: path.resolve(outputPath),
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -48,10 +62,10 @@ module.exports = [{
 {
     mode: 'production',
     name: 'scss',
-    entry: path.resolve(__dirname, `./${entryFilePath}`),
+    entry: scssFiles,
     output: {
-        path: path.resolve(__dirname, `./${outputPath}css`),
-        filename: `${outputFile}_tmp.tmp`
+        path: path.resolve(outputPath),
+        filename: '[name].tmp'
     },
     module: {
         rules: [{
@@ -86,10 +100,15 @@ module.exports = [{
         }]
     },
     plugins: [
-        new MiniCssExtractPlugin({ filename: `${outputFile}.css` }),
-        new CleanWebpackPlugin({
-            protectWebpackAssets: false,
-            cleanAfterEveryBuildPatterns: ['*.tmp']
-        })
+        new MiniCssExtractPlugin({ filename: '[name].css' }),
+        new CleanWebpackPlugin(
+            {
+                cleanOnceBeforeBuildPatterns: [],
+                cleanAfterEveryBuildPatterns: ['**/*.tmp'],
+                protectWebpackAssets: false,
+                verbose: true,
+                dry: false
+            },
+        )
     ]
 }];
