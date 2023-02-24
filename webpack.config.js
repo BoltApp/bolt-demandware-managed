@@ -103,7 +103,7 @@ module.exports = [{
         new MiniCssExtractPlugin({ filename: '[name].css' }),
         new CleanWebpackPlugin(
             {
-                cleanOnceBeforeBuildPatterns: [],
+                cleanOnceBeforeBuildPatterns: ['js/*.js', 'css/*.css'],
                 cleanAfterEveryBuildPatterns: ['**/*.tmp'],
                 protectWebpackAssets: false,
                 verbose: true,
