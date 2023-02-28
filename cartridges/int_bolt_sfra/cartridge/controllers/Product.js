@@ -12,7 +12,8 @@ server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     res.setViewData({
         config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
+        isPPC: true
     });
     next();
 });
