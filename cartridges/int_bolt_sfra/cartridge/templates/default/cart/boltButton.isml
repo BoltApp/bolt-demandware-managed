@@ -1,4 +1,4 @@
-<isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion == 'V2' && (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0)}">
+<isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion == 'V2' && (pdict.isPPC || (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0))}">
     <input type="hidden" class="create-bolt-order-url" value="${URLUtils.https('Bolt-GetOrderReference')}" />
     <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
     <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />

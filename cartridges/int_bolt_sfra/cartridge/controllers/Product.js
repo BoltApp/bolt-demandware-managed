@@ -13,18 +13,7 @@ server.append('Show', function (req, res, next) {
     res.setViewData({
         config: configuration,
         boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
-        isPPC: false,
-        location: 'cart'
-    });
-    next();
-});
-
-server.append('MiniCartShow', function (req, res, next) {
-    var configuration = BoltPreferences.getSitePreferences();
-    res.setViewData({
-        config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
-        location: 'minicart'
+        isPPC: true
     });
     next();
 });
