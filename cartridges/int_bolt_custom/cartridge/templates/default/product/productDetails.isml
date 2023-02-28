@@ -9,7 +9,6 @@
     <isset name="product" value="${pdict.product}" scope="page" />
     <isset name="isQuickView" value="${false}" scope="page" />
     <isset name="isProductSet" value="${pdict.product.productType === 'set'}" scope="page" />
-    <isset name="isPPC" value="${true}" scope="page" />
 
     <isobject object="${product.raw}" view="detail" />
         <div class="container product-detail product-wrapper" data-pid="${product.id}">
