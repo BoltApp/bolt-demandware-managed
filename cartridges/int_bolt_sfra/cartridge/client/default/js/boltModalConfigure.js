@@ -55,33 +55,6 @@ var boltUtil = require('./boltUtil');
 }(window);
 
 var boltCartID = '';
-var boltBC;
-
-// barrier is externally-resolved promise
-var boltBarrier = function () {
-    var resolveHolder;
-    var isResolved = false;
-    var value = null;
-    var promise = new Promise(function (resolve) {
-        resolveHolder = resolve;
-    });
-    return {
-        promise: promise,
-        resolve: function (t) {
-            resolveHolder(t);
-            value = t;
-            isResolved = true;
-        },
-        value: function () { return value; },
-        isResolved: function () { return isResolved; },
-    };
-};
-
-var callConfigureWithPromises = function () {
-    cartBarrier = boltBarrier();
-    hintBarrier = boltBarrier();
-    boltCheckoutConfigure(cartBarrier.promise, hintBarrier.promise, boltCallbacks);
-}
 
 var boltCheckoutConfigure = function (cart, hints, callback, parameters) {
     // Check if BoltCheckout is defined (connect.js executed).
@@ -90,7 +63,7 @@ var boltCheckoutConfigure = function (cart, hints, callback, parameters) {
         boltUtil.whenDefined(window, 'BoltCheckout', callConfigure, 'callConfigure');
         return;
     }
-    boltBC = BoltCheckout.configure(cart, hints, callback, parameters);
+    BoltCheckout.configure(cart, hints, callback, parameters);
 }
 
 var boltCheckoutSetup = function () {
@@ -152,8 +125,6 @@ var boltCallbacks = {
                 });
 
             redirect.submit();
-        } else {
-            callConfigureWithPromises();
         }
     },
     onCheckoutStart: function () {
