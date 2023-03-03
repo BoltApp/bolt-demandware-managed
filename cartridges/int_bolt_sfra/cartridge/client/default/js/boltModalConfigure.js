@@ -4,4 +4,5 @@ var bolt = require('./bolt');
 
 $(document).ready(function () {
     bolt.initBoltButton();
+    bolt.addApplePayHandlerIfNeeded();
 });
