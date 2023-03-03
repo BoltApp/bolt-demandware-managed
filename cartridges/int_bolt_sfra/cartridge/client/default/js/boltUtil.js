@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Map of watched objects to maps of their respective watched properties to configured callbacks
  * @type {Map<Object, Map<string, function[]>>}
@@ -16,16 +18,21 @@ var BoltState = {
 
 };
 
-/////////////////////////////////////////////////////////////////////////
-// Using Mutation Observers to Watch for Element Availability and change.
-/////////////////////////////////////////////////////////////////////////
+/**
+ * Using Mutation Observers to Watch for Element Availability and change.
+ */
+/* eslint-disable */
 ! function (win) {
 
-    var listeners = [],
-        doc = win.document,
-        MutationObserver = win.MutationObserver || win.WebKitMutationObserver,
-        observer;
+    var listeners = [];
+    var doc = win.document;
+    var MutationObserver = win.MutationObserver || win.WebKitMutationObserver;
+    var observer;
 
+    /**
+     * @param {Object} selector the selector
+     * @param {Object} fn the fn property is just an alias to the prototype property
+     */
     function ready(selector, fn) {
         // Store the selector and callback to be monitored
         listeners.push({
@@ -62,12 +69,10 @@ var BoltState = {
             }
         }
     }
-
     // Expose methods
     win.onElementReady = ready;
-
 }(window);
-
+/* eslint-enable */
 module.exports = {
     BoltState,
     /**
@@ -80,8 +85,8 @@ module.exports = {
      * @param {Function} callback function to be called when {@see property} gets defined on {@see object}
      * @param {null} key deprecated parameter used for setting multiple callbacks per property
      */
-    whenDefined: function (object, property, callback, key = null) {
-        if (object.hasOwnProperty(property)) {
+    whenDefined: function (object, property, callback) {
+        if (Object.prototype.hasOwnProperty.call(object, property)) {
             callback();
         } else {
             var overloadedPropertyName = '_' + property;
@@ -108,13 +113,13 @@ module.exports = {
                 /**
                  * Sets the overloaded property index with the provided value then executes configured callbacks
                  *
-                 * @param {mixed} value
+                 * @param {mixed} value the value to set
                  */
                 set: function (value) {
                     this[overloadedPropertyName] = value;
-                    for (var propertyCallback of propertyCallbacks.values()) {
+                    propertyCallbacks.values().forEach(propertyCallback => {
                         propertyCallback();
-                    }
+                    });
                 }
             });
         }
