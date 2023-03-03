@@ -3,17 +3,20 @@
 var boltUtil = require('./boltUtil');
 
 var boltCheckoutConfigure = function (cart, hints, callback, parameters) {
-    if (boltUtil.BoltState.BoltCheckBtnInitiated) {
-        return;
+    var callConfigure = function() {
+        if (boltUtil.BoltState.BoltCheckBtnInitiated) {
+            return;
+        }
+        // Check if BoltCheckout is defined (connect.js executed).
+        // If not, postpone processing until it is
+        if (!window.BoltCheckout) {
+            boltUtil.whenDefined(window, 'BoltCheckout', callConfigure, 'callConfigure');
+            return;
+        }
+        BoltCheckout.configure(cart, hints, callback, parameters);
+        boltUtil.BoltState.BoltCheckBtnInitiated = true;
     }
-    // Check if BoltCheckout is defined (connect.js executed).
-    // If not, postpone processing until it is
-    if (!window.BoltCheckout) {
-        boltUtil.whenDefined(window, 'BoltCheckout', callConfigure, 'callConfigure');
-        return;
-    }
-    BoltCheckout.configure(cart, hints, callback, parameters);
-    boltUtil.BoltState.BoltCheckBtnInitiated = true;
+    callConfigure();
 }
 
 var boltCheckoutSetup = function () {
