@@ -2,61 +2,10 @@
 
 var boltUtil = require('./boltUtil');
 
-/////////////////////////////////////////////////////////////////////////
-// Using Mutation Observers to Watch for Element Availability and change.
-/////////////////////////////////////////////////////////////////////////
-! function (win) {
-
-    var listeners = [],
-        doc = win.document,
-        MutationObserver = win.MutationObserver || win.WebKitMutationObserver,
-        observer;
-
-    function ready(selector, fn) {
-        // Store the selector and callback to be monitored
-        listeners.push({
-            selector: selector,
-            fn: fn
-        });
-        if (!observer) {
-            // Watch for changes in the document
-            observer = new MutationObserver(check);
-            observer.observe(doc.documentElement, {
-                childList: true,
-                subtree: true
-            });
-        }
-        // Check if the element is currently in the DOM
-        check();
-    }
-
-    function check() {
-        // Check the DOM for elements matching a stored selector
-        for (var i = 0, len = listeners.length, listener, elements; i < len; i++) {
-            listener = listeners[i];
-            // Query for elements matching the specified selector
-            elements = doc.querySelectorAll(listener.selector);
-            for (var j = 0, jLen = elements.length, element; j < jLen; j++) {
-                element = elements[j];
-                // Make sure the callback isn't invoked with the
-                // same element more than once
-                if (!element.ready) {
-                    element.ready = true;
-                    // Invoke the callback with the element
-                    listener.fn.call(element, element);
-                }
-            }
-        }
-    }
-
-    // Expose methods
-    win.onElementReady = ready;
-
-}(window);
-
-var boltCartID = '';
-
 var boltCheckoutConfigure = function (cart, hints, callback, parameters) {
+    if (boltUtil.BoltState.BoltCheckBtnInitiated) {
+        return;
+    }
     // Check if BoltCheckout is defined (connect.js executed).
     // If not, postpone processing until it is
     if (!window.BoltCheckout) {
@@ -64,6 +13,7 @@ var boltCheckoutConfigure = function (cart, hints, callback, parameters) {
         return;
     }
     BoltCheckout.configure(cart, hints, callback, parameters);
+    boltUtil.BoltState.BoltCheckBtnInitiated = true;
 }
 
 var boltCheckoutSetup = function () {
@@ -74,9 +24,8 @@ var boltCheckoutSetup = function () {
         url: createBoltOrderUrl,
         method: 'GET',
         success: function success(data) {
-            if (data !== null && boltCartID !== data.basketID) {
+            if (data !== null) {
                 // use the response from backend to configure Bolt connect
-                boltCartID = data.basketID;
                 var cart = {
                     id: data.basketID
                 };
@@ -92,9 +41,7 @@ var boltCheckoutSetup = function () {
 };
 
 onElementReady('[data-tid="instant-bolt-checkout-button"]', function (element) {
-    $('[data-tid="instant-bolt-checkout-button"]').on("click", function (event) {
-        boltCheckoutSetup();
-    });
+    boltCheckoutSetup();
 });
 
 var boltSuccessRedirect = $('#successRedirect').val();
