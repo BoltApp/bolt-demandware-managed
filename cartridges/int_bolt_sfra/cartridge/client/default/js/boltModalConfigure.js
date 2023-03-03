@@ -2,23 +2,6 @@
 
 var boltUtil = require('./boltUtil');
 
-var boltCheckoutConfigure = function (cart, hints, callback, parameters) {
-    var callConfigure = function () {
-        if (boltUtil.BoltState.BoltCheckBtnInitiated) {
-            return;
-        }
-        // Check if BoltCheckout is defined (connect.js executed).
-        // If not, postpone processing until it is
-        if (!window.BoltCheckout) {
-            boltUtil.whenDefined(window, 'BoltCheckout', callConfigure);
-            return;
-        }
-        BoltCheckout.configure(cart, hints, callback, parameters); // eslint-disable-line no-undef
-        boltUtil.BoltState.BoltCheckBtnInitiated = true;
-    };
-    callConfigure();
-};
-
 var boltCheckoutSetup = function () {
     var createBoltOrderUrl = $('.create-bolt-order-url').val();
     var sfccBaseVersion = $('#sfccBaseVersion').val();
@@ -34,9 +17,9 @@ var boltCheckoutSetup = function () {
                 };
 
                 if (sfccBaseVersion >= 6) {
-                    boltCheckoutConfigure(cart, data.hints, boltCallbacks);
+                    boltUtil.methods.boltCheckoutConfigure(cart, data.hints, boltCallbacks);
                 } else {
-                    boltCheckoutConfigure(cart, data.hints, null);
+                    boltUtil.methods.boltCheckoutConfigure(cart, data.hints, null);
                 }
             }
         }

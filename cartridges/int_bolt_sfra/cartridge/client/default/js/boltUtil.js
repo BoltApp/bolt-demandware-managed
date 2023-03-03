@@ -73,55 +73,80 @@ var BoltState = {
     win.onElementReady = ready;
 }(window);
 /* eslint-enable */
+/**
+ * Executes provided callback when a property gets defined on provided object.
+ * The most common use is waiting for a variable to be defined by an external library
+ * using {@see window} as {@see object}
+ *
+ * @param {Object} object to check for property definition
+ * @param {number|string} property that is expected to be defined on {@see object}
+ * @param {Function} callback function to be called when {@see property} gets defined on {@see object}
+ */
+function whenDefined(object, property, callback) {
+    if (Object.prototype.hasOwnProperty.call(object, property)) {
+        callback();
+    } else {
+        var overloadedPropertyName = '_' + property;
+        if (!whenDefinedCallbacks.has(object)) {
+            whenDefinedCallbacks.set(object, new Map([]));
+        }
+        if (!whenDefinedCallbacks.get(object).has(property)) {
+            whenDefinedCallbacks.get(object).set(property, []);
+        }
+        var propertyCallbacks = whenDefinedCallbacks.get(object).get(property);
+        propertyCallbacks.push(callback);
+        Object.defineProperty(object, property, {
+            configurable: true,
+            enumerable: true,
+            writeable: true,
+            /**
+             * Retrieves the watched property from overloaded index
+             *
+             * @returns {*} {@see property} value on {@see object}
+             */
+            get: function () {
+                return this[overloadedPropertyName];
+            },
+            /**
+             * Sets the overloaded property index with the provided value then executes configured callbacks
+             *
+             * @param {mixed} value the value to set
+             */
+            set: function (value) {
+                this[overloadedPropertyName] = value;
+                propertyCallbacks.values().forEach(propertyCallback => {
+                    propertyCallback();
+                });
+            }
+        });
+    }
+}
+/**
+ * @param {Object} cart the cart object
+ * @param {Object} hints the hint data
+ * @param {Function} callback the callback functions
+ * @param {Object} parameters the configuration parameters
+ */
+function boltCheckoutConfigure(cart, hints, callback, parameters) {
+    var callConfigure = function () {
+        if (BoltState.BoltCheckBtnInitiated) {
+            return;
+        }
+        // Check if BoltCheckout is defined (connect.js executed).
+        // If not, postpone processing until it is
+        if (!window.BoltCheckout) {
+            whenDefined(window, 'BoltCheckout', callConfigure);
+            return;
+        }
+        BoltCheckout.configure(cart, hints, callback, parameters); // eslint-disable-line no-undef
+        BoltState.BoltCheckBtnInitiated = true;
+    };
+    callConfigure();
+}
 module.exports = {
     BoltState,
-    /**
-     * Executes provided callback when a property gets defined on provided object.
-     * The most common use is waiting for a variable to be defined by an external library
-     * using {@see window} as {@see object}
-     *
-     * @param {Object} object to check for property definition
-     * @param {number|string} property that is expected to be defined on {@see object}
-     * @param {Function} callback function to be called when {@see property} gets defined on {@see object}
-     * @param {null} key deprecated parameter used for setting multiple callbacks per property
-     */
-    whenDefined: function (object, property, callback) {
-        if (Object.prototype.hasOwnProperty.call(object, property)) {
-            callback();
-        } else {
-            var overloadedPropertyName = '_' + property;
-            if (!whenDefinedCallbacks.has(object)) {
-                whenDefinedCallbacks.set(object, new Map([]));
-            }
-            if (!whenDefinedCallbacks.get(object).has(property)) {
-                whenDefinedCallbacks.get(object).set(property, []);
-            }
-            var propertyCallbacks = whenDefinedCallbacks.get(object).get(property);
-            propertyCallbacks.push(callback);
-            Object.defineProperty(object, property, {
-                configurable: true,
-                enumerable: true,
-                writeable: true,
-                /**
-                 * Retrieves the watched property from overloaded index
-                 *
-                 * @returns {*} {@see property} value on {@see object}
-                 */
-                get: function () {
-                    return this[overloadedPropertyName];
-                },
-                /**
-                 * Sets the overloaded property index with the provided value then executes configured callbacks
-                 *
-                 * @param {mixed} value the value to set
-                 */
-                set: function (value) {
-                    this[overloadedPropertyName] = value;
-                    propertyCallbacks.values().forEach(propertyCallback => {
-                        propertyCallback();
-                    });
-                }
-            });
-        }
+    methods: {
+        whenDefined: whenDefined,
+        boltCheckoutConfigure: boltCheckoutConfigure
     }
 };
