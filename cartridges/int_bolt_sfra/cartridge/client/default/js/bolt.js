@@ -108,4 +108,31 @@ exports.initBoltButton = function () {
     }, 100);
 };
 
+/**
+ * This function is to add event listener to order total element if applePay button is detected.
+ * Once change of order total is detected, reload the page to run bolt configure logic again(currently page load is the only way to configure bolt modal)
+ * with updated cart information. This is because applepay only allows sync action, order data needs to be ready(via bolt configure)
+ * before applepay button shows up.
+ * This is a short term solution, once storm side expose 'reconfigure' function. We can reconfigure bolt modal without page reload.
+ */
+exports.addApplePayHandlerIfNeeded = function () {
+    const MAX_COUNT = 30;
+    var timeCounter = 0;
+    var grandTotalClass = '.grand-total';
+    var applePayButtonExist = setInterval(function () {
+        if (timeCounter >= MAX_COUNT) {
+            clearInterval(applePayButtonExist);
+        } else {
+            var applePayButton = $('[data-tid="apple-pay-button"]');
+            if (applePayButton.length > 0) {
+                clearInterval(applePayButtonExist);
+                $('body').on('DOMSubtreeModified', grandTotalClass, function () {
+                    location.reload(); // eslint-disable-line no-restricted-globals
+                });
+            }
+            timeCounter += 1;
+        }
+    }, 1000);
+};
+
 exports.BoltHasConfigureRun = BoltHasConfigureRun;
