@@ -273,7 +273,7 @@ function openFindStoresModal(storeElement, event) {
 module.exports = {
     updateSelectStore: function () {
         $('body').on('product:updateAddToCart', function (e, response) {
-            $('.btn-get-in-store-inventory', response.$productContainer).attr('disabled', (!response.product.readyToOrder || !response.product.available));
+            $('.btn-get-in-store-inventory', response.$productContainer).attr('disabled', (!response.product.readyToOrder || !response.product.available || !response.product.availableForInStorePickup));
         });
     },
     updateSelectedStoreOnAttributeChange: function () {
