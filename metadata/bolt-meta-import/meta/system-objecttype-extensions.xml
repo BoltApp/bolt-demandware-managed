@@ -520,7 +520,7 @@
         <default-value>false</default-value>
       </attribute-definition>
       <attribute-definition attribute-id="boltEnableSSO">
-        <display-name xml:lang="x-default">Enable Bolt Pay</display-name>
+        <display-name xml:lang="x-default">Enable Bolt SSO</display-name>
         <type>boolean</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
