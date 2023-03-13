@@ -127,7 +127,6 @@ function fillModalElement(pid, quantity, selectedPostalCode, selectedRadius) {
  * @param {HTMLElement} $container - the target html element
  */
 function deselectStore($container) {
-    console.log('deselectStore');
     var storeElement = $($container).find('.selected-store-with-inventory');
     $(storeElement).attr('data-status', 'deselect');
     $(storeElement).addClass('display-none');
@@ -140,7 +139,6 @@ function deselectStore($container) {
  * @param {HTMLElement} $container - the target html element
  */
 function resetStore($container) {
-    console.log('resetStore');
     var storeElement = $($container).find('.selected-store-with-inventory');
     $(storeElement).removeAttr('data-search-pid');
     $(storeElement).find('.card-body').empty();
@@ -155,7 +153,6 @@ function resetStore($container) {
  * @param {HTMLElement} $selectedStoreElement - the target html element
  */
 function reSelectStore($storeElement, $selectedStoreElement) {
-    console.log('reSelectStore');
     var searchPID = $($selectedStoreElement).attr('data-search-pid');
     var storeID = $($selectedStoreElement).find('.store-name').attr('data-store-id');
     $($selectedStoreElement).removeClass('display-none');
@@ -290,7 +287,6 @@ module.exports = {
                         pid: response.data.product.id,
                         storeId: myStoreId
                     };
-                    console.log('myStoreId');
                     $.ajax({
                         url: $('.btn-get-in-store-inventory').data('getmystore-action-url'),
                         data: requestData,
@@ -366,7 +362,6 @@ module.exports = {
             }
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    console.log(position.coords);
                     var requestData = {
                         pid: storeElement.attr('data-pid'),
                         latitude: position.coords.latitude,
@@ -377,7 +372,6 @@ module.exports = {
                         data: requestData,
                         method: 'GET',
                         success: function (myStoreResponse) {
-                            console.log(myStoreResponse);
                             if (Object.hasOwn(myStoreResponse, 'storeHtml')) {
                                 selectedStoreElement.attr('data-search-pid', storeElement.attr('data-pid'));
                                 selectedStoreElement.find('.card-body').empty();
@@ -389,21 +383,17 @@ module.exports = {
                                 selectedStoreElement.removeClass('display-none');
                                 $.spinner().stop();
                             } else {
-                                console.log('no store found');
                                 $.spinner().stop();
                                 openFindStoresModal(storeElement, e);
                             }
                         },
                         error: function (request, status, error) {
-                            console.log('ajax');
-                            console.log(error);
                             $.spinner().stop();
                             openFindStoresModal(storeElement, e);
                         }
                     });
                 },
                 function (error) {
-                    console.log(error);
                     $.spinner().stop();
                     openFindStoresModal(storeElement, e);
                 },
