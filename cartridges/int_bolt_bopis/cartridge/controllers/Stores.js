@@ -50,7 +50,7 @@ server.get('GetMySelectedStore', function (req, res, next) {
     var storeObject = StoreMgr.getStore(storeId);
     var instoreInventory = instorePUstoreHelpers.getStoreInventory(storeId, productId);
     var storeResult = {};
-    if (!!instoreInventory) {
+    if (!!instoreInventory) { // eslint-disable-line no-extra-boolean-cast
         var store = new StoreModel(storeObject);
         storeResult.storeHtml = renderTemplateHelper.getRenderedHtml(store, 'store/storeDetails');
     } else {

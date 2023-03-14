@@ -387,13 +387,13 @@ module.exports = {
                                 openFindStoresModal(storeElement, e);
                             }
                         },
-                        error: function (request, status, error) {
+                        error: function (request, status, error) { // eslint-disable-line no-unused-vars
                             $.spinner().stop();
                             openFindStoresModal(storeElement, e);
                         }
                     });
                 },
-                function (error) {
+                function (error) { // eslint-disable-line no-unused-vars
                     $.spinner().stop();
                     openFindStoresModal(storeElement, e);
                 },

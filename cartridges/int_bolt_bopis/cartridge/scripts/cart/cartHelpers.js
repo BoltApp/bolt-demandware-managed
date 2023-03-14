@@ -44,14 +44,16 @@ function getExistingProductLineItemInCartWithTheSameStore(
     productLineItems,
     childProducts,
     options,
-    storeId) {
+    storeId
+) {
     var existingProductLineItem = null;
     var matchingProducts = base.getExistingProductLineItemsInCart(
         product,
         productId,
         productLineItems,
         childProducts,
-        options);
+        options
+    );
     if (matchingProducts.length) {
         existingProductLineItem = arrayHelper.find(matchingProducts, function (matchingProduct) {
             return hasSameStore(matchingProduct.custom.fromStoreId, storeId);
@@ -100,8 +102,7 @@ function createInStorePickupShipmentForLineItem(basket, storeId, req) {
             req.session.privacyCache.set(shipment.UUID, 'valid');
 
             // Find in-store method in shipping methods.
-            var shippingMethods =
-                ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods();
+            var shippingMethods = ShippingMgr.getShipmentShippingModel(shipment).getApplicableShippingMethods();
             var shippingMethod = collections.find(shippingMethods, function (method) {
                 return method.custom.storePickupEnabled;
             });
@@ -154,7 +155,7 @@ function addProductToCart(currentBasket, productId, quantity, childProducts, opt
     };
     var Transaction = require('dw/system/Transaction');
 
-    var lineItemQuantity = isNaN(quantity) ? base.DEFAULT_LINE_ITEM_QUANTITY : quantity;
+    var lineItemQuantity = Number.isNaN(quantity) ? base.DEFAULT_LINE_ITEM_QUANTITY : quantity;
     var totalQtyRequested = 0;
     var canBeAdded = false;
 
@@ -163,9 +164,7 @@ function addProductToCart(currentBasket, productId, quantity, childProducts, opt
     } else {
         totalQtyRequested = lineItemQuantity + base.getQtyAlreadyInCart(productId, productLineItems);
         perpetual = product.availabilityModel.inventoryRecord.perpetual;
-        canBeAdded =
-            (perpetual
-            || totalQtyRequested <= product.availabilityModel.inventoryRecord.ATS.value);
+        canBeAdded = (perpetual || totalQtyRequested <= product.availabilityModel.inventoryRecord.ATS.value);
     }
 
     if (!canBeAdded) {
@@ -181,8 +180,7 @@ function addProductToCart(currentBasket, productId, quantity, childProducts, opt
     }
     // Get the existing product line item from the basket if the new product item
     // has the same bundled items or options and the same instore pickup store selection
-    productInCart = getExistingProductLineItemInCartWithTheSameStore(
-        product, productId, productLineItems, childProducts, options, storeId);
+    productInCart = getExistingProductLineItemInCartWithTheSameStore(product, productId, productLineItems, childProducts, options, storeId);
     if (productInCart) {
         productQuantityInCart = productInCart.quantity.value;
         quantityToSet = lineItemQuantity ? lineItemQuantity + productQuantityInCart : productQuantityInCart + 1;

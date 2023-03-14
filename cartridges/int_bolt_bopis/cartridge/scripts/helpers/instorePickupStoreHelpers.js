@@ -13,8 +13,7 @@ function setStoreInProductLineItem(storeId, productLineItem) {
     Transaction.wrap(function () {
         if (storeId) {
             var store = StoreMgr.getStore(storeId);
-            var inventoryListId = ('inventoryListId' in store.custom) ?
-                    store.custom.inventoryListId : null;
+            var inventoryListId = ('inventoryListId' in store.custom) ? store.custom.inventoryListId : null;
             if (store && inventoryListId) {
                 var storeinventory = ProductInventoryMgr.getInventoryList(inventoryListId);
                 if (storeinventory) {
