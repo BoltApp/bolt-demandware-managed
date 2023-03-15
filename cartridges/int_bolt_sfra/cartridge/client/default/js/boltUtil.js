@@ -28,6 +28,8 @@ var BoltState = {
     var doc = win.document;
     var MutationObserver = win.MutationObserver || win.WebKitMutationObserver;
     var observer;
+    var data_listeners = [];
+    var data_observer;
 
     /**
      * @param {Object} selector the selector
@@ -69,8 +71,41 @@ var BoltState = {
             }
         }
     }
+
+    function data_change(selector, fn) {
+        // Store the selector and callback to be monitored
+        data_listeners.push({
+            selector: selector,
+            fn: fn
+        });
+        if (!data_observer) {
+            // Watch for data changes in the document
+            data_observer = new MutationObserver(check_data);
+            var config = {
+                characterData: true,
+                subtree: true,
+                childList: true
+            };
+            data_observer.observe(doc.documentElement, config);
+        }
+    }
+
+    function check_data() {
+        // Check the DOM for elements matching a stored selector
+        for (var i = 0, len = data_listeners.length, listener, elements; i < len; i++) {
+            listener = data_listeners[i];
+            // Query for elements matching the specified selector
+            elements = doc.querySelectorAll(listener.selector);
+            for (var j = 0, jLen = elements.length, element; j < jLen; j++) {
+                element = elements[j];
+                // Invoke the callback with the element
+                listener.fn.call(element, element);
+            }
+        }
+    }
     // Expose methods
     win.onElementReady = ready;
+    win.onDataChange = data_change;
 }(window);
 /* eslint-enable */
 /**
@@ -143,10 +178,41 @@ function boltCheckoutConfigure(cart, hints, callback, parameters) {
     };
     callConfigure();
 }
+/**
+ * Run function fn on element underlying data change
+ *
+ * @param {string} selectors the CSS selectors define the pattern to select elements
+ * @param {Function} fn the function passed as parameter
+ * @param {boolean} nonEmpty run fuction fn only if the element is non empty
+ * @param {boolean} visibleOnly run fuction fn only if the element is visible
+ */
+function monitorDataChange(selectors, fn, nonEmpty, visibleOnly) {
+    for (var i = 0, length = selectors.length; i < length; i++) {
+        var selector = selectors[i];
+        /* eslint-disable */
+        !function(selector) {
+            onElementReady(selector, function(el) {
+                var value = el.textContent;
+                onDataChange(selector, function(element) {
+                    if (visibleOnly && element.offsetParent === null) return;
+                    if (element.textContent !== value) {
+                        var originalValue = value;
+                        value = element.textContent;
+                        if (nonEmpty && !value) return;
+                        if (originalValue !== '' && parseInt(originalValue) > -1) return;
+                        fn(element);
+                    }
+                });
+            });
+        }(selector);
+        /* eslint-enable */
+    }
+}
 module.exports = {
     BoltState,
     methods: {
         whenDefined: whenDefined,
-        boltCheckoutConfigure: boltCheckoutConfigure
+        boltCheckoutConfigure: boltCheckoutConfigure,
+        monitorDataChange: monitorDataChange
     }
 };

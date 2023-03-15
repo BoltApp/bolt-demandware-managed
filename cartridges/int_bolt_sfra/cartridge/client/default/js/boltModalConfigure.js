@@ -5,7 +5,6 @@ var boltUtil = require('./boltUtil');
 var boltCheckoutSetup = function () {
     var createBoltOrderUrl = $('.create-bolt-order-url').val();
     var sfccBaseVersion = $('#sfccBaseVersion').val();
-
     $.ajax({
         url: createBoltOrderUrl,
         method: 'GET',
@@ -15,7 +14,6 @@ var boltCheckoutSetup = function () {
                 var cart = {
                     id: data.basketID
                 };
-
                 if (sfccBaseVersion >= 6) {
                     boltUtil.methods.boltCheckoutConfigure(cart, data.hints, boltCallbacks);
                 } else {
@@ -25,11 +23,9 @@ var boltCheckoutSetup = function () {
         }
     });
 };
-
 onElementReady('[data-tid="instant-bolt-checkout-button"]', function () { // eslint-disable-line no-undef
     boltCheckoutSetup();
 });
-
 var boltSuccessRedirect = $('#successRedirect').val();
 var boltSfccData;
 var boltCallbacks = {
@@ -42,43 +38,36 @@ var boltCallbacks = {
                     method: 'POST',
                     action: boltSuccessRedirect
                 });
-
             $('<input>')
                 .appendTo(redirect)
                 .attr({
                     name: 'orderID',
                     value: boltSfccData.merchant_order_number
                 });
-
             $('<input>')
                 .appendTo(redirect)
                 .attr({
                     name: 'orderToken',
                     value: boltSfccData.sfcc.sfcc_order_token
                 });
-
             redirect.submit();
         }
     },
     onCheckoutStart: function () {
         // This function is called after the checkout form is presented to the user.
     },
-
     // eslint-disable-next-line no-unused-vars
     onEmailEnter: function (email) {
         // This function is called after the user enters their email address.
     },
-
     onShippingDetailsComplete: function () {
         // This function is called when the user proceeds to the shipping options page.
         // This is applicable only to multi-step checkout.
     },
-
     onShippingOptionsComplete: function () {
         // This function is called when the user proceeds to the payment details page.
         // This is applicable only to multi-step checkout.
     },
-
     onPaymentSubmit: function () {
         // This function is called after the user clicks the pay button.
     },
@@ -88,3 +77,20 @@ var boltCallbacks = {
         callback();
     }
 };
+
+var boltCartTotal = '';
+/**
+ * Using Mutation Observers to watch for changes being made to the cart grand total.
+ * If the cart grand total changes, just reload page.
+ * This is for Apple Pay only.
+ */
+onElementReady('[data-tid="apple-pay-button"]', function () { // eslint-disable-line no-undef
+    boltCartTotal = document.querySelector('.grand-total').textContent;
+});
+var boltCheckoutReloadPage = function (element) {
+    var newCartTotal = element.textContent;
+    if (boltCartTotal && newCartTotal && newCartTotal !== boltCartTotal) {
+        window.location.reload();
+    }
+};
+boltUtil.methods.monitorDataChange(['.grand-total'], boltCheckoutReloadPage, true, true);
