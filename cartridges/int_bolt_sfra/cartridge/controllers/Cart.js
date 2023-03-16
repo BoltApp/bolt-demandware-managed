@@ -14,7 +14,6 @@ var configuration = BoltPreferences.getSitePreferences();
 server.append('Show', function (req, res, next) {
     res.setViewData({
         config: configuration,
-        isPPC: false,
         component: BOLTCART
     });
     next();

@@ -1,5 +1,5 @@
 <div class="bolt-${pdict.component}">
-    <isif condition="${pdict.config.boltEnable && (pdict.isPPC || pdict.isMiniCart || (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0))}">
+    <isif condition="${pdict.config.boltEnable && (pdict.isMiniCart || (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0))}">
         <input type="hidden" class="create-bolt-order-url" value="${URLUtils.https('Bolt-GetOrderReference')}" />
         <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
         <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />
