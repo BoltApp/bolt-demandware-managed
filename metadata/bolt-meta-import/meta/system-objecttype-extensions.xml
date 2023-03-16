@@ -439,13 +439,6 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="SFCCShipmentId">
-        <display-name xml:lang="x-default">SFCCShipmentId</display-name>
-        <type>string</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
-      </attribute-definition>
       <attribute-definition attribute-id="itemGroup">
         <display-name xml:lang="x-default">Item Group</display-name>
         <type>string</type>
@@ -464,7 +457,6 @@
       <attribute-group group-id="In store Pick Up">
         <display-name xml:lang="x-default">In store Pick Up</display-name>
         <attribute attribute-id="fromStoreId"/>
-        <attribute attribute-id="SFCCShipmentId"/>
         <attribute attribute-id="itemGroup"/>
         <attribute attribute-id="pickUpInStore"/>
       </attribute-group>
@@ -547,7 +539,7 @@
         <externally-managed-flag>false</externally-managed-flag>
         <default-value>false</default-value>
       </attribute-definition>
-       <attribute-definition attribute-id="boltEnablePPC">
+      <attribute-definition attribute-id="boltEnablePPC">
         <display-name xml:lang="x-default">Enable Product Page Checkout</display-name>
         <type>boolean</type>
         <mandatory-flag>false</mandatory-flag>
