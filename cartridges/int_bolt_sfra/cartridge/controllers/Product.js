@@ -9,9 +9,10 @@ var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/pr
 
 server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
+    var isPPCEnabledForProduct = configuration.boltEnablePPC; // TODO: @var Also check if current product is allow/deny list.
     res.setViewData({
         config: configuration,
-        isPPC: true
+        renderBoltPPCButton: isPPCEnabledForProduct
     });
     next();
 });

@@ -1,0 +1,18 @@
+<isif condition="${pdict.config && pdict.config.boltEnable && pdict.boltVersion && pdict.boltVersion == 'V2' && pdict.product && pdict.product.renderBoltPPCButton }">
+    <isset name="boltCdnUrl" value="${pdict.config.boltCdnUrl}" scope="page" />
+    <isset name="boltPublishableKey" value="${pdict.config.boltMultiPublishableKey}" scope="page" />
+
+    <input type="hidden" class="create-bolt-order-url" value="${URLUtils.https('Bolt-GetOrderReferenceForProductPageCheckout')}" />
+    <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
+    <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />
+    <script id="bolt-track" src="${boltCdnUrl}/track.js" data-publishable-key="${boltPublishableKey}" async></script>
+    <script id="bolt-connect" src="${boltCdnUrl}/connect.js" data-publishable-key="${boltPublishableKey}"></script>
+    <iscomment>Bolt Product Page checkout button</iscomment>
+    <!--
+        # Optionally include JS code that calls `configureProductButton`
+        <div data-tid="instant-bolt-checkout-button" id="product-page-checkout-wrapper" class="bolt-button-wrapper" style="display:none">
+    -->
+    <div data-tid="instant-bolt-checkout-button" id="product-page-checkout-wrapper" class="bolt-button-wrapper">
+        <object data="${boltCdnUrl}/v1/checkout_button?publishable_key=${boltPublishableKey}&variant=ppc" class="bolt-product-checkout-button"></object>
+    </div>
+</isif>
