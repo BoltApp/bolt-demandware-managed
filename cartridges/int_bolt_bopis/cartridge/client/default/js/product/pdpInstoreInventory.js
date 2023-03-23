@@ -298,7 +298,9 @@ module.exports = {
                                 selectedStore.find('.card-body').append(myStoreResponse.storeHtml);
                                 selectedStore.find('.store-name').attr('data-store-id', myStoreId);
                             } else {
-                                $('.availability-msg', response.container).empty().html(myStoreResponse.infoSelectForStock);
+                                if (response.container.find('.btn-get-in-store-inventory').attr('data-bopis-status') === 'selected') {
+                                    $('.availability-msg', response.container).empty().html(myStoreResponse.infoSelectForStock);
+                                }
                                 resetStore(response.container);
                             }
                         }
