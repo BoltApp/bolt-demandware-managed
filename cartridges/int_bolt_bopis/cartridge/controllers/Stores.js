@@ -23,7 +23,8 @@ server.get('GetStoreByCoords', function (req, res, next) {
     var longitude = req.querystring.longitude;
     var url = null;
     var products = buildProductListAsJson(productId + ':1');
-    var storesModel = storeHelpers.getStores(15, '', latitude, longitude, req.geolocation, false, url, products);
+    var defaultSearchRadius = 15; // Area (radius) in DistanceUnit where Stores will be searched for. The system default 15 is used here.
+    var storesModel = storeHelpers.getStores(defaultSearchRadius, '', latitude, longitude, req.geolocation, false, url, products);
     var storesLen = storesModel.stores.length;
     while (storesLen--) {
         var storeId = storesModel.stores[storesLen].ID;
