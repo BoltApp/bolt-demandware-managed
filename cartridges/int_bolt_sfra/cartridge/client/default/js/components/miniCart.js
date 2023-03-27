@@ -8,9 +8,14 @@ module.exports = function () {
     var minicartTotal = '';
 
     $('.minicart .popover').on('DOMSubtreeModified', function () {
-        console.log($(this).children().length);
         if (document.querySelector('.minicart .popover').textContent !== '') {
-            console.log(document.querySelector('.minicart .popover .minicart-footer .sub-total').textContent);
-        }        
+            var subTotalElement = document.querySelector('.minicart .popover .minicart-footer .sub-total');
+            if (subTotalElement !== null && subTotalElement.textContent && subTotalElement.textContent !== minicartTotal) {
+                // do something;
+                console.log(subTotalElement.textContent);
+                console.log(minicartTotal);
+                minicartTotal = subTotalElement.textContent;
+            }
+        }
     });
 };
