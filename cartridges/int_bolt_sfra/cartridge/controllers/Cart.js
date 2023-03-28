@@ -18,4 +18,14 @@ server.append('Show', function (req, res, next) {
     next();
 });
 
+server.append('MiniCartShow', function (req, res, next) {
+    var configuration = BoltPreferences.getSitePreferences();
+    res.setViewData({
+        config: configuration,
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
+        location: 'minicart'
+    });
+    next();
+});
+
 module.exports = server.exports();

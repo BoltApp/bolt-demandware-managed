@@ -1,0 +1,4 @@
+<div>
+    <isinclude template="cart/boltButton" />
+</div>
+
