@@ -91,9 +91,10 @@ exports.initBoltButton = function () {
         var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         // have to check if child of this dom is svg, otherwise bolt button is not fully rendered (it's the object)
         var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'svg';
+        console.log(boltButtonLoaded);
         if (boltButtonLoaded) {
             clearInterval(boltButtonExist);
-
+            console.log('loaded');
             $('[data-tid="instant-bolt-checkout-button"]').children().replaceWith($('[data-tid="instant-bolt-checkout-button"]').children().clone());
             if (!BoltHasConfigureRun()) {
                 configureBoltApp();

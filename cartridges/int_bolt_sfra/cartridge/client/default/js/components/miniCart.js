@@ -55,19 +55,17 @@ var bolt = require('../bolt');
 
 module.exports = function () {
     base();
-
     var minicartTotal = '';
-
     onDataChange('.minicart .popover', function(element) {
         if (element.textContent !== '') {
-            if (!bolt.BoltHasConfigureRun()) {
-                //bolt.initBoltButton();
-            }
             var subTotalElement = document.querySelector('.minicart .popover .minicart-footer .sub-total');
             if (subTotalElement !== null && subTotalElement.textContent && subTotalElement.textContent !== minicartTotal) {
                 // do something;
+                if (minicartTotal === '' && !bolt.BoltHasConfigureRun()) {
+                    bolt.initBoltButton();
+                }
                 console.log(subTotalElement.textContent);
-                console.log(minicartTotal);
+                //console.log(minicartTotal);
                 minicartTotal = subTotalElement.textContent;
             }
         }
