@@ -28,10 +28,25 @@ server.append('MiniCartShow', function (req, res, next) {
     next();
 });
 
+server.append('MiniCart', function (req, res, next) {
+    var configuration = BoltPreferences.getSitePreferences();
+    res.setViewData({
+        config: configuration,
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
+        location: 'minicart'
+    });
+    next();
+});
+
 server.get('ReloadBoltButton', function (req, res, next) {
     var renderTemplateHelper = require('*/cartridge/scripts/renderTemplateHelper');
     var buttonResult = {};
-    buttonResult.html = renderTemplateHelper.getRenderedHtml('', 'cart/checkoutButtons');
+    var configuration = BoltPreferences.getSitePreferences();
+    var viewData = {
+        config: configuration,
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+    };
+    buttonResult.html = renderTemplateHelper.getRenderedHtml(viewData, 'cart/checkoutButtons');
     res.json(buttonResult);
     next();
 });

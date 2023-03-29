@@ -90,8 +90,7 @@ exports.initBoltButton = function () {
     var boltButtonExist = setInterval(function () {
         var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         // have to check if child of this dom is svg, otherwise bolt button is not fully rendered (it's the object)
-        var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'svg';
-        console.log(boltButtonLoaded);
+        var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'OBJECT';
         if (boltButtonLoaded) {
             clearInterval(boltButtonExist);
             console.log('loaded');
@@ -105,6 +104,21 @@ exports.initBoltButton = function () {
                     window.BoltButtonApp.open();
                 }
             });
+        }
+    }, 100);
+};
+
+exports.initBoltMiniCartButton = function () {
+    var boltButtonExist = setInterval(function () {
+        var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
+        var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout;
+        console.log('initBoltMiniCartButton');
+        if (boltButtonLoaded) {
+            clearInterval(boltButtonExist);
+            console.log('loaded');
+            if (!BoltHasConfigureRun()) {
+                configureBoltApp();
+            }
         }
     }, 100);
 };

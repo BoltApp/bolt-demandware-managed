@@ -65,7 +65,7 @@ module.exports = [{
     }
 },
 {
-    mode: 'none',
+    mode: 'production',
     name: 'scss',
     entry: scssFiles,
     output: {

@@ -60,12 +60,20 @@ module.exports = function () {
         if (element.textContent !== '') {
             var subTotalElement = document.querySelector('.minicart .popover .minicart-footer .sub-total');
             if (subTotalElement !== null && subTotalElement.textContent && subTotalElement.textContent !== minicartTotal) {
-                // do something;
-                if (minicartTotal === '' && !bolt.BoltHasConfigureRun()) {
-                    bolt.initBoltButton();
+                if (minicartTotal === '') {
+                    bolt.initBoltMiniCartButton();
+                } else {
+                    $.ajax({
+                        url: $('#bolt-minicart-btn').data('action-url'),
+                        data: {},
+                        method: 'GET',
+                        success: function (response) {
+                            $('#bolt-minicart-btn').empty();
+                            $('#bolt-minicart-btn').replaceWith(response.html);
+                        }
+                    });
                 }
                 console.log(subTotalElement.textContent);
-                //console.log(minicartTotal);
                 minicartTotal = subTotalElement.textContent;
             }
         }

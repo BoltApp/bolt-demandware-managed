@@ -1,4 +1,4 @@
 <div id="bolt-minicart-btn" data-action-url="${URLUtils.url('Cart-ReloadBoltButton')}">
-    <isinclude template="cart/boltButton" />
+    <isinclude template="cart/boltMiniCartButton" />
 </div>
 
