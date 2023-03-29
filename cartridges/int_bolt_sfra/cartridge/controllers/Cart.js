@@ -28,4 +28,12 @@ server.append('MiniCartShow', function (req, res, next) {
     next();
 });
 
+server.get('ReloadBoltButton', function (req, res, next) {
+    var renderTemplateHelper = require('*/cartridge/scripts/renderTemplateHelper');
+    var buttonResult = {};
+    buttonResult.html = renderTemplateHelper.getRenderedHtml('', 'cart/checkoutButtons');
+    res.json(buttonResult);
+    next();
+});
+
 module.exports = server.exports();

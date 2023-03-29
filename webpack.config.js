@@ -57,10 +57,15 @@ module.exports = [{
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {
+            jquery: path.resolve(__dirname, '../storefront-reference-architecture/node_modules/jquery')
+        }
     }
 },
 {
-    mode: 'production',
+    mode: 'none',
     name: 'scss',
     entry: scssFiles,
     output: {

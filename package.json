@@ -91,9 +91,7 @@
     "clean-webpack-plugin": "4.0.0"
   },
   "dependencies": {
-    "app-root-path": "^3.0.0",
-    "bootstrap": "^4.6.1",
-    "jquery": "^3.6.0"
+    "app-root-path": "^3.0.0"
   },
   "packageName": "int_bolt_sfra",
   "paths": {
@@ -114,5 +112,10 @@
   "volta": {
     "node": "10.22.0",
     "npm": "6.14.6"
+  },
+  "resolve": {
+    "cartridgepath": [
+      "app_storefront_base"
+    ]
   }
 }
