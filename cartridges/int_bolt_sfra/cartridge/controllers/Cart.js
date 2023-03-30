@@ -42,11 +42,12 @@ server.get('ReloadBoltButton', function (req, res, next) {
     var renderTemplateHelper = require('*/cartridge/scripts/renderTemplateHelper');
     var buttonResult = {};
     var configuration = BoltPreferences.getSitePreferences();
-    var viewData = {
+    var context = {
         config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
+        isMiniCart: true
     };
-    buttonResult.html = renderTemplateHelper.getRenderedHtml(viewData, 'cart/checkoutButtons');
+    buttonResult.html = renderTemplateHelper.getRenderedHtml(context, 'cart/checkoutButtons');
     res.json(buttonResult);
     next();
 });

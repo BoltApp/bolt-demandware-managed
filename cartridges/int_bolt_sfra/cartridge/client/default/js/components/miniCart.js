@@ -60,16 +60,19 @@ module.exports = function () {
         if (element.textContent !== '') {
             var subTotalElement = document.querySelector('.minicart .popover .minicart-footer .sub-total');
             if (subTotalElement !== null && subTotalElement.textContent && subTotalElement.textContent !== minicartTotal) {
-                if (minicartTotal === '') {
+                if (minicartTotal === '' || $('#bolt-minicart-btn').attr('data-boltbtn-type') === 'minicart') {
                     bolt.initBoltMiniCartButton();
+                    $('#bolt-minicart-btn').attr('data-boltbtn-type', 'product');
                 } else {
                     $.ajax({
                         url: $('#bolt-minicart-btn').data('action-url'),
                         data: {},
                         method: 'GET',
                         success: function (response) {
-                            $('#bolt-minicart-btn').empty();
                             $('#bolt-minicart-btn').replaceWith(response.html);
+                            $('#bolt-minicart-btn').attr('data-boltbtn-type', 'minicart');
+                            bolt.resetBoltConfigure();
+                            bolt.initBoltMiniCartButton();
                         }
                     });
                 }

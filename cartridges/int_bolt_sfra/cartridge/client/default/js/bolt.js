@@ -83,7 +83,11 @@ var configureBoltApp = function () {
 };
 
 var BoltHasConfigureRun = function () {
-    return typeof window.BoltButtonApp !== 'undefined';
+    return typeof window.BoltButtonApp !== 'undefined' && window.BoltButtonApp !== null;
+};
+
+exports.resetBoltConfigure = function () {
+    window.BoltButtonApp = null;
 };
 
 exports.initBoltButton = function () {
@@ -109,6 +113,7 @@ exports.initBoltButton = function () {
 };
 
 exports.initBoltMiniCartButton = function () {
+    $('.minicart-footer').spinner().start();
     var boltButtonExist = setInterval(function () {
         var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout;
@@ -117,7 +122,9 @@ exports.initBoltMiniCartButton = function () {
             clearInterval(boltButtonExist);
             console.log('loaded');
             if (!BoltHasConfigureRun()) {
+                console.log('config');
                 configureBoltApp();
+                $('.minicart-footer').spinner().stop();
             }
         }
     }, 100);
@@ -151,3 +158,4 @@ exports.addApplePayHandlerIfNeeded = function () {
 };
 
 exports.BoltHasConfigureRun = BoltHasConfigureRun;
+//exports.demo = demo;
