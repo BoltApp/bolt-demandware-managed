@@ -59,23 +59,28 @@ var callbacks = {
     }
 };
 
-var configureBoltApp = function () {
+var configureBoltApp = function (winBoltProperty) {
     var createBoltOrderUrl = $('.create-bolt-order-url').val();
     var sfccBaseVersion = $('#sfccBaseVersion').val();
     $.ajax({
         url: createBoltOrderUrl,
         method: 'GET',
         async: false,
-        success: function success(data) {
+        success: function(data) {
             if (data !== null) {
                 // use the response from backend to configure Bolt connect
                 var cart = {
                     id: data.basketID
                 };
                 if (sfccBaseVersion >= 6) {
-                    window.BoltButtonApp = BoltCheckout.configure(cart, data.hints, callbacks); // eslint-disable-line no-undef
+                    BoltCheckout.configure(cart, data.hints, callbacks); // eslint-disable-line no-undef
                 } else {
-                    window.BoltButtonApp = BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
+                    BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
+                }
+                if (winBoltProperty == 'cart') {
+                    window.BoltButtonApp = true;
+                } else {
+                    window.BoltMiniCartButtonApp = true;
                 }
             }
         }
@@ -83,31 +88,27 @@ var configureBoltApp = function () {
 };
 
 var BoltHasConfigureRun = function () {
-    return typeof window.BoltButtonApp !== 'undefined' && window.BoltButtonApp !== null;
+    return typeof window.BoltButtonApp !== 'undefined' && window.BoltButtonApp;
 };
 
-exports.resetBoltConfigure = function () {
-    window.BoltButtonApp = null;
+var boltMiniCartHasConfigureRun = function () {
+    return typeof window.BoltMiniCartButtonApp !== 'undefined' && window.BoltMiniCartButtonApp;
+};
+
+exports.resetBoltMiniCartConfigure = function () {
+    window.BoltMiniCartButtonApp = false;
 };
 
 exports.initBoltButton = function () {
     var boltButtonExist = setInterval(function () {
-        var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
+        var checkoutBoltButton = $('.bolt-cart[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         // have to check if child of this dom is svg, otherwise bolt button is not fully rendered (it's the object)
-        var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'OBJECT';
+        var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'svg';
         if (boltButtonLoaded) {
             clearInterval(boltButtonExist);
-            console.log('loaded');
-            $('[data-tid="instant-bolt-checkout-button"]').children().replaceWith($('[data-tid="instant-bolt-checkout-button"]').children().clone());
             if (!BoltHasConfigureRun()) {
-                configureBoltApp();
+                configureBoltApp('cart');
             }
-            // add an event handler to Bolt button's click
-            checkoutBoltButton.click(function (e) {
-                if ($(e.target).attr('data-tid') !== 'apple-pay-button') {
-                    window.BoltButtonApp.open();
-                }
-            });
         }
     }, 100);
 };
@@ -115,15 +116,12 @@ exports.initBoltButton = function () {
 exports.initBoltMiniCartButton = function () {
     $('.minicart-footer').spinner().start();
     var boltButtonExist = setInterval(function () {
-        var checkoutBoltButton = $('[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
+        var checkoutBoltButton = $('.bolt-minicart[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout;
-        console.log('initBoltMiniCartButton');
         if (boltButtonLoaded) {
             clearInterval(boltButtonExist);
-            console.log('loaded');
-            if (!BoltHasConfigureRun()) {
-                console.log('config');
-                configureBoltApp();
+            if (!boltMiniCartHasConfigureRun()) {
+                configureBoltApp('minicart');
                 $('.minicart-footer').spinner().stop();
             }
         }
@@ -158,4 +156,4 @@ exports.addApplePayHandlerIfNeeded = function () {
 };
 
 exports.BoltHasConfigureRun = BoltHasConfigureRun;
-//exports.demo = demo;
+exports.boltMiniCartHasConfigureRun = boltMiniCartHasConfigureRun;
