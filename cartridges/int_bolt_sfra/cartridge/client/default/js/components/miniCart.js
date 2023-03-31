@@ -55,7 +55,7 @@ var bolt = require('../bolt');
 
 module.exports = function () {
     base();
-    onDataChange ('.minicart .popover', function(element) { // eslint-disable-line no-undef
+    onDataChange('.minicart .popover', function (element) { // eslint-disable-line no-undef
         if (element.textContent !== '') {
             var subTotalElement = document.querySelector('.minicart .popover .minicart-footer .sub-total');
             var attrMiniCartTotal = $('#bolt-minicart-btn').attr('data-minicart-total');
