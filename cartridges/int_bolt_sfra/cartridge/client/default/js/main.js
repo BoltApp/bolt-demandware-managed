@@ -1,3 +1,4 @@
+/* eslint-disable */
 window.jQuery = window.$ = require('jquery');
 var processInclude = require('base/util');
 

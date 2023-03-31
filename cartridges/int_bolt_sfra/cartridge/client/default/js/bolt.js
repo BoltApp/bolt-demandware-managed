@@ -66,7 +66,7 @@ var configureBoltApp = function (winBoltProperty) {
         url: createBoltOrderUrl,
         method: 'GET',
         async: false,
-        success: function(data) {
+        success: function (data) {
             if (data !== null) {
                 // use the response from backend to configure Bolt connect
                 var cart = {
@@ -77,7 +77,7 @@ var configureBoltApp = function (winBoltProperty) {
                 } else {
                     BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
                 }
-                if (winBoltProperty == 'cart') {
+                if (winBoltProperty === 'cart') {
                     window.BoltButtonApp = true;
                 } else {
                     window.BoltMiniCartButtonApp = true;
