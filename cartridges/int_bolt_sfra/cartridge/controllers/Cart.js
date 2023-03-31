@@ -18,4 +18,36 @@ server.append('Show', function (req, res, next) {
     next();
 });
 
+server.append('MiniCartShow', function (req, res, next) {
+    var configuration = BoltPreferences.getSitePreferences();
+    res.setViewData({
+        config: configuration,
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+    });
+    next();
+});
+
+server.append('MiniCart', function (req, res, next) {
+    var configuration = BoltPreferences.getSitePreferences();
+    res.setViewData({
+        config: configuration,
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+    });
+    next();
+});
+
+server.get('ReloadBoltButton', function (req, res, next) {
+    var renderTemplateHelper = require('*/cartridge/scripts/renderTemplateHelper');
+    var buttonResult = {};
+    var configuration = BoltPreferences.getSitePreferences();
+    var context = {
+        config: configuration,
+        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
+        isMiniCart: true
+    };
+    buttonResult.html = renderTemplateHelper.getRenderedHtml(context, 'cart/checkoutButtons');
+    res.json(buttonResult);
+    next();
+});
+
 module.exports = server.exports();
