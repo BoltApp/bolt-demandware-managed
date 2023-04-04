@@ -121,6 +121,7 @@ exports.initBoltMiniCartButton = function () {
         if (boltButtonLoaded) {
             clearInterval(boltButtonExist);
             if (!boltMiniCartHasConfigureRun()) {
+                successRedirect = $('#successRedirect').val();
                 configureBoltApp('minicart');
                 $('.minicart-footer').spinner().stop();
             }
