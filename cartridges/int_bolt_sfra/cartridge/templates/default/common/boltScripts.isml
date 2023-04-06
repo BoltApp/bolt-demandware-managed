@@ -3,6 +3,6 @@
     var boltConfig = preferences.getSitePreferences();
 </isscript>
 <isif condition="${boltConfig.boltEnable}">
-    <script id="bolt-track" src="${pdict.config.boltCdnUrl}/track.js" data-publishable-key="${pdict.config.boltMultiPublishableKey}"></script>
-    <script id="bolt-connect" src="${pdict.config.boltCdnUrl}/connect.js" data-publishable-key="${pdict.config.boltMultiPublishableKey}"></script>
+    <script id="bolt-track" src="${boltConfig.boltCdnUrl}/track.js" data-publishable-key="${boltConfig.boltMultiPublishableKey}"></script>
+    <script id="bolt-connect" src="${boltConfig.boltCdnUrl}/connect.js" data-publishable-key="${boltConfig.boltMultiPublishableKey}"></script>
 </isif>
