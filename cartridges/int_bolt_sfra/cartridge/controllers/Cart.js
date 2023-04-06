@@ -4,16 +4,19 @@ var server = require('server');
 var page = module.superModule;
 server.extend(page);
 
+const MINICART = 'minicart';
+const CART = 'cart';
+
 /* Script Modules */
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
-var Constants = require('int_bolt_custom/cartridge/scripts/utils/constants');
+
 
 server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     res.setViewData({
         config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
-        isPPC: false
+        isPPC: false,
+        component: CART
     });
     next();
 });
@@ -22,7 +25,7 @@ server.append('MiniCartShow', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     res.setViewData({
         config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+        component: MINICART
     });
     next();
 });
@@ -31,7 +34,7 @@ server.append('MiniCart', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     res.setViewData({
         config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION
+        component: MINICART
     });
     next();
 });
@@ -42,10 +45,10 @@ server.get('ReloadBoltButton', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
     var context = {
         config: configuration,
-        boltVersion: Constants.BOLT_CARTRIDGE_V2_VERSION,
-        isMiniCart: true
+        isMiniCart: true,
+        component: MINICART
     };
-    buttonResult.html = renderTemplateHelper.getRenderedHtml(context, 'cart/checkoutButtons');
+    buttonResult.html = renderTemplateHelper.getRenderedHtml(context, 'cart/boltButton');
     res.json(buttonResult);
     next();
 });

@@ -5,7 +5,8 @@ var sfccData;
 var callbacks = {
     close: function () {
     // This function is called when the Bolt checkout modal is closed.
-        if (sfccData) {
+        var sfccBaseVersion = $('#sfccBaseVersion').val();
+        if (sfccData && sfccBaseVersion >= 6) {
             var redirect = $('<form>')
                 .appendTo(document.body)
                 .attr({
@@ -61,7 +62,6 @@ var callbacks = {
 
 var configureBoltApp = function (winBoltProperty) {
     var createBoltOrderUrl = $('.create-bolt-order-url').val();
-    var sfccBaseVersion = $('#sfccBaseVersion').val();
     $.ajax({
         url: createBoltOrderUrl,
         method: 'GET',
@@ -72,11 +72,7 @@ var configureBoltApp = function (winBoltProperty) {
                 var cart = {
                     id: data.basketID
                 };
-                if (sfccBaseVersion >= 6) {
-                    BoltCheckout.configure(cart, data.hints, callbacks); // eslint-disable-line no-undef
-                } else {
-                    BoltCheckout.configure(cart, data.hints, null); // eslint-disable-line no-undef
-                }
+                BoltCheckout.configure(cart, data.hints, callbacks); // eslint-disable-line no-undef
                 if (winBoltProperty === 'cart') {
                     window.BoltButtonApp = true;
                 } else {
