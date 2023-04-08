@@ -4,8 +4,8 @@ var server = require('server');
 var page = module.superModule;
 server.extend(page);
 
-const BOLTMINICART = 'minicart';
-const BOLTCART = 'cart';
+var BOLTMINICART = 'minicart';
+var BOLTCART = 'cart';
 
 /* Script Modules */
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
