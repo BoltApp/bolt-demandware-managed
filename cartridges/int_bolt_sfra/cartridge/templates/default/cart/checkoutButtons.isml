@@ -1,4 +1,11 @@
-<div id="bolt-minicart-btn" data-minicart-total="" data-action-url="${URLUtils.url('Cart-ReloadBoltButton')}">
-    <isinclude template="cart/boltMiniCartButton" />
+<isif condition="${pdict.config.boltEnable}">
+<isinclude template="cart/boltButton" />
+<iselse>
+<div class="mb-sm-3">
+    <a href="${URLUtils.https('Checkout-Begin')}"
+        class="btn btn-primary btn-block checkout-btn ${pdict.valid.error ? 'disabled' : ''}" role="button">
+        ${Resource.msg('button.checkout', 'cart', null)}
+    </a>
 </div>
+</isif>
 
