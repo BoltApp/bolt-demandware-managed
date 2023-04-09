@@ -18,7 +18,7 @@ exports.BOLT_CARTRIDGE_VERSION = '2.1.0';
 exports.getSitePreferences = function () {
     var site = Site.getCurrent();
 
-    var boltMultiPublishableKey = site.getCustomPreferenceValue('boltMultiPublishableKeyOCAPI') || '';
+    var boltMultiPublishableKey = 'xucIhuC7kR07.FljG3LVceZat.4e91eb678c187f0820a3ce27fc87b684f0d2797bf3439d5b34da164ff4e27771';
     var blockedCharactersList = site.getCustomPreferenceValue('blockedCharactersList') || null;
 
     if (boltMultiPublishableKey === '') {
@@ -47,19 +47,7 @@ exports.getSitePreferences = function () {
  * @returns {string} API URL to load connect from
  */
 exports.getBoltApiServiceURL = function boltApiURL() {
-    var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
-
-    switch (boltEnv) {
-        case 'sandbox':
-            return 'https://api-sandbox.bolt.com';
-
-        case 'staging':
-            return 'https://api-staging.bolt.com';
-
-        case 'production':
-        default:
-            return 'https://api.bolt.com';
-    }
+    return 'https://api.ayang.dev.bolt.me';
 };
 
 /**
@@ -67,19 +55,7 @@ exports.getBoltApiServiceURL = function boltApiURL() {
  * @returns {string} CDN URL to load connect from
  */
 function boltConnectURL() {
-    var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
-
-    switch (boltEnv) {
-        case 'sandbox':
-            return 'https://connect-sandbox.bolt.com';
-
-        case 'staging':
-            return 'https://connect-staging.bolt.com';
-
-        case 'production':
-        default:
-            return 'https://connect.bolt.com';
-    }
+    return 'https://connect.ayang.dev.bolt.me';
 }
 
 /**

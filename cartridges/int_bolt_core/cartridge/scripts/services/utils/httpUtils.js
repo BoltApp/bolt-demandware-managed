@@ -61,7 +61,7 @@ exports.getAuthenticationStatus = function () {
     var strAuth = request.getHttpHeaders().get('x-bolt-hmac-sha256');
     var httpParameterMap = request.getHttpParameterMap();
     var requestBody = httpParameterMap.get('requestBodyAsString') ? httpParameterMap.requestBodyAsString : null;
-    var boltSigningSecret = Site.getCurrent().getCustomPreferenceValue('boltSigningSecret') || '';
+    var boltSigningSecret = '47a5f8ccac54692f3bfc110d826033586d3c7bf2eb88ad2e369624c7d6fa0d96';
 
     if (!strAuth) {
         log.error('Missing authorization key on request header');
@@ -181,8 +181,8 @@ function serviceParseResponse(_service, httpClient) {
  */
 function getConfiguration() {
     var site = Site.getCurrent();
-    var boltSigningSecret = site.getCustomPreferenceValue('boltSigningSecret') || '';
-    var boltAPIKey = site.getCustomPreferenceValue('boltAPIKey') || '';
+    var boltSigningSecret = '47a5f8ccac54692f3bfc110d826033586d3c7bf2eb88ad2e369624c7d6fa0d96';
+    var boltAPIKey = 'd737c0af74d2188576f29c4dc54759ea7aa2b319f9bb427570afd30e3d40be76';
     var boltPartnerMerchant = site.getCustomPreferenceValue('boltPartnerMerchant').valueOf() || '';
 
     if (boltAPIKey === '' || boltSigningSecret === '') {
