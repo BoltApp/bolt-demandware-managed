@@ -4,8 +4,8 @@ var server = require('server');
 var page = module.superModule;
 server.extend(page);
 
-const MINICART = 'minicart';
-const CART = 'cart';
+var BOLTMINICART = 'minicart';
+var BOLTCART = 'cart';
 
 /* Script Modules */
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
@@ -15,7 +15,7 @@ server.append('Show', function (req, res, next) {
     res.setViewData({
         config: configuration,
         isPPC: false,
-        component: CART
+        component: BOLTCART
     });
     next();
 });
@@ -23,7 +23,7 @@ server.append('Show', function (req, res, next) {
 server.append('MiniCartShow', function (req, res, next) {
     res.setViewData({
         config: configuration,
-        component: MINICART
+        component: BOLTMINICART
     });
     next();
 });
@@ -31,7 +31,7 @@ server.append('MiniCartShow', function (req, res, next) {
 server.append('MiniCart', function (req, res, next) {
     res.setViewData({
         config: configuration,
-        component: MINICART
+        component: BOLTMINICART
     });
     next();
 });
@@ -42,7 +42,7 @@ server.get('ReloadBoltButton', function (req, res, next) {
     var context = {
         config: configuration,
         isMiniCart: true,
-        component: MINICART
+        component: BOLTMINICART
     };
     buttonResult.html = renderTemplateHelper.getRenderedHtml(context, 'cart/boltButton');
     res.json(buttonResult);
