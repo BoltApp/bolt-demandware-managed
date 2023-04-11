@@ -119,7 +119,7 @@ function getSFCCBaseVersion() {
     var version = 5;
     var sfccBaseVersion = Site.getCurrent().getCustomPreferenceValue('sfccBaseVersion');
     if (empty(sfccBaseVersion)) {
-        return baseVersion;
+        return version;
     }
 
     var baseVersion = sfccBaseVersion.split('.');
