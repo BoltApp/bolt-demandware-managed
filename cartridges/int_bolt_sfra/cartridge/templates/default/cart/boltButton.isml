@@ -1,4 +1,4 @@
-<isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion == 'V2' && (pdict.isPPC || (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0))}">
+<isif condition="${pdict.config.boltEnable && (pdict.isPPC || pdict.isMiniCart || (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0))}">
     <input type="hidden" class="create-bolt-order-url" value="${URLUtils.https('Bolt-GetOrderReference')}" />
     <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
     <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />
@@ -6,13 +6,10 @@
     <isset name="boltCdnUrl" value="${pdict.config.boltCdnUrl}" scope="page" />
     <isset name="boltPublishableKey" value="${pdict.config.boltMultiPublishableKey}" scope="page" />
 
-    <script id="bolt-track" src="${boltCdnUrl}/track.js" data-publishable-key="${boltPublishableKey}"></script>
-    <script id="bolt-connect" src="${boltCdnUrl}/connect.js" data-publishable-key="${boltPublishableKey}"></script>
-
     <iscomment>Bolt checkout button</iscomment>
     <div class="col-12 checkout-continue">
         <div class="mb-sm-3 clearfix">
-            <div data-tid="instant-bolt-checkout-button">
+            <div id="bolt-${pdict.component}-btn" class="bolt-${pdict.component}" data-${pdict.component}-total="" data-action-url="${URLUtils.url('Cart-ReloadBoltButton')}" data-tid="instant-bolt-checkout-button">
                 <object data="${boltCdnUrl}/v1/checkout_button?publishable_key=${boltPublishableKey}"></object>
             </div>
         </div>

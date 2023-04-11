@@ -14,6 +14,7 @@
         </isif>
         <isactivedatahead/>
         <isinclude template="/components/schema" />
+        <isinclude template="/common/boltScripts" />
     </head>
     <body>
     	<input type="hidden" class="update-bolt-button" value="${URLUtils.https('BoltCheckoutButtonUpdate-GetUpdatedButton')}">

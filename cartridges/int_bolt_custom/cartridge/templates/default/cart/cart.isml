@@ -78,7 +78,7 @@
           </div>
           <isinclude template="cart/cartTotals" />
           <div class="row">
-            <isinclude template="cart/boltButton" />
+            <isinclude template="cart/checkoutButtons" />
           </div>
         </div>
       </div>
