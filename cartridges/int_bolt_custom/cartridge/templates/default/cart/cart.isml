@@ -1,8 +1,4 @@
 <isdecorate template="common/layout/page">
-  <isif condition="${pdict.config && pdict.config.boltEnable && pdict.config.boltEnableCartPage && pdict.boltVersion && pdict.boltVersion == 'V2' && (pdict.items.length !== 0 || pdict.giftCertificateItems.length !== 0)}">
-    <script id="bolt-track" src="${pdict.config.boltCdnUrl}/track.js" data-publishable-key="${pdict.config.boltMultiPublishableKey}"></script>
-    <script id="bolt-connect" src="${pdict.config.boltCdnUrl}/connect.js" data-publishable-key="${pdict.config.boltMultiPublishableKey}"></script>
-  </isif>
   <isscript>
     var assets = require('*/cartridge/scripts/assets.js');
     assets.addCss('/css/cart.css');
