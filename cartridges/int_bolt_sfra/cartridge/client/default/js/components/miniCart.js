@@ -58,21 +58,21 @@ module.exports = function () {
     onDataChange('.minicart .popover', function (element) { // eslint-disable-line no-undef
         if (element.textContent !== '') {
             var subTotalElement = document.querySelector('.minicart .popover .minicart-footer .sub-total');
-            var attrMiniCartTotal = $('#bolt-minicart-btn').attr('data-minicart-total');
+            var attrMiniCartTotal = $('.bolt-minicart-btn').attr('data-minicart-total');
             if (subTotalElement !== null && subTotalElement.textContent
                 && (attrMiniCartTotal === '' || attrMiniCartTotal !== subTotalElement.textContent)) {
                 if (attrMiniCartTotal === '') {
-                    $('#bolt-minicart-btn').attr('data-minicart-total', subTotalElement.textContent);
+                    $('.bolt-minicart-btn').attr('data-minicart-total', subTotalElement.textContent);
                     bolt.resetBoltMiniCartConfigure();
                     bolt.initBoltMiniCartButton();
                 } else {
                     $.ajax({
-                        url: $('#bolt-minicart-btn').data('action-url'),
+                        url: $('.bolt-minicart-btn').data('action-url'),
                         data: {},
                         method: 'GET',
                         success: function (response) {
-                            $('#bolt-minicart-btn').replaceWith(response.html);
-                            $('#bolt-minicart-btn').attr('data-minicart-total', subTotalElement.textContent);
+                            $('.bolt-minicart').replaceWith(response.html);
+                            $('.bolt-minicart-btn').attr('data-minicart-total', subTotalElement.textContent);
                             bolt.resetBoltMiniCartConfigure();
                             bolt.initBoltMiniCartButton();
                         }
