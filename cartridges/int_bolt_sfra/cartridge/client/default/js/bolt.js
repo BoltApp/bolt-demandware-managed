@@ -97,7 +97,7 @@ exports.resetBoltMiniCartConfigure = function () {
 
 exports.initBoltButton = function () {
     var boltButtonExist = setInterval(function () {
-        var checkoutBoltButton = $('.bolt-cart[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
+        var checkoutBoltButton = $('.bolt-cart-btn[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         // have to check if child of this dom is svg, otherwise bolt button is not fully rendered (it's the object)
         var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout && checkoutBoltButton.children()[0].nodeName === 'svg';
         if (boltButtonLoaded) {
@@ -112,7 +112,7 @@ exports.initBoltButton = function () {
 exports.initBoltMiniCartButton = function () {
     $('.minicart-footer').spinner().start();
     var boltButtonExist = setInterval(function () {
-        var checkoutBoltButton = $('.bolt-minicart[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
+        var checkoutBoltButton = $('.bolt-minicart-btn[data-tid="instant-bolt-checkout-button"]'); // @ts-ignore
         var boltButtonLoaded = checkoutBoltButton && window.BoltCheckout;
         if (boltButtonLoaded) {
             clearInterval(boltButtonExist);
