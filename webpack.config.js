@@ -97,6 +97,10 @@ module.exports = [{
                     loader: 'sass-loader',
                     options: {
                         includePaths: [
+                            path.resolve(
+                                process.cwd(),
+                                '../storefront-reference-architecture/node_modules/'
+                            ),
                             path.resolve('node_modules')
                         ]
                     }
