@@ -350,12 +350,7 @@ declare class SitePreferencesCustomAttributes {
   /**
    * Publishable Key - Back Office
    */
-  boltBackOfficePublishableKey: string;
-
-  /**
-   * Enable Cart Ajax Update
-   */
-  boltCartAjaxUpdateEnable: boolean;
+  boltBackOfficePublishableKeyOCAPI: string;
 
   /**
    * Enable Bolt Pay
@@ -373,24 +368,9 @@ declare class SitePreferencesCustomAttributes {
   boltEnableCartPage: boolean;
 
   /**
-   * Display Bolt Checkout on the Native Checkout Page
-   */
-  boltEnableCheckoutPage: boolean;
-
-  /**
-   * Gift Cetificate Enable
-   */
-  boltGiftCertificateEnable: boolean;
-
-  /**
    * Publishable Key - Multistep
    */
-  boltMultiPublishableKey: string;
-
-  /**
-   * Preauth Enable
-   */
-  boltPreauthEnable: boolean;
+  boltMultiPublishableKeyOCAPI: string;
 
   /**
    * Signing Secret
@@ -406,6 +386,21 @@ declare class SitePreferencesCustomAttributes {
    * Bolt Merchant Division ID
    */
   boltMerchantDivisionID: string;
+
+   /**
+   * Enable Bolt SSO
+   */
+   boltEnableSSO: boolean;
+
+   /**
+   * Enable Product Page Checkout
+   */
+   boltEnablePPC: boolean;
+
+  /**
+   * Bolt Partner Merchant
+   */
+  boltPartnerMerchant: string;
 }
 /**
  * Custom attributes for ActiveData object.

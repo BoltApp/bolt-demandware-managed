@@ -497,15 +497,8 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltCartAjaxUpdateEnable">
-        <display-name xml:lang="x-default">Enable Cart Ajax Update</display-name>
-        <type>boolean</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <default-value>false</default-value>
-      </attribute-definition>
       <attribute-definition attribute-id="boltEnable">
-        <display-name xml:lang="x-default">Enable Bolt Pay</display-name>
+        <display-name xml:lang="x-default">Enable Bolt Checkout</display-name>
         <type>boolean</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
@@ -527,13 +520,6 @@
       </attribute-definition>
       <attribute-definition attribute-id="boltEnableCartPage">
         <display-name xml:lang="x-default">Display Bolt Checkout on the Cart Page</display-name>
-        <type>boolean</type>
-        <mandatory-flag>false</mandatory-flag>
-        <externally-managed-flag>false</externally-managed-flag>
-        <default-value>false</default-value>
-      </attribute-definition>
-      <attribute-definition attribute-id="boltEnableCheckoutPage">
-        <display-name xml:lang="x-default">Display Bolt Checkout on the Native Checkout Page</display-name>
         <type>boolean</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
@@ -609,12 +595,17 @@
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
       </attribute-definition>
-      <attribute-definition attribute-id="boltEnableSessionRecording">
-        <display-name xml:lang="x-default">Enable Shopper Session Recording</display-name>
-        <type>boolean</type>
+      <attribute-definition attribute-id="boltPartnerMerchant">
+        <display-name xml:lang="x-default">Bolt Partner Merchant</display-name>
+        <type>enum-of-string</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
-        <default-value>false</default-value>
+        <value-definitions>
+          <value-definition default="true">
+            <display xml:lang="x-default">MERCHANT_NAME</display>
+            <value>MERCHANT_NAME</value>
+          </value-definition>
+        </value-definitions>
       </attribute-definition>
       <attribute-definition attribute-id="sfccBaseVersion">
         <display-name xml:lang="x-default">SFCC Base Version</display-name>
@@ -629,22 +620,20 @@
     </custom-attribute-definitions>
 
     <group-definitions>
-      <attribute-group group-id="Bolt Payment Setting - General">
+      <attribute-group group-id="Bolt Payment Setting - Managed Checkout">
         <display-name xml:lang="x-default">Bolt Payment Setting</display-name>
         <attribute attribute-id="boltEnable"/>
         <attribute attribute-id="boltAPIKey"/>
         <attribute attribute-id="boltSigningSecret"/>
+        <attribute attribute-id="boltMultiPublishableKeyOCAPI"/>
+        <attribute attribute-id="boltBackOfficePublishableKeyOCAPI"/>
+        <attribute attribute-id="boltEnvironmentOCAPI"/>
         <attribute attribute-id="boltEnableCartPage"/>
         <attribute attribute-id="boltEnableBackOffice"/>
         <attribute attribute-id="boltEnableSSO"/>
-        <attribute attribute-id="boltEnableCheckoutPage"/>
         <attribute attribute-id="boltEnablePPC"/>
-        <attribute attribute-id="boltPreauthEnable"/>
-        <attribute attribute-id="boltGiftCertificateEnable"/>
-        <attribute attribute-id="boltCartAjaxUpdateEnable"/>
         <attribute attribute-id="boltPartnerMerchant"/>
         <attribute attribute-id="boltMerchantDivisionID"/>
-        <attribute attribute-id="boltEnableSessionRecording"/>
         <attribute attribute-id="sfccBaseVersion"/>
       </attribute-group>
       <attribute-group group-id="BoltPluginSetting">
@@ -652,12 +641,6 @@
         <attribute attribute-id="sfccBaseVersion"/>
         <attribute attribute-id="otherPluginVersions"/>
         <attribute attribute-id="boltPluginVersion"/>
-      </attribute-group>
-      <attribute-group group-id="Bolt Credentials Setting - V2">
-        <display-name xml:lang="x-default">Bolt Credentials Setting</display-name>
-        <attribute attribute-id="boltMultiPublishableKeyOCAPI"/>
-        <attribute attribute-id="boltBackOfficePublishableKeyOCAPI"/>
-        <attribute attribute-id="boltEnvironmentOCAPI"/>
       </attribute-group>
     </group-definitions>
   </type-extension>
