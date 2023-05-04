@@ -15,7 +15,7 @@ var log = LogUtils.getLogger('Login');
 
 server.get('OAuthRedirectBolt', function (req, res, next) {
     var boltParam = request.getHttpParameterMap();
-    var {code, scope, state, reference, display_id: displayId, order_uuid: orderUUID} = boltParam;
+    var { code, scope, state, reference, display_id: displayId, order_uuid: orderUUID } = boltParam;
     if (!code.value || !scope.value || !state.value) {
         log.error('Missing required parameter in request form: ' + LogUtils.maskCustomerData(req));
         return renderError(res, next);

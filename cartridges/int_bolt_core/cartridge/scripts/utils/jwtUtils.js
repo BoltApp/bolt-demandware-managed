@@ -106,7 +106,7 @@ exports.parseAndValidateJWT = function (token, audience, jwksUrl) {
  */
 function getBoltPublicKey(url, kid) {
     var serviceResponse = BoltHttpUtils.restAPIClient('GET', '', '', '', url);
-    if (serviceResponse.status == HttpResult.ERROR || !serviceResponse.result || !serviceResponse.result.keys) {
+    if (!serviceResponse || serviceResponse.status == HttpResult.ERROR || !serviceResponse.result || !serviceResponse.result.keys) {
         log.error('Fetch Bolt JWKs file failed with URL: ' + url);
         return null;
     }

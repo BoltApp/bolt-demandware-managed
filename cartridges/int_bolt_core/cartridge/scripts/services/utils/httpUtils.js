@@ -119,7 +119,7 @@ exports.restAPIClient = function (method, endPoint, request, requestContentType,
     request = request || '';
     var serviceArgs = {
         method: method,
-        endPointUrl: fullUrlOverride ? fullUrlOverride : endPointUrl,
+        endPointUrl: fullUrlOverride || endPointUrl,
         request: request,
         boltAPIKey: config.boltAPIKey
     };
