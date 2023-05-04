@@ -19,6 +19,7 @@
       "max-len": "off",
       "no-plusplus": "off",
       "no-use-before-define": "off",
-      "no-param-reassign": "off"
+      "no-param-reassign": "off",
+      "eqeqeq": "off"
   }
 }

@@ -84,10 +84,12 @@ exports.getAuthenticationStatus = function () {
  * @param {string} method - web service method
  * @param {string} endPoint - Bolt API url
  * @param {Object} request - request object
+ * @param {string} requestContentType - content type
+ * @param {string} fullUrlOverride - service endpoint
  * @returns {ServiceResponse} service response
  */
-exports.restAPIClient = function (method, endPoint, request) {
-    var contentType = 'application/json';
+exports.restAPIClient = function (method, endPoint, request, requestContentType, fullUrlOverride) {
+    var contentType = requestContentType || 'application/json';
     var service = LocalServiceRegistry.createService('bolt.http', {
         createRequest: function createRequest(service, args) {
             service.URL = args.endPointUrl;
@@ -117,7 +119,7 @@ exports.restAPIClient = function (method, endPoint, request) {
     request = request || '';
     var serviceArgs = {
         method: method,
-        endPointUrl: endPointUrl,
+        endPointUrl: fullUrlOverride || endPointUrl,
         request: request,
         boltAPIKey: config.boltAPIKey
     };
