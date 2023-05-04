@@ -159,32 +159,8 @@
           "write_attributes": "(**)",
           "cache_time": 0,
           "methods": ["post"]
-        },
-        {
-					"resource_id": "/customers/**",
-					"methods": [
-						"get",
-						"post"
-					],
-					"read_attributes": "(**)",
-					"write_attributes": "(**)",
-					"cache_time": 1500
-				}
+        }
       ]
-    },
-    {
-			"client_id": "<<your SLAS client id for SSO>>",
-			"resources": [
-				{
-					"resource_id": "/sessions",
-					"methods": [
-						"post"
-					],
-					"read_attributes": "(**)",
-					"write_attributes": "(**)",
-					"cache_time": 1500
-				}
-			]
-		}
+    }
   ]
 }
