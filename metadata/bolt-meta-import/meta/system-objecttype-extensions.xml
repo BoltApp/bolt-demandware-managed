@@ -492,7 +492,7 @@
       </attribute-definition>
       <attribute-definition attribute-id="boltAPIKey">
         <display-name xml:lang="x-default">API Key</display-name>
-        <type>string</type>
+        <type>password</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
@@ -534,7 +534,7 @@
       </attribute-definition>
       <attribute-definition attribute-id="boltSigningSecret">
         <display-name xml:lang="x-default">Signing Secret</display-name>
-        <type>string</type>
+        <type>password</type>
         <mandatory-flag>false</mandatory-flag>
         <externally-managed-flag>false</externally-managed-flag>
         <min-length>0</min-length>
