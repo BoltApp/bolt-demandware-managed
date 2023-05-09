@@ -63,7 +63,7 @@ exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orde
       CustomerMgr.loginExternallyAuthenticatedCustomer(providerID, platformAccountID, false);
     });
 
-    // update dwsid 
+    // update session id in Bolt since dwsid changed after shopper login
     if (boltOrderId.value) {
       putSFCCObject(orderId, boltOrderId, clientID);
     }
@@ -116,7 +116,7 @@ function getOAuthConfiguration() {
     clientID: clientID,
     clientSecret: Site.getCurrent().getCustomPreferenceValue('boltAPIKey') || '',
     providerID: BoltProviderID,
-    boltAPIbaseURL: BoltPreferences.getBoltApiServiceURL('sso')
+    boltAPIbaseURL: BoltPreferences.getBoltApiServiceURL()
   };
   return config;
 }
@@ -132,8 +132,7 @@ function getOAuthConfiguration() {
  * @returns {Object} result
  */
 function exchangeOauthToken(code, scope, clientID, clientSecret, openIDConfig) {
-  //var oauthTokenEndpoint = openIDConfig.token_endpoint;
-  var oauthTokenEndpoint = "https://api.serena-external.dev.bolt.me/v1/oauth/token"
+  var oauthTokenEndpoint = openIDConfig.token_endpoint;
   var params = {
     'grant_type': 'authorization_code',
     'code': code,
