@@ -57,3 +57,15 @@ exports.sanitizeInput = function (input, denyListRegex) {
 
     return sanitizedInput;
 };
+
+exports.getDwsidCookie = function () {
+    var cookies = request.getHttpCookies();
+
+    for (var i = 0; i < cookies.cookieCount; i++) {
+        if (cookies[i].name === 'dwsid') {
+            return cookies[i].value;
+        }
+    }
+
+    return '';
+};

@@ -8,6 +8,7 @@ var BasketMgr = require('dw/order/BasketMgr');
 /* Script Modules */
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
 var UserSignature = require('int_bolt_core/cartridge/scripts/cart/userSignature');
+var commonUtils = require('int_bolt_core/cartridge/scripts/utils/commonUtils');
 
 /**
  *  Get basket ID since SFCC frontend doesn't expose it by default.
@@ -20,7 +21,7 @@ server.get('GetOrderReference', server.middleware.https, function (req, res, nex
     if (configuration && configuration.boltEnableCartPage) {
         var basket = BasketMgr.getCurrentBasket();
         basketID = basket.getUUID();
-        dwsid = getDwsidCookie();
+        dwsid = commonUtils.getDwsidCookie();
         hints = UserSignature.getPrefillUserSignature();
         hints.fetch_cart_metadata = {
             SFCCSessionID: dwsid
@@ -36,21 +37,5 @@ server.get('GetOrderReference', server.middleware.https, function (req, res, nex
     });
     next();
 });
-
-/**
- * Get dwsid cookie
- * @returns {string} dwsid cookie value
- */
-function getDwsidCookie() {
-    var cookies = request.getHttpCookies();
-
-    for (var i = 0; i < cookies.cookieCount; i++) {
-        if (cookies[i].name === 'dwsid') {
-            return cookies[i].value;
-        }
-    }
-
-    return '';
-}
 
 module.exports = server.exports();

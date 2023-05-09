@@ -7,6 +7,7 @@ server.extend(Login);
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
+var Site = require('dw/system/Site');
 
 /* Script Modules */
 var LogUtils = require('int_bolt_core/cartridge/scripts/utils/boltLogUtils');
@@ -14,26 +15,31 @@ var OAuthUtils = require('int_bolt_core/cartridge/scripts/utils/oauthUtils');
 var log = LogUtils.getLogger('Login');
 
 server.get('OAuthRedirectBolt', function (req, res, next) {
+    if (!Site.getCurrent().getCustomPreferenceValue('boltEnableSSO')) {
+        log.error('Bolt SSO feature is not enabled');
+        return renderError(res, next);
+    }
+
+    /*
+    reference: SFCC basket ID
+    display_id: SFCC order ID
+    order_uuid: SFCC order UUID
+    order_id: Bolt order ID
+    */ 
     var boltParam = request.getHttpParameterMap();
-    var { code, scope, state, reference, display_id: displayId, order_uuid: orderUUID } = boltParam;
+    var { code, scope, state, reference, display_id: displayId, order_uuid: orderUUID, order_id: boltOrderId} = boltParam;
     if (!code.value || !scope.value || !state.value) {
         log.error('Missing required parameter in request form: ' + LogUtils.maskCustomerData(req));
         return renderError(res, next);
     }
 
-    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(code, scope, displayId, orderUUID);
+    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(code, scope, displayId, orderUUID, boltOrderId);
     if (output.status === 'failure') {
         if (output.ignoreError) { // if ignore error, don't show error page.
             return next();
         }
         log.error(output.message);
         renderError(res, next);
-    }
-
-    // if shopper creates the account during checkout, set order reference to cache to
-    // update the dwsid in the Bolt dynamo db, since dwsid changed after login.
-    if (reference.value) {
-        req.session.privacyCache.set('orderId', reference.value);
     }
 
     // optional: this is to support any customized post-login actions and redirect url override
