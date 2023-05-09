@@ -12,6 +12,7 @@ var HttpResult = require('dw/svc/Result');
 var JWTUtils = require('int_bolt_core/cartridge/scripts/utils/jwtUtils');
 var BoltHttpUtils = require('int_bolt_core/cartridge/scripts/services/utils/httpUtils');
 var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
+var CommonUtils = require('int_bolt_core/cartridge/scripts/utils/commonUtils');
 
 const OpenIdEndpoint = '/.well-known/openid-configuration';
 const BoltProviderID = 'Bolt';
@@ -24,7 +25,7 @@ const BoltProviderID = 'Bolt';
  * @param {string} orderUUID - the created order UUID if provided
  * @returns {Object} result
  */
-exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orderUUID) {
+exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orderUUID, boltOrderId) {
   // step 1: fetch openID configuration from Bolt
   var { clientID, clientSecret, providerID, boltAPIbaseURL } = getOAuthConfiguration();
   var openIDConfigResponse = BoltHttpUtils.restAPIClient('GET', '', '', 'none', boltAPIbaseURL+OpenIdEndpoint);
@@ -61,6 +62,11 @@ exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orde
     Transaction.wrap(function () {
       CustomerMgr.loginExternallyAuthenticatedCustomer(providerID, platformAccountID, false);
     });
+
+    // update dwsid 
+    if (boltOrderId.value) {
+      putSFCCObject(orderId, boltOrderId, clientID);
+    }
   } else {
     return oauthErrorResponse('Platform account customer profile credentials disabled: ' + platformAccountID);
   }
@@ -75,6 +81,29 @@ exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orde
 };
 
 /**
+ * Communicates with Bolt db Endpoint to put the cart object
+ * @param {string} orderID - SFCC order id
+ * @param {string} boltOrderId -  Bolt order id
+ * @param {string} clientID - client id for the oauth workflow, should be the same as merchant publishable key
+ */
+function putSFCCObject (orderId, boltOrderId, clientId) {
+  const endpoint = '/sfcc_objects';
+  var dwsid = CommonUtils.getDwsidCookie();
+
+  const request = {
+    publishable_key: clientId,
+    sfcc_order_id: orderId,
+    session_id: dwsid,
+    order_id: boltOrderId,
+  };
+
+  var serviceResponse = BoltHttpUtils.restAPIClient('POST', endpoint, JSON.stringify(request), '', '');
+  if (!serviceResponse || serviceResponse.status == HttpResult.ERROR) {
+      log.error('Failed to update dwid to Bolt.')
+  }
+}
+
+/**
  * Return OAuth configuration
  * @returns {Object} result
  */
@@ -87,7 +116,7 @@ function getOAuthConfiguration() {
     clientID: clientID,
     clientSecret: Site.getCurrent().getCustomPreferenceValue('boltAPIKey') || '',
     providerID: BoltProviderID,
-    boltAPIbaseURL: BoltPreferences.getBoltApiServiceURL()
+    boltAPIbaseURL: BoltPreferences.getBoltApiServiceURL('sso')
   };
   return config;
 }
@@ -103,7 +132,8 @@ function getOAuthConfiguration() {
  * @returns {Object} result
  */
 function exchangeOauthToken(code, scope, clientID, clientSecret, openIDConfig) {
-  var oauthTokenEndpoint = openIDConfig.token_endpoint;
+  //var oauthTokenEndpoint = openIDConfig.token_endpoint;
+  var oauthTokenEndpoint = "https://api.serena-external.dev.bolt.me/v1/oauth/token"
   var params = {
     'grant_type': 'authorization_code',
     'code': code,
