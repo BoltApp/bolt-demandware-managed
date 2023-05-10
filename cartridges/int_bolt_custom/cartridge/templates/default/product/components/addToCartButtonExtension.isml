@@ -1,8 +1,5 @@
-<isdecorate>
-    <!-- Bolt PPC Checkout Button -->
-    <isif condition="${pdict.product && pdict.product.renderBoltPPCButton}">
-        <div class="row">
-            <isinclude template="product/components/boltProductPageButton" />
-        </div>
-    </isif>
-</isdecorate>
+<!-- Bolt Product Page Checkout Button -->
+<isif condition="${pdict.renderBoltPPCButton}">
+    <isinclude template="product/components/boltProductPageButton" />
+</isif>
+
