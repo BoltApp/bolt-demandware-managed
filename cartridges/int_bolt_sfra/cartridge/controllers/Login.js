@@ -33,13 +33,19 @@ server.get('OAuthRedirectBolt', function (req, res, next) {
         return renderError(res, next);
     }
 
-    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(code, scope, displayId, orderUUID, boltOrderId);
+    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(code, scope, displayId, orderUUID);
     if (output.status === 'failure') {
         if (output.ignoreError) { // if ignore error, don't show error page.
             return next();
         }
         log.error(output.message);
         renderError(res, next);
+    }
+
+    // if shopper login during checkout, set bolt order id to session cache.
+    // update session id to Bolt later in Account-Show since session id changed after login 
+    if (boltOrderId.value) {
+        req.session.privacyCache.set('boltOrderId', boltOrderId.value);
     }
 
     // optional: this is to support any customized post-login actions and redirect url override
