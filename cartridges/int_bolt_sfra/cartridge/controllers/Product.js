@@ -9,7 +9,6 @@ var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/pr
 
 server.append('Show', function (req, res, next) {
     var configuration = BoltPreferences.getSitePreferences();
-    var basketID, hints, dwsid; // eslint-disable-line
     // TODO: Check if product is available in the inventory.
     var productAvailable = true;
     // TODO: @var Also check if current product is allow/deny list.
