@@ -27,13 +27,13 @@ server.get('OAuthRedirectBolt', function (req, res, next) {
     order_id: Bolt order ID
     */ 
     var boltParam = request.getHttpParameterMap();
-    var { code, scope, state, reference, display_id: displayId, order_uuid: orderUUID, order_id: boltOrderId} = boltParam;
+    var { code, scope, state, reference, display_id: displayId, order_uuid: orderToken, order_id: boltOrderId} = boltParam;
     if (!code.value || !scope.value || !state.value) {
         log.error('Missing required parameter in request form: ' + LogUtils.maskCustomerData(req));
         return renderError(res, next);
     }
 
-    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(code, scope, displayId, orderUUID);
+    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(code, scope, displayId, orderToken);
     if (output.status === 'failure') {
         if (output.ignoreError) { // if ignore error, don't show error page.
             return next();
