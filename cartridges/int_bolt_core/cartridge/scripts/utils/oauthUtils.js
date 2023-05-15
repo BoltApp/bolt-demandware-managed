@@ -23,10 +23,10 @@ const BoltProviderID = 'Bolt';
  * @param {string} code - the authorization code from Bolt
  * @param {string} scope - scope for the oauth workflow, currently only support openid
  * @param {string} orderId - the created order id if provided
- * @param {string} orderUUID - the created order UUID if provided
+ * @param {string} orderToken - the created order UUID if provided
  * @returns {Object} result
  */
-exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orderUUID) {
+exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orderToken) {
   // step 1: fetch openID configuration from Bolt
   var { clientID, clientSecret, providerID, boltAPIbaseURL } = getOAuthConfiguration();
   var openIDConfigResponse = BoltHttpUtils.restAPIClient('GET', '', '', 'none', boltAPIbaseURL+OpenIdEndpoint);
@@ -50,7 +50,7 @@ exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orde
   }
   
   // step 4: create a new account or link existing account
-  var createAccountResponse = createPlatformAccount(externalProfile, orderId, orderUUID)
+  var createAccountResponse = createPlatformAccount(externalProfile, orderId, orderToken)
   if (createAccountResponse.error) {
     return customerProfile.error;
   }
@@ -138,7 +138,7 @@ function exchangeOauthToken(code, scope, clientID, clientSecret, openIDConfig) {
  * @param {Object} externalProfile - user info sent in the JWT token
  * @returns {Object} result
  */
-function createPlatformAccount(externalProfile, orderId, orderUUID) {
+function createPlatformAccount(externalProfile, orderId, orderToken) {
   var platformAccountID = externalProfile.sub
   var authenticatedCustomerProfile = CustomerMgr.getExternallyAuthenticatedCustomerProfile(BoltProviderID, platformAccountID);
   var isRegistration = false;  // isRegistration is true if the shopper does not have platform account associated with the email.
@@ -158,9 +158,9 @@ function createPlatformAccount(externalProfile, orderId, orderUUID) {
         saveCustomFields(externalProfile, authenticatedCustomerProfile);
 
         // set order to the customer if the account is created during checkout.
-        if (orderId.value && orderUUID.value) {
-          var order = OrderMgr.getOrder(orderId.value);
-          if (order && order.getUUID() === orderUUID.value && order.getCustomerEmail() === externalProfile.email) {
+        if (orderId.value && orderToken.value) {
+          var order = OrderMgr.getOrder(orderId.value, orderToken.value);
+          if (order && order.getCustomerEmail() === externalProfile.email) {
             order.setCustomer(newCustomer);
           }
         }
