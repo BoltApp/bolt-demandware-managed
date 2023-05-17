@@ -197,10 +197,7 @@ function addProductToCart(currentBasket, productId, quantity, childProducts, opt
         }
     } else {
         var productLineItem;
-        // Create a new instore pickup shipment as default shipment for product line item
-        // if the shipment if not exist in the basket
-        var inStoreShipment = createInStorePickupShipmentForLineItem(currentBasket, storeId, req);
-        var shipment = inStoreShipment || defaultShipment;
+        var shipment = defaultShipment;
 
         if (shipment.shippingMethod && shipment.shippingMethod.custom.storePickupEnabled && !storeId) {
             shipment = currentBasket.createShipment(UUIDUtils.createUUID());
