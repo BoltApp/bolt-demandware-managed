@@ -17,6 +17,7 @@ server.prepend('Show', function (req, res, next) {
     var boltOrderId = req.session.privacyCache.store.boltOrderId;
     if (boltOrderId) {
         putSFCCObject(boltOrderId);
+        req.session.privacyCache.store.boltOrderId = '';
     }
 
     return next();
