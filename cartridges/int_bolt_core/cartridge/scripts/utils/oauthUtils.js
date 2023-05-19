@@ -14,8 +14,8 @@ var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/pr
 var LogUtils = require('int_bolt_core/cartridge/scripts/utils/boltLogUtils');
 var log = LogUtils.getLogger('Login');
 
-const OpenIdEndpoint = '/.well-known/openid-configuration';
-const BoltProviderID = 'Bolt';
+var OpenIdEndpoint = '/.well-known/openid-configuration';
+var BoltProviderID = 'Bolt';
 
 /**
  * Login the shopper using Bolt SSO

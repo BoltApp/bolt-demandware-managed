@@ -1,4 +1,5 @@
 'use strict';
+
 var server = require('server');
 var Account = module.superModule;
 server.extend(Account);
@@ -13,38 +14,35 @@ var log = LogUtils.getLogger('Login');
 
 // for SSO login during checkout, update dwsid in Bolt db.
 server.prepend('Show', function (req, res, next) {
-  var boltOrderId = req.session.privacyCache.store.boltOrderId;
+    var boltOrderId = req.session.privacyCache.store.boltOrderId;
+    if (boltOrderId) {
+        putSFCCObject(boltOrderId);
+    }
 
-  if (boltOrderId) {
-    var dwsid = CommonUtils.getDwsidCookie();
-    putSFCCObject(boltOrderId);
-  }
-
-  return next();
+    return next();
 });
 
 /**
  * Communicates with Bolt Endpoint to put the SFCC object
  * @param {string} boltOrderId -  Bolt order id
  */
-function putSFCCObject (boltOrderId) {
-    const endpoint = '/sfcc_objects';
+function putSFCCObject(boltOrderId) {
+    var endpoint = '/sfcc_objects';
     var dwsid = CommonUtils.getDwsidCookie();
     var boltMultiPublishableKey = Site.getCurrent().getCustomPreferenceValue('boltMultiPublishableKeyOCAPI') || '';
     var publishableKeySplit = boltMultiPublishableKey.split('.');
-    var publishableKey = publishableKeySplit[publishableKeySplit.length - 1]
-  
-    const request = {
-      publishable_key: publishableKey,
-      session_id: dwsid,
-      order_id: boltOrderId,
+    var publishableKey = publishableKeySplit[publishableKeySplit.length - 1];
+
+    var request = {
+        publishable_key: publishableKey,
+        session_id: dwsid,
+        order_id: boltOrderId
     };
-  
+
     var serviceResponse = BoltHttpUtils.restAPIClient('POST', endpoint, JSON.stringify(request), '', '');
     if (!serviceResponse || serviceResponse.status == HttpResult.ERROR) {
-        log.error('Failed to update dwsid to Bolt')
+        log.error('Failed to update dwsid to Bolt');
     }
-    return;
 }
 
 module.exports = server.exports();
