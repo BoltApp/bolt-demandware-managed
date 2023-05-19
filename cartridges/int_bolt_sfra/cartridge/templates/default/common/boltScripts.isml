@@ -6,3 +6,13 @@
     <script id="bolt-track" src="${boltConfig.boltCdnUrl}/track.js" data-publishable-key="${boltConfig.boltMultiPublishableKey}"></script>
     <script id="bolt-connect" src="${boltConfig.boltCdnUrl}/connect.js" data-publishable-key="${boltConfig.boltMultiPublishableKey}"></script>
 </isif>
+
+<iscomment> SSO login and logout button </iscomment>
+<isif condition="${boltConfig.boltEnableSSO}">
+    <div class="bolt-account-sso" data-logged-in="false" />
+    <div class="bolt-account-sso" data-logged-in="true" />
+    <script id="bolt-account"
+        src="${boltConfig.boltAccountURL}/account.js" 
+        data-publishable-key="${boltConfig.boltMultiPublishableKey}">
+    </script>
+</isif>
