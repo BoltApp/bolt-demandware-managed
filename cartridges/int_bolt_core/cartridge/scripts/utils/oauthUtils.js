@@ -2,7 +2,6 @@
 
 /* API Includes */
 var CustomerMgr = require('dw/customer/CustomerMgr');
-var Encode = require('dw/crypto/Encoding');
 var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
 var Site = require('dw/system/Site');

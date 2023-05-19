@@ -1,5 +1,6 @@
-const server = require('server');
-const Account = module.superModule;
+'use strict';
+var server = require('server');
+var Account = module.superModule;
 server.extend(Account);
 
 var Site = require('dw/system/Site');
@@ -12,10 +13,10 @@ var log = LogUtils.getLogger('Login');
 
 // for SSO login during checkout, update dwsid in Bolt db.
 server.prepend('Show', function (req, res, next) {
-  const boltOrderId = req.session.privacyCache.store.boltOrderId;
+  var boltOrderId = req.session.privacyCache.store.boltOrderId;
 
   if (boltOrderId) {
-    const dwsid = CommonUtils.getDwsidCookie();
+    var dwsid = CommonUtils.getDwsidCookie();
     putSFCCObject(boltOrderId);
   }
 
