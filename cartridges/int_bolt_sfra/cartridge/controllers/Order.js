@@ -15,10 +15,6 @@ var reportingUrlsHelper = require('*/cartridge/scripts/reportingUrls');
 var OrderModel = require('*/cartridge/models/order');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 
-/**
- * Exclude order customer ID check for Bolt SSO, since order is assigned to new created account
- * if shopper creates account during checkout.
- */
 server.replace(
     'Confirm',
     consentTracking.consent,
@@ -38,8 +34,8 @@ server.replace(
         order = OrderMgr.getOrder(req.form.orderID, req.form.orderToken);
 
         // This is where different from the base cartridge, skip order customer check for SSO.
-        // If shopper check the checkbox to create an account during checkout, we set the order to the new created account but not login, so order customer id
-        // is different from the guest customer ID in the original request.
+        // If shopper check the checkbox to create an account during checkout, we set the order to the new created account but not login,
+        // so the order customer id is different from the guest customer ID in the original request.
         if (!order || (!boltEnableSSO && order.customer.ID !== req.currentCustomer.raw.ID)) {
             res.render('/error', {
                 message: Resource.msg('error.confirmation.error', 'confirmation', null)
