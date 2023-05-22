@@ -1,8 +1,0 @@
-<isscript>
-    var boltUtils = require('*/cartridge/scripts/services/utils/preferences');
-    var config = boltUtils.getSitePreferences();
-</isscript>
-
-<isif condition="${config.boltEnableSessionRecording}">
-    <script id="bolt-session-replay" type="text/javascript" src="${config.boltCdnUrl}/openreplay.js" data-publishable-key="${config.boltMultiPublishableKey}"></script>
-</isif>

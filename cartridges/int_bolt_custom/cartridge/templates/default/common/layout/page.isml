@@ -17,25 +17,9 @@
         <isinclude template="/common/boltScripts" />
     </head>
     <body>
-    	<input type="hidden" class="update-bolt-button" value="${URLUtils.https('BoltCheckoutButtonUpdate-GetUpdatedButton')}">
         <div class="page" data-action="${pdict.action}" data-querystring="${pdict.queryString}" >
             <isinclude template="/components/header/pageHeader" />
-            <isscript>
-                var preferences = require('*/cartridge/scripts/services/utils/preferences');
-                var boltConfig = preferences.getSitePreferences();
-            </isscript>
 
-            <iscomment> SSO login button </iscomment>
-            <isif condition="${boltConfig.boltEnableSSO}">
-                <div class="bolt-account-sso" data-logged-in="false" />
-                <div class="bolt-account-sso" data-logged-in="true" />
-                <script id="bolt-account"
-                    src="${boltConfig.boltAccountURL}/account.js" 
-                    data-publishable-key="${boltConfig.boltMultiPublishableKey}">
-                </script>
-            </isif>
-
-            <isinclude template="common/session_replay/openreplay" />
             <div role="main" id="maincontent">
                 <isreplace/>
             </div>
