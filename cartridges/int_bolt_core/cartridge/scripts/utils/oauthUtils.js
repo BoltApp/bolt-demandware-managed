@@ -160,7 +160,7 @@ function createPlatformAccount(externalProfile, orderId, orderToken) {
                 // save custom fields, configured in Bolt admin dash
                 saveCustomFields(externalProfile, authenticatedCustomerProfile);
 
-                // set order to the customer if the account is created during checkout.
+                // Optional: set order to the new created account if shopper creates account during checkout
                 if (orderId.value && orderToken.value) {
                     var order = OrderMgr.getOrder(orderId.value, orderToken.value);
                     if (order && order.getCustomerEmail() === externalProfile.email) {

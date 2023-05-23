@@ -35,7 +35,7 @@ server.get('OAuthRedirectBolt', function (req, res, next) {
         return renderError(res, next);
     }
 
-    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(boltParam.code, boltParam.scope, boltParam.displayId, orderToken);
+    var output = OAuthUtils.oauthLoginOrCreatePlatformAccount(boltParam.code, boltParam.scope, boltParam.display_id, orderToken);
     if (output.status === 'failure') {
         if (output.ignoreError) { // if ignore error, don't show error page.
             return next();
