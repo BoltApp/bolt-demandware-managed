@@ -12,6 +12,9 @@ var BoltHttpUtils = require('int_bolt_core/cartridge/scripts/services/utils/http
 var LogUtils = require('int_bolt_core/cartridge/scripts/utils/boltLogUtils');
 var log = LogUtils.getLogger('Login');
 
+var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
+var configuration = BoltPreferences.getSitePreferences();
+
 // for SSO login during checkout, update dwsid in Bolt db.
 server.prepend('Show', function (req, res, next) {
     var boltOrderId = req.session.privacyCache.store.boltOrderId;
@@ -45,5 +48,12 @@ function putSFCCObject(boltOrderId) {
         log.error('Failed to update dwsid to Bolt');
     }
 }
+
+server.append('Header', function (req, res, next) {
+    res.setViewData({
+        config: configuration
+    });
+    next();
+});
 
 module.exports = server.exports();
