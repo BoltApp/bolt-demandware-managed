@@ -209,7 +209,8 @@ function addProductToCart(currentBasket, productId, quantity, childProducts, opt
         if (storeId) {
             // Create a new instore pickup shipment as default shipment for product line item
             var inStoreShipment = createInStorePickupShipmentForLineItem(currentBasket, storeId, req);
-            if (inStoreShipment) {
+            // if in store shipment is not created, throw error
+            if (!inStoreShipment) {
                 result.error = true;
                 result.message = Resource.msg(
                     'error.alert.instoreshipment.unable.create',
