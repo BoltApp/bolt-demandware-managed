@@ -36,7 +36,6 @@ exports.getSitePreferences = function () {
         boltAccountURL: boltAccountURL(),
         boltMultiPublishableKey: boltMultiPublishableKey,
         blockedCharactersList: blockedCharactersList,
-        boltEnableSessionRecording: Site.getCurrent().getCustomPreferenceValue('boltEnableSessionRecording') || false,
         sfccBaseVersion: getSFCCBaseVersion(),
         boltEnablePPC: Site.getCurrent().getCustomPreferenceValue('boltEnablePPC') || false
     };
