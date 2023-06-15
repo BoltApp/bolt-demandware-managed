@@ -197,27 +197,31 @@ function addProductToCart(currentBasket, productId, quantity, childProducts, opt
         }
     } else {
         var productLineItem;
-        // Create a new instore pickup shipment as default shipment for product line item
-        // if the shipment if not exist in the basket
-        var inStoreShipment = createInStorePickupShipmentForLineItem(currentBasket, storeId, req);
-        var shipment = inStoreShipment || defaultShipment;
-
-        if (shipment.shippingMethod && shipment.shippingMethod.custom.storePickupEnabled && !storeId) {
-            shipment = currentBasket.createShipment(UUIDUtils.createUUID());
-        }
-
+        // Use defaultShipment when adding a new line item
         productLineItem = base.addLineItem(
             currentBasket,
             product,
             lineItemQuantity,
             childProducts,
             optionModel,
-            shipment
+            defaultShipment
         );
-
-        // Once the new product line item is added, set the instore pickup fromStoreId for the item
-        if (productLineItem.product.custom.availableForInStorePickup) {
-            if (storeId) {
+        if (storeId) {
+            // Create a new instore pickup shipment as default shipment for product line item
+            var inStoreShipment = createInStorePickupShipmentForLineItem(currentBasket, storeId, req);
+            // if in store shipment creation fails for some reasons, just throw error
+            if (!inStoreShipment) {
+                result.error = true;
+                result.message = Resource.msg(
+                    'error.alert.instoreshipment.unable.create',
+                    'instorePickup',
+                    null
+                );
+                return result;
+            }
+            productLineItem.setShipment(inStoreShipment);
+            // Once the new product line item is added, set the instore pickup fromStoreId for the item
+            if (productLineItem.product.custom.availableForInStorePickup) {
                 instorePickupStoreHelper.setStoreInProductLineItem(storeId, productLineItem);
             }
         }
