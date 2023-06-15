@@ -173,7 +173,6 @@ $(document).ready(function () {
     });
 });
 
-
 // ----------------------------- WIP -----------------------------
 /*
     Problems with the current implementation of `buildBoltCartObject`
@@ -191,6 +190,7 @@ $(document).ready(function () {
 */
 // TODO: buildBoltCartObject should either return a valid BoltCart object (or) undefined
 //       It will be invoked once on page load (and) whenever the product attributes change.
+// eslint-disable-next-line no-unused-vars
 var wipBuildBoltCartObject = function () {
     var getChildProducts = function () {
         var childProducts = [];
@@ -226,7 +226,7 @@ var wipBuildBoltCartObject = function () {
     var buttons = $('button.add-to-cart,  button.add-to-cart-global');
     if (!buttons.length) {
         console.error('Unable to find add to cart buttons');
-        return;
+        return undefined;
     }
     var button = buttons[0];
 
