@@ -144,6 +144,17 @@ const buildBoltCartObject = function (product) {
     const productImage = product.images.small[0].absURL;
     const productName = product.productName;
     const quantity = product.selectedQuantity;
+    var productOptions = [];
+    // To get options such as "Extended Warranty" and send to Bolt server for creating cart.
+    if (!$('.bundle-item').length) {
+        var addToCartBtn = $('button.add-to-cart');
+        var $productContainer = addToCartBtn.closest('.product-detail');
+        if (!$productContainer.length) {
+            $productContainer = addToCartBtn.closest('.quick-view-dialog').find('.product-detail');
+        }
+        productOptions = getOptions($productContainer);
+    }
+
     return {
         currency: 'USD',
         items: [
@@ -152,13 +163,80 @@ const buildBoltCartObject = function (product) {
                 merchantProductID: productID,
                 quantity: quantity,
                 name: productName,
-                image: productImage
+                image: productImage,
+                options: productOptions
             }
         ]
     };
 };
 
+/**
+ * Retrieves the relevant pid value
+ * @param {jquery} $el - DOM container for a given add to cart button
+ * @return {string} - value to be used when adding product to cart
+ */
+var getPidValue = function ($el) {
+    var pid;
+
+    if ($('#quickViewModal').hasClass('show') && !$('.product-set').length) {
+        pid = $($el).closest('.modal-content').find('.product-quickview').data('pid');
+    } else if ($('.product-set-detail').length || $('.product-set').length) {
+        pid = $($el).closest('.product-detail').find('.product-id').text();
+    } else {
+        pid = $('.product-detail:not(".bundle-item")').data('pid');
+    }
+
+    return pid;
+};
+
+/**
+ * Retrieve product options
+ *
+ * @param {jQuery} $productContainer - DOM element for current product
+ * @return {string} - Product options and their selected values
+ */
+var getOptions = function ($productContainer) {
+    var options = $productContainer
+        .find('.product-option')
+        .map(function () {
+            var $elOption = $(this).find('.options-select');
+            var urlValue = $elOption.val();
+            var selectedValueId = $elOption.find('option[value="' + urlValue + '"]')
+                .data('value-id');
+            return {
+                optionId: $(this).data('option-id'),
+                selectedValueId: selectedValueId
+            };
+        }).toArray();
+
+    return options;
+}
+
 $(document).ready(function () {
+    var addToCartBtn = $('button.add-to-cart');
+    // When product details page has fully loaded and if the add-to-cart button is enabled,
+    // we can get product data from controller Product-Variation (which is defined in sfcc core)
+    // to build Bolt cart object to initiate Bolt PPC button
+    if (!addToCartBtn.prop('disabled')) {
+        var pid = getPidValue(addToCartBtn);
+        var productContainer = addToCartBtn.closest('.product-detail');
+        var ppcQuantity = productContainer.find('.quantity-select').val();
+        var getProductDataUrl = $('.get-ppc-product-data').val() + '?pid=' + pid + '&quantity=' + ppcQuantity;
+        $.ajax({
+            url: getProductDataUrl,
+            method: 'GET',
+            async: false,
+            success: function (data) {
+                if (data !== null && data.hasOwnProperty('product')) {
+                    var product = data.product;
+                    if (product.available && product.readyToOrder) {
+                        var boltCartObject = buildBoltCartObject(product);
+                        configurePPCCartAndShowButton(boltCartObject);
+                    }
+                }
+            }
+        });
+    }
     // product:statusUpdate
     $(document).bind('product:updateAddToCart', function (_e, productResponse) {
         console.log('On Status Update', productResponse);
@@ -172,6 +250,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 // ----------------------------- WIP -----------------------------
 /*

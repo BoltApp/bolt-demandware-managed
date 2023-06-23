@@ -9,6 +9,7 @@
 
     <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
     <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />
+    <input type="hidden" class="get-ppc-product-data" value="${URLUtils.url('Product-Variation')}" />
     <!--
         This appears to be included via boltScripts.isml. Double check if this needs to be included here.
         <script id="bolt-connect" src="${boltCdnUrl}/connect.js" data-publishable-key="${boltPublishableKey}"></script>
