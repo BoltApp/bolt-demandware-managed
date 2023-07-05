@@ -164,7 +164,7 @@ const buildBoltCartObject = function (product) {
                 quantity: quantity,
                 name: productName,
                 image: productImage,
-                options: productOptions
+                options: JSON.stringify(productOptions)
             }
         ]
     };
@@ -210,7 +210,7 @@ var getOptions = function ($productContainer) {
         }).toArray();
 
     return options;
-}
+};
 
 $(document).ready(function () {
     var addToCartBtn = $('button.add-to-cart');
@@ -251,7 +251,6 @@ $(document).ready(function () {
     });
 });
 
-
 // ----------------------------- WIP -----------------------------
 /*
     Problems with the current implementation of `buildBoltCartObject`
@@ -282,7 +281,7 @@ var wipBuildBoltCartObject = function () {
         return childProducts.length ? JSON.stringify(childProducts) : [];
     };
 
-    var getOptions = function ($productContainer) {
+    var wipGetOptions = function ($productContainer) {
         var options = $productContainer
             .find('.product-option')
             .map(function () {
@@ -340,7 +339,7 @@ var wipBuildBoltCartObject = function () {
     console.log(`The form element is ${JSON.stringify(form)}`);
 
     if (!$('.bundle-item').length) {
-        form.options = getOptions($productContainer);
+        form.options = wipGetOptions($productContainer);
     }
 
     return {
