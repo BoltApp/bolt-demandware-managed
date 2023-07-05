@@ -227,7 +227,7 @@ $(document).ready(function () {
             method: 'GET',
             async: false,
             success: function (data) {
-                if (data !== null && data.hasOwnProperty('product')) {
+                if (data !== null && Object.prototype.hasOwnProperty.call(data, 'product')) {
                     var product = data.product;
                     if (product.available && product.readyToOrder) {
                         var boltCartObject = buildBoltCartObject(product);
