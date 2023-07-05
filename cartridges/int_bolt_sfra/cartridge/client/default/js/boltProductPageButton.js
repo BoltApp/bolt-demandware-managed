@@ -281,7 +281,7 @@ var wipBuildBoltCartObject = function () {
         return childProducts.length ? JSON.stringify(childProducts) : [];
     };
 
-    var wipGetOptions = function ($productContainer) {
+    var buildOptions = function ($productContainer) {
         var options = $productContainer
             .find('.product-option')
             .map(function () {
@@ -339,7 +339,7 @@ var wipBuildBoltCartObject = function () {
     console.log(`The form element is ${JSON.stringify(form)}`);
 
     if (!$('.bundle-item').length) {
-        form.options = wipGetOptions($productContainer);
+        form.options = buildOptions($productContainer);
     }
 
     return {
