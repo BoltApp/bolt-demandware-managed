@@ -204,8 +204,8 @@ var getOptions = function ($productContainer) {
             var selectedValueId = $elOption.find('option[value="' + urlValue + '"]')
                 .data('value-id');
             return {
-                optionId: $(this).data('option-id'),
-                selectedValueId: selectedValueId
+                option_id: $(this).data('option-id'),
+                option_value_id: selectedValueId
             };
         }).toArray();
 
