@@ -156,7 +156,6 @@ const buildBoltCartObject = function (product) {
     }
 
     return {
-        currency: 'USD',
         items: [
             {
                 reference: productID,
@@ -213,7 +212,16 @@ var getOptions = function ($productContainer) {
 };
 
 $(document).ready(function () {
+    // get add to cart button
     var addToCartBtn = $('button.add-to-cart');
+    // if add to cart button not found, it could be bundle product
+    if (addToCartBtn.length == 0) {
+        addToCartBtn = $('button.add-to-cart-global');
+    }
+    // if no add to cart button is found, return
+    if (addToCartBtn.length == 0) {
+        return;
+    }
     // When product details page has fully loaded and if the add-to-cart button is enabled,
     // we can get product data from controller Product-Variation (which is defined in sfcc core)
     // to build Bolt cart object to initiate Bolt PPC button
@@ -343,7 +351,6 @@ var wipBuildBoltCartObject = function () {
     }
 
     return {
-        currency: 'USD',
         items: [
             {
                 reference: form.pid,
