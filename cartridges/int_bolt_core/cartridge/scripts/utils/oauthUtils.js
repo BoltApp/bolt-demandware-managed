@@ -31,7 +31,7 @@ exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orde
     var clientID = oauthConfiguration.clientID;
     var clientSecret = oauthConfiguration.clientSecret;
     var providerID = oauthConfiguration.providerID;
-    var boltAPIbaseURL = oauthConfiguration.boltAPIbaseURL;
+    var boltAPIbaseURL = oauthConfiguration.boltAPIbaseURL.replace('serena', 'serena-external');
     var openIDConfigResponse = BoltHttpUtils.restAPIClient('GET', '', '', 'none', boltAPIbaseURL + OpenIdEndpoint);
     if (!openIDConfigResponse || openIDConfigResponse.status == HttpResult.ERROR || !openIDConfigResponse.result) {
         return oauthErrorResponse('Failed fetching open id configuration from endpoint: ' + OpenIdEndpoint);
@@ -47,7 +47,7 @@ exports.oauthLoginOrCreatePlatformAccount = function (code, scope, orderId, orde
 
     // step 3: validate JWT
     var idToken = oauthTokenResponse.id_token;
-    var externalProfile = JWTUtils.parseAndValidateJWT(idToken, clientID, openIDConfig.jwks_uri);
+    var externalProfile = JWTUtils.parseAndValidateJWT(idToken, clientID, openIDConfig.jwks_uri.replace('serena', 'serena-external'));
     if (!externalProfile) {
         return oauthErrorResponse('Unable to parse external profile from id token: ' + idToken);
     }
@@ -108,7 +108,7 @@ function getOAuthConfiguration() {
  * @returns {Object} result
  */
 function exchangeOauthToken(code, scope, clientID, clientSecret, openIDConfig) {
-    var oauthTokenEndpoint = openIDConfig.token_endpoint;
+    var oauthTokenEndpoint = openIDConfig.token_endpoint.replace('serena', 'serena-external');
     var params = {
         grant_type: 'authorization_code',
         code: code,

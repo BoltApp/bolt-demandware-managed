@@ -49,6 +49,8 @@ exports.getBoltApiServiceURL = function boltApiURL() {
     var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
 
     switch (boltEnv) {
+        case 'local':
+            return 'https://api.serena.dev.bolt.me';
         case 'sandbox':
             return 'https://api-sandbox.bolt.com';
 
@@ -69,6 +71,8 @@ function boltConnectURL() {
     var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
 
     switch (boltEnv) {
+        case 'local':
+            return 'https://connect.serena.dev.bolt.me'
         case 'sandbox':
             return 'https://connect-sandbox.bolt.com';
 
@@ -88,6 +92,8 @@ function boltConnectURL() {
 function boltAccountURL() {
     var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
     switch (boltEnv) {
+        case 'local':
+            return 'https://account.serena.dev.bolt.me';
         case 'sandbox':
             return 'https://account-sandbox.bolt.com';
         case 'staging':
