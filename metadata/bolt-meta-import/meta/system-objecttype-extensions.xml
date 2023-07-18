@@ -664,18 +664,21 @@
 
   <type-extension type-id="Product">
     <custom-attribute-definitions>
-      <attribute-definition attribute-id="itemTag">
-        <display-name xml:lang="x-default">Store ID</display-name>
-        <type>string</type>
+      <attribute-definition attribute-id="hideBoltButtonPDP">
+        <display-name xml:lang="x-default">Hide Bolt Button PDP</display-name>
+        <type>boolean</type>
+        <site-specific-flag>false</site-specific-flag>
         <mandatory-flag>false</mandatory-flag>
+        <visible-flag>false</visible-flag>
         <externally-managed-flag>false</externally-managed-flag>
-        <min-length>0</min-length>
+        <order-required-flag>false</order-required-flag>
+        <externally-defined-flag>false</externally-defined-flag>
       </attribute-definition>
     </custom-attribute-definitions>
     <group-definitions>
-      <attribute-group group-id="Custom">
-        <display-name xml:lang="x-default">Custom</display-name>
-        <attribute attribute-id="itemTag"/>
+      <attribute-group group-id="bolt">
+        <display-name xml:lang="x-default">bolt</display-name>
+        <attribute attribute-id="hideBoltButtonPDP"/>
       </attribute-group>
     </group-definitions>
   </type-extension>
