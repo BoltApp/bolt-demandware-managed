@@ -1,7 +1,5 @@
 'use strict';
 
-// var base = require('base/product/base');
-
 var ppcButtonClass = 'bolt-product-checkout-button';
 // isProductPageCheckoutButtonVisible is used to track the visibility of the PPC button
 var ppcButtonVisible;
