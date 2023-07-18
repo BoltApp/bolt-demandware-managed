@@ -1,6 +1,6 @@
 'use strict';
 
-var base = require('base/product/base');
+// var base = require('base/product/base');
 
 var ppcButtonClass = 'bolt-product-checkout-button';
 // isProductPageCheckoutButtonVisible is used to track the visibility of the PPC button
@@ -216,27 +216,48 @@ var getProductDetails = function (addToCartBtn) {
     var productContainer = addToCartBtn.closest('.product-detail');
     var ppcQuantity = productContainer.find('.quantity-select').val();
     var getProductDataUrl = $('.get-ppc-product-data').val() + '?pid=' + pid + '&quantity=' + ppcQuantity;
+    var productDetails = null;
     $.ajax({
         url: getProductDataUrl,
         method: 'GET',
         async: false,
         success: function (data) {
             if (data !== null && Object.prototype.hasOwnProperty.call(data, 'product')) {
+                productDetails = data.product;
                 var product = data.product;
                 if (product.available && product.readyToOrder) {
                     var boltCartObject = buildBoltCartObject(product);
                     configurePPCCartAndShowButton(boltCartObject);
+                } else {
+                    clearPPCCartAndHideButton();
                 }
             }
         }
     });
+    return productDetails;
 };
 
 var bindProductBundleQuanityUpdate = function (addToCartBtn) {
     var productContainer = addToCartBtn.closest('.product-detail');
     var ppcQuantity = productContainer.find('.quantity-select');
     ppcQuantity.on('change', function () {
-        getProductDetails(addToCartBtn);
+        var product = getProductDetails(addToCartBtn);
+        if (!product) {
+            return;
+        }
+        // reset product availability messages
+        if (product.availability.messages.length > 0) {
+            $('ul.availability-msg li').remove();
+            product.availability.messages.forEach(function (message) {
+                $('ul.availability-msg').append($('<li>').html('<div>' + message + '</div>'));
+            });
+        }
+        // disable/enable add to cart button based on product availability
+        if (product.available) {
+            $('.add-to-cart-global').removeAttr('disabled');
+        } else {
+            $('.add-to-cart-global').attr('disabled', 'disabled');
+        }
     });
 };
 
@@ -274,106 +295,3 @@ $(document).ready(function () {
         }
     });
 });
-
-// ----------------------------- WIP -----------------------------
-/*
-    Problems with the current implementation of `buildBoltCartObject`
-    1) It is invoked in response to a `product:updateAddToCart` event. So unless the user updates the product
-       attributes it won't be invoked -> which means PPC button won't be shown unless user changes product attributes
-    2) Similar to point 1. We need to find a way to invoke it on page load. Certain products are in the ready to order state
-       as soon as the page loads. The existing implementation won't show PPC unless user changes product attributes
-    3) Current implementation won't work on pages that have product bundles or product sets
-    4) Current implementation won't include priced attributes. Eg: Warranty on page
-       Eg: See this page: https://zzgv-010.dx.commercecloud.salesforce.com/s/RefArch/electronics/digital%20cameras/kodak-z8612M.html?lang=en_US
-       Warranty price won't be included in the product page checkout cart.
-
-    wipBuildBoltCartObject is being built to address all these issues.
-    It's heavily inspired (i.e copied :-P from 'storefront-reference-architecture/cartridges/app_storefront_base/cartridge/client/default/js/product/base.js')
-*/
-// TODO: buildBoltCartObject should either return a valid BoltCart object (or) undefined
-//       It will be invoked once on page load (and) whenever the product attributes change.
-// eslint-disable-next-line no-unused-vars
-var wipBuildBoltCartObject = function () {
-    var getChildProducts = function () {
-        var childProducts = [];
-        $('.bundle-item').each(function () {
-            childProducts.push({
-                pid: $(this).find('.product-id').text(),
-                quantity: parseInt($(this).find('label.quantity').data('quantity'), 10)
-            });
-        });
-        return childProducts.length ? JSON.stringify(childProducts) : [];
-    };
-
-    var buildOptions = function ($productContainer) {
-        var options = $productContainer
-            .find('.product-option')
-            .map(function () {
-                var $elOption = $(this).find('.options-select');
-                var urlValue = $elOption.val();
-                var selectedValueId = $elOption.find('option[value="' + urlValue + '"]')
-                    .data('value-id');
-                return {
-                    optionId: $(this).data('option-id'),
-                    selectedValueId: selectedValueId
-                };
-            }).toArray();
-        return JSON.stringify(options);
-    };
-
-    var pid;
-    var pidsObj;
-    var setPids;
-
-    var buttons = $('button.add-to-cart,  button.add-to-cart-global');
-    if (!buttons.length) {
-        console.error('Unable to find add to cart buttons');
-        return undefined;
-    }
-    var button = buttons[0];
-
-    if ($('.set-items').length && $(button).hasClass('add-to-cart-global')) {
-        setPids = [];
-        $('.product-detail').each(function () {
-            if (!$(this).hasClass('product-set-detail')) {
-                setPids.push({
-                    pid: $(this).find('.product-id').text(),
-                    qty: $(this).find('.quantity-select').val(),
-                    options: getOptions($(this))
-                });
-            }
-        });
-        pidsObj = JSON.stringify(setPids);
-    }
-
-    pid = base.getPidValue(button);
-
-    var $productContainer = $(button).closest('.product-detail');
-    if (!$productContainer.length) {
-        $productContainer = $(button).closest('.quick-view-dialog').find('.product-detail');
-    }
-
-    var form = {
-        pid: pid,
-        pidsObj: pidsObj,
-        childProducts: getChildProducts(),
-        quantity: base.getQuantitySelected($(button))
-    };
-
-    console.log(`The form element is ${JSON.stringify(form)}`);
-
-    if (!$('.bundle-item').length) {
-        form.options = buildOptions($productContainer);
-    }
-
-    return {
-        items: [
-            {
-                reference: form.pid,
-                quantity: parseInt(form.quantity, 10),
-                merchantProductID: form.pid,
-                name: 'Casual Spring Easy Jacket'
-            }
-        ]
-    };
-};
