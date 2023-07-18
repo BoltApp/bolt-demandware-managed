@@ -235,7 +235,7 @@ var getProductDetails = function (addToCartBtn) {
     return productDetails;
 };
 
-var bindProductBundleQuanityUpdate = function (addToCartBtn) {
+var bindProductBundleQuantityUpdate = function (addToCartBtn) {
     var productContainer = addToCartBtn.closest('.product-detail');
     var ppcQuantity = productContainer.find('.quantity-select');
     ppcQuantity.on('change', function () {
@@ -267,7 +267,7 @@ $(document).ready(function () {
         addToCartBtn = $('button.add-to-cart-global');
         if (addToCartBtn.length > 0) {
             // for product bundle, need to bind the ppc logic to quantity field
-            bindProductBundleQuanityUpdate(addToCartBtn);
+            bindProductBundleQuantityUpdate(addToCartBtn);
         }
     }
     // if no add to cart button is found, return
