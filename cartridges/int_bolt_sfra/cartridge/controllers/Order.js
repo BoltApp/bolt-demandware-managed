@@ -9,6 +9,7 @@ var URLUtils = require('dw/web/URLUtils');
 var Site = require('dw/system/Site');
 var OrderMgr = require('dw/order/OrderMgr');
 var Locale = require('dw/util/Locale');
+var Transaction = require('dw/system/Transaction');
 
 var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
 var reportingUrlsHelper = require('*/cartridge/scripts/reportingUrls');
@@ -23,6 +24,7 @@ server.replace(
     function (req, res, next) {
         var order;
         var boltEnableSSO = Site.getCurrent().getCustomPreferenceValue('boltEnableSSO');
+        var boltEnablePPC = Site.getCurrent().getCustomPreferenceValue('boltEnablePPC');
 
         if (!req.form.orderToken || !req.form.orderID) {
             res.render('/error', {
@@ -33,16 +35,33 @@ server.replace(
 
         order = OrderMgr.getOrder(req.form.orderID, req.form.orderToken);
 
-        // This is where different from the base cartridge, skip order customer check for SSO.
-        // If shopper check the checkbox to create an account during checkout, we set the order to the new created account but not login,
+        // This is where different from the base cartridge, skip order customer check for SSO and PPC checkout.
+        // SSO: If shopper check the checkbox to create an account during checkout, we set the order to the new created account but not login,
         // so the order customer id is different from the guest customer ID in the original request.
-        if (!order || (!boltEnableSSO && order.customer.ID !== req.currentCustomer.raw.ID)) {
+        // PPC: If shopper use product page checkout, orders customer ID will be different from the session customer ID
+        if (!order || (!(boltEnableSSO || boltEnablePPC) && order.customer.ID !== req.currentCustomer.raw.ID)) {
             res.render('/error', {
                 message: Resource.msg('error.confirmation.error', 'confirmation', null)
             });
 
             return next();
         }
+
+        // Link Order to loggedin SFCC customer when PPC is enabled
+        if (boltEnablePPC) {
+            var currentCustomer = req.currentCustomer.raw;
+            if (currentCustomer.isAuthenticated() || currentCustomer.isExternallyAuthenticated()) {
+                // get customer email and compare with order email
+                var orderEmail = order.getCustomerEmail();
+                var customerEmail = currentCustomer.getProfile().getEmail();
+                if (orderEmail === customerEmail) {
+                    Transaction.wrap(function () {
+                        order.setCustomer(currentCustomer);
+                    });
+                }
+            }
+        }
+
         var lastOrderID = Object.prototype.hasOwnProperty.call(req.session.raw.custom, 'orderID') ? req.session.raw.custom.orderID : null;
         if (lastOrderID === req.querystring.ID) {
             res.redirect(URLUtils.url('Home-Show'));
