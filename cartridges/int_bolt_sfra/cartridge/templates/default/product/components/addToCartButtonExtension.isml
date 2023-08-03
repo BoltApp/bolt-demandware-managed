@@ -1,0 +1,5 @@
+<!-- Bolt Product Page Checkout Button -->
+<isif condition="${pdict.renderBoltPPCButton}">
+    <isinclude template="product/components/boltProductPageButton" />
+</isif>
+
