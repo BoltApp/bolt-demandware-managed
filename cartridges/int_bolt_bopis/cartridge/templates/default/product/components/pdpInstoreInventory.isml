@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="refinements">
+        <div class="collapsible-sm">
+            <ul class="col-12">
+                <li class="col col-12 col-bolt-bopis">
+                    <button class="btn-get-ship-to-home" data-bopis-status="selected">
+                        <i class="fa fa-check-circle"></i>
+                        <span aria-hidden="true">Ship to Home</span>
+                    </button>
+                </li>
+                <li class="col col-12 col-bolt-bopis">
+                    <button class="btn-get-in-store-inventory" data-bopis-status="" data-action-url="${pdict.pickUpInStore.actionUrl}"
+                        data-ats-action-url="${pdict.pickUpInStore.atsActionUrl}"
+                        data-getmystore-action-url="${pdict.pickUpInStore.myStoreActionUrl}"
+                        data-getstorebycoords-action-url="${pdict.pickUpInStore.getStoreByCoordsActionUrl}"
+                        data-modal-close-text=${Resource.msg('label.modal.close.text', 'instorePickup', null)}
+                        ${!product.readyToOrder || !product.available || !product.availableForInStorePickup ? "disabled" : ""}>
+                        <i class="fa fa-circle-o"></i>
+                        <span aria-hidden="true">
+                            ${Resource.msg('button.availability.select.store', 'instorePickup', null)}
+                        </span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card selected-store-with-inventory display-none">
+            <div class="card-header">
+                <h5 class="pull-left">
+                    ${Resource.msg('msg.in.store.inventory.selected.store.title', 'instorePickup', null)}</h5>
+
+                <button type="button" class="close pull-right">
+                    <span class="close" id="remove-store-selection">&times;</span>
+                </button>
+            </div>
+
+            <!-- for placing the selected store details on PDP page-->
+            <div class="card-body">
+            </div>
+
+            <button class="btn btn-block change-store btn-outline-primary"
+                data-action-url="${pdict.pickUpInStore.actionUrl}" type="submit">
+                ${Resource.msg('button.change.store', 'instorePickup', null)}
+            </button>
+
+        </div>
+    </div>
+</div>

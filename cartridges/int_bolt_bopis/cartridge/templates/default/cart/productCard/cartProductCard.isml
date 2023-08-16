@@ -1,0 +1,59 @@
+<isset name="hasEmbeddedBonusProducts" value="${lineItem.bonusProductLineItemUUID === 'bonus'}"  scope="page"/>
+<isset name="bonusproductlineitem" value="${hasEmbeddedBonusProducts ? 'bonus-product-line-item' : ''}" scope="page"/>
+<isset name="bonuslineitemrow" value="${hasEmbeddedBonusProducts ? 'bonus-line-item-row' : ''}" scope="page"/>
+
+<div class="card product-info ${bonusproductlineitem} uuid-${lineItem.UUID}">
+    <!--- name and remove buttons --->
+    <isinclude template="cart/productCard/cartProductCardHeader" />
+
+    <div class="row ${bonuslineitemrow}">
+        <div class="col-lg-5">
+            <div class="row">
+                <div class="col-lg-12 d-flex flex-row">
+                    <div class="item-image">
+                        <img class="product-image" src="${lineItem.images.small[0].url}" alt="${lineItem.images.small[0].alt}" title="${lineItem.images.small[0].title}">
+                    </div>
+                    <div class="item-attributes d-flex flex-column">
+                        <isloop items="${lineItem.variationAttributes}" var="attribute">
+                            <p class="line-item-attributes">${attribute.displayName}: ${attribute.displayValue}</p>
+                        </isloop>
+                        <isloop items="${lineItem.options}" var="option">
+                            <isif condition="${!!option}" />
+                                <p class="line-item-attributes">${option}</p>
+                            </isif>
+                        </isloop>
+
+                        <isinclude template="cart/productCard/cartProductCardAvailability" />
+
+                        <div class="hidden-xs-down">
+                            <a href="${"#"}" class="edit" title="${Resource.msg('link.edit.item','cart',null)}">${Resource.msg('link.edit.item','cart',null)}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 d-lg-none"><hr class="line-item-divider"></div>
+
+        <isinclude template="cart/productCard/cartProductCardProductPrice" />
+    </div>
+
+    <isif condition="${lineItem.bonusProductLineItemUUID === 'bonus'}">
+        <isinclude template="cart/productCard/cartEmbeddedBonusProducts" />
+    </isif>
+
+    <isif condition="${lineItem.fromStoreId}">
+        <div class="row">
+            <div class="col-12"><hr class="line-item-divider line-dotted"></div>
+            <div class="col-12">
+                <span class="line-item-name">${Resource.msg('label.instore.pickup.from','instorePickup',null)}</span>
+                <isinclude url="${URLUtils.url('Stores-GetStoreById', 'storeId', lineItem.fromStoreId)}"/>
+            </div>
+        </div>
+    </isif>
+
+    <isif condition="${!lineItem.isBonusProductLineItem}"/>
+        <div class="hidden-md-down">
+            <isinclude template="components/deleteButton" />
+        </div>
+    </isif>
+</div>
