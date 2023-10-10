@@ -42,7 +42,7 @@
           "resource_id": "/baskets/{basket_id}/items/{item_id}",
           "read_attributes": "(**)",
           "write_attributes": "(**)",
-          "methods": ["patch"]
+          "methods": ["patch", "delete"]
         },
         {
           "resource_id": "/baskets/{basket_id}/customer",
@@ -159,6 +159,13 @@
           "write_attributes": "(**)",
           "cache_time": 0,
           "methods": ["post"]
+        },
+        {
+          "resource_id": "/products/*/recommendations",
+          "read_attributes": "(**)",
+          "write_attributes": "(**)",
+          "cache_time": 0,
+          "methods": ["get"]
         }
       ]
     }
