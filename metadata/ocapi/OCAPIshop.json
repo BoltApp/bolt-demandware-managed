@@ -166,6 +166,13 @@
           "write_attributes": "(**)",
           "cache_time": 0,
           "methods": ["get"]
+        },
+        {
+          "resource_id": "/product_search",
+          "read_attributes": "(**)",
+          "write_attributes": "(**)",
+          "cache_time": 0,
+          "methods": ["get"]
         }
       ]
     }
