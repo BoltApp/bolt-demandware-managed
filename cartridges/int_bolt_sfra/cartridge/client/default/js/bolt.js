@@ -136,6 +136,7 @@ exports.addApplePayHandlerIfNeeded = function () {
     const MAX_COUNT = 30;
     var timeCounter = 0;
     var grandTotalClass = '.grand-total';
+    var grandTotalText = $('.grand-total').text();
     var applePayButtonExist = setInterval(function () {
         if (timeCounter >= MAX_COUNT) {
             clearInterval(applePayButtonExist);
@@ -144,7 +145,12 @@ exports.addApplePayHandlerIfNeeded = function () {
             if (applePayButton.length > 0) {
                 clearInterval(applePayButtonExist);
                 $('body').on('DOMSubtreeModified', grandTotalClass, function () {
-                    location.reload(); // eslint-disable-line no-restricted-globals
+                    var updatedGrandTotalText = $('.grand-total').text();
+                    // if total price is updated, reload the cart so ApplePay configuration can
+                    // get updated total price.
+                    if (updatedGrandTotalText != grandTotalText) {
+                        location.reload(); // eslint-disable-line no-restricted-globals
+                    }
                 });
             }
             timeCounter += 1;
