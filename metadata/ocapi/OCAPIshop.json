@@ -173,6 +173,12 @@
           "write_attributes": "(**)",
           "cache_time": 0,
           "methods": ["get"]
+        },
+        {
+          "resource_id": "/products/({ids})",
+          "methods": ["get"],
+          "read_attributes": "(**)",
+          "write_attributes": "(**)"
         }
       ]
     }
