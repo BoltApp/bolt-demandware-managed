@@ -39,12 +39,11 @@ var callbacks = {
                 url: validateSessionUrl,
                 method: 'GET',
                 async: false,
-                success: function (data) {
+                success: function () {
                     // do nothing
                 }
             });
         }
-        
         return true;
     },
     onCheckoutStart: function () {

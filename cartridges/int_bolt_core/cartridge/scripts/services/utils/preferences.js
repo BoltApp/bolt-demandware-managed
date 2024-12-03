@@ -39,7 +39,7 @@ exports.getSitePreferences = function () {
         sfccBaseVersion: getSFCCBaseVersion(),
         boltEnablePPC: Site.getCurrent().getCustomPreferenceValue('boltEnablePPC') || false,
         boltClientID: Site.getCurrent().getCustomPreferenceValue('boltClientID') || '',
-        boltEnableResetDwsid: Site.getCurrent().getCustomPreferenceValue('boltEnableResetDwsid') || false,
+        boltEnableResetDwsid: Site.getCurrent().getCustomPreferenceValue('boltEnableResetDwsid') || false
     };
 };
 

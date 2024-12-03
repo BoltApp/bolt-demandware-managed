@@ -7,8 +7,8 @@
 /* eslint-disable no-shadow */
 
 /* API Includes */
-var Site = require("dw/system/Site");
-var Mac = require("dw/crypto/Mac");
+var Site = require('dw/system/Site');
+var Mac = require('dw/crypto/Mac');
 var System = require('dw/system/System');
 var Encoding = require('dw/crypto/Encoding');
 var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
@@ -226,10 +226,10 @@ exports.respondError = function (res, errorMessage, statusCode) {
  */
 function jwtServiceParseResponse(_, httpClient) {
     if (httpClient.statusCode === 200 || httpClient.statusCode === 201) {
-        return httpClient.getResponseHeader("Authorization");
+        return httpClient.getResponseHeader('Authorization');
     }
 
-    log.error("Error on http request: " + httpClient.getErrorText());
+    log.error('Error on http request: ' + httpClient.getErrorText());
     return null;
 }
 
@@ -239,16 +239,16 @@ function jwtServiceParseResponse(_, httpClient) {
  * @returns {dw.svc.Service} JWT service
  */
 function getJWTServiceInstance() {
-    return LocalServiceRegistry.createService("bolt.http", {
+    return LocalServiceRegistry.createService('bolt.http', {
         createRequest: function createRequest(service, args) {
             service.setURL(args.endpointURL);
             service.setRequestMethod(args.method);
-            service.addHeader("Content-Type", "application/json");
-            service.addHeader("x-dw-client-id", args.clientID);
-            service.addHeader("Cookie", "dwsid=" + args.dwsid);
+            service.addHeader('Content-Type', 'application/json');
+            service.addHeader('x-dw-client-id', args.clientID);
+            service.addHeader('Cookie', 'dwsid=' + args.dwsid);
             return args.request;
         },
-        parseResponse: jwtServiceParseResponse,
+        parseResponse: jwtServiceParseResponse
     });
 }
 
@@ -261,17 +261,12 @@ exports.checkIfSessionIdValid = function (dwsid) {
     var serviceInstance = getJWTServiceInstance();
     var config = getConfiguration();
     var siteID = Site.current.ID;
-    var endpointURL =
-        "https://" +
-        System.instanceHostname +
-        "/s/" +
-        siteID +
-        "/dw/shop/v21_10/customers/auth";
+    var endpointURL = 'https://' + System.instanceHostname + '/s/' + siteID + '/dw/shop/v21_10/customers/auth';
     var requestBody = JSON.stringify({
-        type: "session",
+        type: 'session',
     });
     var serviceArgs = {
-        method: "post",
+        method: 'post',
         endpointURL: endpointURL,
         clientID: config.boltClientID,
         dwsid: dwsid,
