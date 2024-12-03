@@ -31,6 +31,22 @@ var callbacks = {
             redirect.submit();
         }
     },
+    check: function () {
+        var checkSession = $('#boltEnableResetDwsid').val();
+        if (checkSession === 'enable') {
+            var validateSessionUrl = $('.validate-reset-dwsid-url').val();
+            $.ajax({
+                url: validateSessionUrl,
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    // do nothing
+                }
+            });
+        }
+        
+        return true;
+    },
     onCheckoutStart: function () {
     // This function is called after the checkout form is presented to the user.
     },

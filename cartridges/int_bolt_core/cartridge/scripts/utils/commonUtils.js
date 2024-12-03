@@ -69,3 +69,14 @@ exports.getDwsidCookie = function () {
 
     return '';
 };
+
+/**
+ * Delete the session id (dwsid)
+ */
+exports.delDwsidCookie = function () {
+    var Cookie = require('dw/web/Cookie');
+    var sessionCookie = new Cookie('dwsid', '');
+    sessionCookie.setPath('/');
+    sessionCookie.setMaxAge(0);
+    response.addHttpCookie(sessionCookie);
+};

@@ -401,6 +401,16 @@ declare class SitePreferencesCustomAttributes {
    * Bolt Partner Merchant
    */
   boltPartnerMerchant: string;
+
+  /**
+   * Bolt Client ID
+   */
+  boltClientID: string;
+
+  /**
+   * Enable Reset Session ID
+   */
+  boltEnableResetDwsid: boolean;
 }
 /**
  * Custom attributes for ActiveData object.
