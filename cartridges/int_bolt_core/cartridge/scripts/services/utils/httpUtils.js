@@ -263,14 +263,14 @@ exports.checkIfSessionIdValid = function (dwsid) {
     var siteID = Site.current.ID;
     var endpointURL = 'https://' + System.instanceHostname + '/s/' + siteID + '/dw/shop/v21_10/customers/auth';
     var requestBody = JSON.stringify({
-        type: 'session',
+        type: 'session'
     });
     var serviceArgs = {
         method: 'post',
         endpointURL: endpointURL,
         clientID: config.boltClientID,
         dwsid: dwsid,
-        request: requestBody,
+        request: requestBody
     };
     var result = serviceInstance.call(serviceArgs);
 

@@ -53,7 +53,7 @@ server.get(
         }
         res.setStatusCode(200);
         res.json({
-          rev: isSessionValid
+            rev: isSessionValid
         });
         next();
     }
