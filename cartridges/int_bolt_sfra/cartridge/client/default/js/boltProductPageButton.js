@@ -67,9 +67,7 @@ var callbacks = {
                         let errContent = document.createTextNode('Your session timed out due to inactivity. Reloading page now.');
                         divBoltErr.appendChild(errContent);
                         $('#product-page-checkout-wrapper').append(divBoltErr);
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1500); //will call the function after 1.5 secs.
+                        setTimeout(function () {window.location.reload();}, 1500);
                     }
                 }
             });

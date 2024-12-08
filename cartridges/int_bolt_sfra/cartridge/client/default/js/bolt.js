@@ -51,9 +51,7 @@ var callbacks = {
                         } else if (('.bolt-minicart-btn').length > 0) {
                             $('.bolt-minicart-btn').append(divBoltErr);
                         }
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1500); //will call the function after 1.5 secs.
+                        setTimeout(function () {window.location.reload();}, 1500);
                     }
                 }
             });
