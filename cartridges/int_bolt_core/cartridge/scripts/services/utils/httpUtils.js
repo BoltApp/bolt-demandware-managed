@@ -9,6 +9,7 @@
 /* API Includes */
 var Site = require('dw/system/Site');
 var Mac = require('dw/crypto/Mac');
+var System = require('dw/system/System');
 var Encoding = require('dw/crypto/Encoding');
 var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');
 var HttpResult = require('dw/svc/Result');
@@ -186,7 +187,7 @@ function getConfiguration() {
     var boltSigningSecret = site.getCustomPreferenceValue('boltSigningSecret') || '';
     var boltAPIKey = site.getCustomPreferenceValue('boltAPIKey') || '';
     var boltPartnerMerchant = site.getCustomPreferenceValue('boltPartnerMerchant').valueOf() || '';
-
+    var boltClientID = site.getCustomPreferenceValue('boltClientID') || '';
     if (boltAPIKey === '' || boltSigningSecret === '') {
         log.error('Error: Bolt Business Manager configurations are missing.');
     }
@@ -197,7 +198,8 @@ function getConfiguration() {
         boltAPIKey: boltAPIKey,
         boltPartnerMerchant: boltPartnerMerchant,
         boltAPIbaseURL: baseAPIUrl,
-        boltAPIBaseURLV1: baseAPIUrl + '/v1'
+        boltAPIBaseURLV1: baseAPIUrl + '/v1',
+        boltClientID: boltClientID
     };
 }
 
@@ -214,4 +216,67 @@ exports.respondError = function (res, errorMessage, statusCode) {
         status: 'error',
         message: errorMessage
     });
+};
+
+/**
+ * Get the result object of service call
+ * @param {Object} _ - Service Object, unused
+ * @param {Object} httpClient - httpClient Object
+ * @returns {Object} service call result object
+ */
+function jwtServiceParseResponse(_, httpClient) {
+    if (httpClient.statusCode === 200 || httpClient.statusCode === 201) {
+        return httpClient.getResponseHeader('Authorization');
+    }
+
+    log.error('Error on http request: ' + httpClient.getErrorText());
+    return null;
+}
+
+/**
+ * Get JWT service instance with headers set
+ *
+ * @returns {dw.svc.Service} JWT service
+ */
+function getJWTServiceInstance() {
+    return LocalServiceRegistry.createService('bolt.http', {
+        createRequest: function createRequest(service, args) {
+            service.setURL(args.endpointURL);
+            service.setRequestMethod(args.method);
+            service.addHeader('Content-Type', 'application/json');
+            service.addHeader('x-dw-client-id', args.clientID);
+            service.addHeader('Cookie', 'dwsid=' + args.dwsid);
+            return args.request;
+        },
+        parseResponse: jwtServiceParseResponse
+    });
+}
+
+/**
+ * Check if the session id (dwsid) is valid
+ * @param {string} dwsid - dwsid cookie value
+ * @returns {boolean} false to indicate the session id is expired
+ */
+exports.checkIfSessionIdValid = function (dwsid) {
+    var serviceInstance = getJWTServiceInstance();
+    var config = getConfiguration();
+    var siteID = Site.current.ID;
+    var endpointURL = 'https://' + System.instanceHostname + '/s/' + siteID + '/dw/shop/v21_10/customers/auth';
+    var requestBody = JSON.stringify({
+        type: 'session'
+    });
+    var serviceArgs = {
+        method: 'post',
+        endpointURL: endpointURL,
+        clientID: config.boltClientID,
+        dwsid: dwsid,
+        request: requestBody
+    };
+    var result = serviceInstance.call(serviceArgs);
+
+    if (result.error === 401) {
+        return false;
+    }
+
+    return true;
 };

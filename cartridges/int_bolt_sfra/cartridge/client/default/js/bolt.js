@@ -31,6 +31,33 @@ var callbacks = {
             redirect.submit();
         }
     },
+    check: function () {
+        var checkSession = $('#boltEnableResetDwsid').val();
+        var checkFlag = true;
+        if (checkSession === 'enable') {
+            var validateSessionUrl = $('.validate-reset-dwsid-url').val();
+            $.ajax({
+                url: validateSessionUrl,
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data !== null && !data.isSessionValid) {
+                        checkFlag = false;
+                        let divBoltErr = document.createElement('div');
+                        let errContent = document.createTextNode('Your session timed out due to inactivity. Reloading page now.');
+                        divBoltErr.appendChild(errContent);
+                        if ($('.bolt-cart-btn').length > 0) {
+                            $('.bolt-cart-btn').append(divBoltErr);
+                        } else if (('.bolt-minicart-btn').length > 0) {
+                            $('.bolt-minicart-btn').append(divBoltErr);
+                        }
+                        setTimeout(function () { window.location.reload(); }, 1500);
+                    }
+                }
+            });
+        }
+        return checkFlag;
+    },
     onCheckoutStart: function () {
     // This function is called after the checkout form is presented to the user.
     },

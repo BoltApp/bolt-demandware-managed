@@ -10,6 +10,8 @@
     <input type="hidden" id="sfccBaseVersion" name="sfccBaseVersion" value="${pdict.config.sfccBaseVersion}" />
     <input type="hidden" id="successRedirect" name="successRedirect" value="${URLUtils.url('Order-Confirm')}" />
     <input type="hidden" class="get-ppc-product-data" value="${URLUtils.url('Product-Variation')}" />
+    <input type="hidden" class="validate-reset-dwsid-url" value="${URLUtils.https('Bolt-ValidateResetSfccSession')}" />
+    <input type="hidden" id="boltEnableResetDwsid" name="boltEnableResetDwsid" value="${pdict.config.boltEnableResetDwsid == true ? 'enable' : 'disable'}" />
     <!--
         This appears to be included via boltScripts.isml. Double check if this needs to be included here.
         <script id="bolt-connect" src="${boltCdnUrl}/connect.js" data-publishable-key="${boltPublishableKey}"></script>

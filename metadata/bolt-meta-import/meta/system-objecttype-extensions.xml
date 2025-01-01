@@ -617,6 +617,20 @@
         <regex>^([0-9]+\.)+[0-9]+$</regex>
         <default-value>5.0.0</default-value>
       </attribute-definition>
+      <attribute-definition attribute-id="boltClientID">
+        <display-name xml:lang="x-default">Bolt Client ID</display-name>
+        <type>string</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <min-length>0</min-length>
+      </attribute-definition>
+      <attribute-definition attribute-id="boltEnableResetDwsid">
+        <display-name xml:lang="x-default">Enable Reset Session ID</display-name>
+        <type>boolean</type>
+        <mandatory-flag>false</mandatory-flag>
+        <externally-managed-flag>false</externally-managed-flag>
+        <default-value>false</default-value>
+      </attribute-definition>
     </custom-attribute-definitions>
 
     <group-definitions>
@@ -635,6 +649,8 @@
         <attribute attribute-id="boltPartnerMerchant"/>
         <attribute attribute-id="boltMerchantDivisionID"/>
         <attribute attribute-id="sfccBaseVersion"/>
+        <attribute attribute-id="boltClientID"/>
+        <attribute attribute-id="boltEnableResetDwsid"/>
       </attribute-group>
       <attribute-group group-id="BoltPluginSetting">
         <display-name xml:lang="x-default">Bolt Plugins Setting</display-name>
