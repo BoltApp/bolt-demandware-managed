@@ -1,0 +1,128 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  lint-and-unit-test:
+    runs-on: ubuntu-latest
+    container:
+      image: boltdev/sfcc-ci:v1.1.0
+      credentials:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: npm-v2-${{ hashFiles('package-lock.json') }}
+      - name: Install Dependencies
+        run: npm install --prefer-offline --no-audit
+      - name: Compile Assets # check for css and js being generated successfully
+        run: |
+          npm run compile
+          bash .github/scripts/test-compile-error.sh
+      - name: Lint
+        run: npm run lint
+      - name: Unit Test
+        run: npm run test:unit
+      - name: Notify build cop on master failure
+        if: failure() && github.ref == 'refs/heads/master'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.GREENKEEPER_WEBHOOK }}
+        run: |
+          curl -sf -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\":\":red_circle: A ${GITHUB_JOB} job has failed! ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}" \
+            "$SLACK_WEBHOOK"
+
+  update-qa-sandbox:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: qa-sandbox-deploy
+      cancel-in-progress: false
+    container:
+      image: boltdev/sfcc-ci:v1.1.0
+      credentials:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: npm-v2-${{ hashFiles('package-lock.json') }}
+      - name: Install Dependencies
+        run: npm install --prefer-offline --no-audit
+      - name: Compile Assets
+        run: |
+          npm run compile
+          bash .github/scripts/test-compile-error.sh
+      - name: Setup dw.json for meta upload
+        env:
+          QA_V2_SANDBOX_HOSTNAME: ${{ secrets.QA_V2_SANDBOX_HOSTNAME }}
+        run: |
+          echo "{" \
+            "\"hostname\":\"${QA_V2_SANDBOX_HOSTNAME}\"" \
+            "}" > dw.json
+      - name: Upload metadata to QA-v2 sandbox zzgv-003
+        env:
+          SFCCCLIENTID: ${{ secrets.SFCCCLIENTID }}
+          SFCCCLIENTSECRET: ${{ secrets.SFCCCLIENTSECRET }}
+        run: |
+          sfcc-ci client:auth ${SFCCCLIENTID} ${SFCCCLIENTSECRET}
+          npm run uploadMetadata
+      - name: Reset dw.json # On meta upload process, adding user/password data to dw.json causes auth issue, it's a SFCC bug
+        run: rm dw.json
+      - name: Setup dw.json for cartridge upload
+        env:
+          QA_V2_SANDBOX_HOSTNAME: ${{ secrets.QA_V2_SANDBOX_HOSTNAME }}
+          SFCCCLIENTID: ${{ secrets.SFCCCLIENTID }}
+          SFCCCLIENTSECRET: ${{ secrets.SFCCCLIENTSECRET }}
+          SFCC_QA_ACCOUNT: ${{ secrets.SFCC_QA_ACCOUNT }}
+          SFCC_QA_ACCOUNT_PW: ${{ secrets.SFCC_QA_ACCOUNT_PW }}
+        run: |
+          echo "{" \
+            "\"hostname\":\"${QA_V2_SANDBOX_HOSTNAME}\"," \
+            "\"client-id\":\"${SFCCCLIENTID}\"," \
+            "\"client-secret\":\"${SFCCCLIENTSECRET}\"," \
+            "\"username\":\"${SFCC_QA_ACCOUNT}\"," \
+            "\"password\":\"${SFCC_QA_ACCOUNT_PW}\"," \
+            "\"code-version\":\"qa_version\"" \
+            "}" > dw.json
+      - name: Upload cartridges to QA-v2 sandbox zzgv-003
+        run: |
+          npm run upload:all
+          bash .github/scripts/upload-cartridges.sh
+      - name: Notify build cop on master failure
+        if: failure() && github.ref == 'refs/heads/master'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.GREENKEEPER_WEBHOOK }}
+        run: |
+          curl -sf -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\":\":red_circle: A ${GITHUB_JOB} job has failed! ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}" \
+            "$SLACK_WEBHOOK"
+
+  # TODO (carried over from CircleCI): fix this to run against v2 cartridge.
+  # This currently runs on zzgv-002 which is for V1
+  integration-tests:
+    if: github.ref == 'refs/heads/master'
+    needs: update-qa-sandbox
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running integration tests against zzgv-002
+        env:
+          CIRCLE_TOKEN: ${{ secrets.CIRCLE_TOKEN }}
+        run: bash .github/scripts/run-integration-tests.sh
+      - name: Notify build cop on master failure
+        if: failure() && github.ref == 'refs/heads/master'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.GREENKEEPER_WEBHOOK }}
+        run: |
+          curl -sf -X POST -H 'Content-Type: application/json' \
+            --data "{\"text\":\":red_circle: A ${GITHUB_JOB} job has failed! ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}\"}" \
+            "$SLACK_WEBHOOK"
