@@ -20,19 +20,19 @@
 			<tr>
 				<td colspan="5" class="overview_title_description">
 					${Resource.msg('bolt.back.label','bolt',null)}
-					<a href="https://merchant-sandbox.bolt.com" target="_blank" >${Resource.msg('bolt.sandbox.label','bolt',null)}</a>
+					<a href="https://merchant-sandbox.boltapp.com" target="_blank" >${Resource.msg('bolt.sandbox.label','bolt',null)}</a>
 					${Resource.msg('bolt.separator.label','bolt',null)}
-					<a href="https://merchant-sandbox.bolt.com" target="_blank" >${Resource.msg('bolt.live.label','bolt',null)}</a><br>&nbsp;
+					<a href="https://merchant.boltapp.com" target="_blank" >${Resource.msg('bolt.live.label','bolt',null)}</a><br>&nbsp;
 				</td>
 			</tr>
 			<tr>
 				<td colspan="5" class="overview_title_description">
-					<a href="https://docs.bolt.com/docs/6-production-readiness" target="_blank" >${Resource.msg('bolt.test.card','bolt',null)}</a><br>&nbsp;
+					<a href="https://docs.boltapp.com/docs/6-production-readiness" target="_blank" >${Resource.msg('bolt.test.card','bolt',null)}</a><br>&nbsp;
 				</td>
 			</tr>
 			<tr>
 				<td colspan="5" class="overview_title_description">
-					<a href="https://www.bolt.com/" target="_blank">${Resource.msg('bolt.website.label','bolt',null)}</a><br>&nbsp;
+					<a href="https://www.boltapp.com/" target="_blank">${Resource.msg('bolt.website.label','bolt',null)}</a><br>&nbsp;
 				</td>
 			</tr>
 			<tr>
