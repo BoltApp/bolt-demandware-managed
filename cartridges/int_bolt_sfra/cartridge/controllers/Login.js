@@ -14,6 +14,9 @@ var LogUtils = require('int_bolt_core/cartridge/scripts/utils/boltLogUtils');
 var OAuthUtils = require('int_bolt_core/cartridge/scripts/utils/oauthUtils');
 var log = LogUtils.getLogger('Login');
 
+var BoltPreferences = require('int_bolt_core/cartridge/scripts/services/utils/preferences');
+var configuration = BoltPreferences.getSitePreferences();
+
 server.get('OAuthRedirectBolt', function (req, res, next) {
     if (!Site.getCurrent().getCustomPreferenceValue('boltEnableSSO')) {
         log.error('Bolt SSO feature is not enabled');
@@ -75,5 +78,12 @@ function renderError(res, next) {
     });
     return next();
 }
+
+server.append('Show', function (req, res, next) {
+    res.setViewData({
+        config: configuration
+    });
+    next();
+});
 
 module.exports = server.exports();
