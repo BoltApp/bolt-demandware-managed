@@ -9,7 +9,7 @@ var log = LogUtils.getLogger('BoltPreferences');
 var System = require('dw/system/System');
 
 exports.BOLT_SOURCE_NAME = 'commerce_cloud';
-exports.BOLT_CARTRIDGE_VERSION = '23.1.0';
+exports.BOLT_CARTRIDGE_VERSION = '26.0.0';
 
 /**
  * Get the custom preferences value from Business Manager
@@ -52,14 +52,14 @@ exports.getBoltApiServiceURL = function boltApiURL() {
 
     switch (boltEnv) {
         case 'sandbox':
-            return 'https://api-sandbox.bolt.com';
+            return 'https://api-sandbox.boltapp.com';
 
         case 'staging':
-            return 'https://api-staging.bolt.com';
+            return 'https://api-staging.boltapp.com';
 
         case 'production':
         default:
-            return 'https://api.bolt.com';
+            return 'https://api.boltapp.com';
     }
 };
 
@@ -72,14 +72,14 @@ function boltConnectURL() {
 
     switch (boltEnv) {
         case 'sandbox':
-            return 'https://connect-sandbox.bolt.com';
+            return 'https://connect-sandbox.boltapp.com';
 
         case 'staging':
-            return 'https://connect-staging.bolt.com';
+            return 'https://connect-staging.boltapp.com';
 
         case 'production':
         default:
-            return 'https://connect.bolt.com';
+            return 'https://connect.boltapp.com';
     }
 }
 
@@ -91,12 +91,12 @@ function boltAccountURL() {
     var boltEnv = Site.getCurrent().getCustomPreferenceValue('boltEnvironmentOCAPI').valueOf();
     switch (boltEnv) {
         case 'sandbox':
-            return 'https://account-sandbox.bolt.com';
+            return 'https://account-sandbox.boltapp.com';
         case 'staging':
-            return 'https://account-staging.bolt.com';
+            return 'https://account-staging.boltapp.com';
         case 'production':
         default:
-            return 'https://account.bolt.com';
+            return 'https://account.boltapp.com';
     }
 }
 /**

@@ -51,4 +51,4 @@ Use the provided NPM scripts to compile and upload changes to your Sandbox.
 
 supported locales: `en-US`, `en-CA`, `fr-CA`
 
-For more information please check https://help.bolt.com/products/managed-checkout/sfcc-sfra-v2/
+For more information please check https://help.boltapp.com/products/managed-checkout/sfcc-sfra-v2/
