@@ -9,7 +9,7 @@ var log = LogUtils.getLogger('BoltPreferences');
 var System = require('dw/system/System');
 
 exports.BOLT_SOURCE_NAME = 'commerce_cloud';
-exports.BOLT_CARTRIDGE_VERSION = '23.2.0';
+exports.BOLT_CARTRIDGE_VERSION = '26.0.0';
 
 /**
  * Get the custom preferences value from Business Manager
